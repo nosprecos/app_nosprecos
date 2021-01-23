@@ -1,24 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import Routes from './src/routes'
+
+import * as Font from 'expo-font';
+import { useFonts } from 'expo-font';
 
 export default function App() {
+
+  const [loaded] = useFonts({
+    Catamaran: require('./assets/Fonts/Catamaran-Regular.ttf'),
+    CatamaranBlack: require('./assets/Fonts/Catamaran-Black.ttf'),
+    CatamaranExtraBold: require('./assets/Fonts/Catamaran-ExtraBold.ttf'),
+    CatamaranBold: require('./assets/Fonts/Catamaran-Bold.ttf'),
+    CatamaranSemiBold: require('./assets/Fonts/Catamaran-SemiBold.ttf'),
+    CatamaranMedium: require('./assets/Fonts/Catamaran-Medium.ttf'),
+    CatamaranLight: require('./assets/Fonts/Catamaran-Light.ttf'),
+    CatamaranThin: require('./assets/Fonts/Catamaran-Thin.ttf'),
+  });
+
+  if (!loaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>HELLO !</Text>
-      <StatusBar style="auto" />
-    </View>
+      <Routes/>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ff0055',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    color: '#fff',
-  },
-});
+
