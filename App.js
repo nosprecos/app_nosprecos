@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 import Routes from './src/routes'
-
+import { StatusBar } from 'react-native'
+import {colors} from './src/styles/colors'
 import * as Font from 'expo-font';
-import { useFonts } from 'expo-font';
+import { useFonts } from 'expo-font'
 
 export default function App() {
 
@@ -18,11 +19,17 @@ export default function App() {
   });
 
   if (!loaded) {
-    return null;
+    return null
   }
 
   return (
-      <Routes/>
+    <>
+    <StatusBar
+        backgroundColor={colors.primary}
+        barStyle={'light-content'}
+      />    
+    <Routes/>
+    </>
   );
 }
 
