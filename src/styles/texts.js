@@ -85,6 +85,7 @@ export const texts = {
     subtitleLight:{
         fontFamily: FONT_FAMILY.black,
         fontSize: 24,
+        fontWeight: 'bold',
         color: colors.light,
     },
 

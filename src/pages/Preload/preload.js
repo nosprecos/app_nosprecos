@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { ActivityIndicator, StyleSheet, Text, View, StatusBar } from 'react-native'
+import { ActivityIndicator, StyleSheet, Text, View, StatusBar, ScrollView } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import {styles} from '../../styles'
 import {colors} from '../../styles/colors'
@@ -9,29 +9,25 @@ import Tickets from '../../../assets/Logo/tickets.svg'
 function Preload() {
     const navigation = useNavigation();
 
-    /* useEffect(() => {
+    useEffect(() => {
         setTimeout(() => {
             navigation.navigate('Signin');
         }, 1000);
 
-    }, []); */
+    }, []);
 
     return (
         
         <View style={styles.container}>  
                
-            <View style={styles.logo}>
+            <View style={styles.logoPreload}>
                 <Logo
                     width={250}
                     height={250}
                     />
                 <ActivityIndicator size="large" color={`${colors.secondary}`} /> 
             </View >
-            <View style={[styles.ticket, {
-        transform: [
-          { rotateZ: "20deg" },
-        ]
-      }]}>
+            <View style={styles.ticketPreload}>
                 <Tickets              
                 />
             </View>                           
