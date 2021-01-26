@@ -9,26 +9,32 @@ import {
     View,
     TextInput,
     TouchableOpacity,
+    ScrollView,
+    Dimensions,
 } from 'react-native'
 
 function Signin(){
-    const [username, setUsername] = useState('Nome de Usuário')
-    const [password, setPassword] = useState('••••••••')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
+    console.log(Dimensions)
     return (
 
-        <View
-        style={styles.container}
+        <ScrollView
+        contentContainerStyle={styles.container}
         >   
             <View style={styles.ticket}>
-                <Tickets/>
+                <Tickets
+                    width={'100%'}
+                    height={150}
+                />
             </View> 
             <View 
                 style={styles.logo}
             >
                 <Logo
-                    width={250}
-                    height={250}
+                    width={'75%'}
+                    height={150}
                 />
             </View>
             <View style={styles.signIn}>
@@ -36,13 +42,16 @@ function Signin(){
                     style={styles.input}
                     onChangeText={text => setUsername(text)}
                     value={username}
+                    placeholder={'Nome de Usuário'}
                     placeholderTextColor={colors.secondary}
                 />
                 <TextInput
                     style={styles.input}
                     onChangeText={text => setPassword(text)}
                     value={password}
+                    placeholder={'Senha'}
                     secureTextEntry={true}
+                    placeholderTextColor={colors.secondary}
                 />
                 <TouchableOpacity
                     style={styles.button}
@@ -60,10 +69,26 @@ function Signin(){
                         Esqueceu sua senha?
                     </Text>
                 </TouchableOpacity>
+                
                                 
-            </View>            
+            </View> 
+            <TouchableOpacity
+                    style={styles.textButton}
+                    onPress={()=> console.log('CADASTRAR!')}
+                >
+                    <View style={{width: '100%', marginTop: 30}}>
+                        <Text style={styles.textBoldLight}>
+                            Não tem uma conta? <Text style={[styles.textBoldLight, {fontWeight: 'bold'}]}>
+                            Crie agora!
+                        </Text>                         
+                        </Text>
+                        
+
+                    </View>   
+                    
+                </TouchableOpacity>         
             
-        </View>
+        </ScrollView>
         
 
     );

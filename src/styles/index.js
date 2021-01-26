@@ -32,7 +32,6 @@ export const styles = StyleSheet.create({
     },
     ticket:{
         width: '100%',
-        height: 150,
         marginLeft: 280,
         marginTop: -20,
         transform: [
@@ -47,7 +46,6 @@ export const styles = StyleSheet.create({
     },
     logo:{
         width: '100%',
-        height: '20%',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -59,10 +57,10 @@ export const styles = StyleSheet.create({
         color: colors.light,
         borderColor: colors.light,
         ...texts.textBoldLight,
+        marginVertical: 5,
     },
     signIn:{
         width: '100%',
-        height: 320,
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 30,
@@ -77,7 +75,7 @@ export const styles = StyleSheet.create({
 
     },
     textButton:{
-        
+        marginTop: 10,
     },
     ...texts
 
