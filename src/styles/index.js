@@ -1,4 +1,4 @@
-import { StyleSheet} from 'react-native';
+import { StyleSheet, Dimensions} from 'react-native';
 const FONT_FAMILY_MAIN = 'CatamaranBlack'
 import {colors} from './colors'
 import {texts} from './texts'
@@ -13,12 +13,11 @@ const FONT_FAMILY={
     thin: "CatamaranThin",
 }
 
+
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.primary,
-        alignItems: 'center',
-        
     },
     ticketPreload:{
         alignItems: 'flex-start',
@@ -31,12 +30,19 @@ export const styles = StyleSheet.create({
         ]
     },
     ticket:{
-        width: '100%',
-        marginLeft: 280,
-        marginTop: -20,
+        flex: 1,
+        minHeight: 120,
+        marginTop: -(Dimensions.get('window').height * 0.03),
+        marginLeft: Dimensions.get('window').width * 0.4,
         transform: [
-            { rotateZ: "200deg" },
+            { rotateZ: "-160deg" },
         ]
+    },
+    top:{
+        flex:1,
+        height: '40%',
+        minHeight: 30,
+        maxHeight: 100,
     },
     logoPreload:{
         width: '100%',
@@ -45,7 +51,10 @@ export const styles = StyleSheet.create({
         height: '40%',
     },
     logo:{
-        width: '100%',
+        flex: 1,
+        maxHeight: 200,
+        minHeight: 80,
+        height: '30%',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -60,10 +69,12 @@ export const styles = StyleSheet.create({
         marginVertical: 5,
     },
     signIn:{
-        width: '100%',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 30,
+        flex: 1,
+        height: '30%',
+
     },
     button:{
         width: '100%',

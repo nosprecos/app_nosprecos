@@ -11,30 +11,30 @@ import {
     TouchableOpacity,
     ScrollView,
     Dimensions,
+    useWindowDimensions,
 } from 'react-native'
 
 function Signin(){
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-
-    console.log(Dimensions)
     return (
 
         <ScrollView
         contentContainerStyle={styles.container}
         >   
-            <View style={styles.ticket}>
+            <View style={styles.top}>
                 <Tickets
                     width={'100%'}
-                    height={150}
+                    height={'100%'}
+                    style={styles.ticket}
                 />
             </View> 
             <View 
                 style={styles.logo}
             >
                 <Logo
-                    width={'75%'}
-                    height={150}
+                    width={'80%'}
+                    height={'100%'}
                 />
             </View>
             <View style={styles.signIn}>
