@@ -19,12 +19,18 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.primary,
     },
+    top:{
+        height: Dimensions.get('window').height * 0.15,
+        minHeight: 60,        
+
+    },
     ticketPreload: {
-        alignItems: 'flex-start',
-        width: '100%',
-        height: '60%',
-        marginRight: 100,
-        marginTop: 100,
+        marginBottom: -(Dimensions.get('window').height * 0.15),
+        marginLeft: -(Dimensions.get('window').width * 0.25),
+        marginTop: Dimensions.get('window').height * 0.10,
+        height: Dimensions.get('window').height * 0.5,
+        maxHeight: 500,
+        minHeight: 150,
         transform: [
             { rotateZ: "20deg" },
         ]
@@ -37,16 +43,17 @@ export const styles = StyleSheet.create({
             { rotateZ: "-160deg" },
         ]
     },
-    top:{
-        height: Dimensions.get('window').height * 0.15,
-        minHeight: 60,        
-
-    },
     logoPreload:{
-        width: '100%',
+        flex: 1,
+        minHeight: 150,
+        paddingHorizontal: Dimensions.get('window').width * 0.10,
+        height: Dimensions.get('window').height * 0.5,
         alignItems: 'center',
         justifyContent: 'center',
-        height: '40%',
+    },
+    bottomPreload:{
+        width: '100%',
+        height: Dimensions.get('window').height * 0.5,
     },
     logo:{
         flex: 1,

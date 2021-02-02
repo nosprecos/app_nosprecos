@@ -9,12 +9,12 @@ import Tickets from '../../../assets/Logo/tickets.svg'
 function Preload() {
     const navigation = useNavigation();
 
-    useEffect(() => {
+    /* useEffect(() => {
         setTimeout(() => {
-            navigation.navigate('Signin');
+            navigation.replace('Signin');
         }, 1000);
 
-    }, []);
+    }, []); */
 
     return (
         
@@ -22,18 +22,22 @@ function Preload() {
                
             <View style={styles.logoPreload}>
                 <Logo
-                    width={250}
-                    height={250}
+                    width={'100%'}
+                    height={'100%'}
                     />
                 <ActivityIndicator size="large" color={`${colors.secondary}`} /> 
             </View >
-            <View style={styles.ticketPreload}>
-                <Tickets              
-                />
+            <View style={styles.bottomPreload}>
+                <View style={styles.ticketPreload}>
+                    <Tickets
+                        width={'100%'}
+                        height={'100%'}              
+                    />
+                </View>
             </View>                           
-        </View>       
-        )
+        </View>         
 
+    )
 }
 
 export default Preload;
