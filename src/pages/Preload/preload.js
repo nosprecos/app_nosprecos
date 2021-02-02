@@ -9,12 +9,12 @@ import Tickets from '../../../assets/Logo/tickets.svg'
 function Preload() {
     const navigation = useNavigation();
 
-    /* useEffect(() => {
+    useEffect(() => {
         setTimeout(() => {
             navigation.replace('Signin');
         }, 1000);
 
-    }, []); */
+    }, []);
 
     return (
         
