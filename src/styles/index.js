@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.primary,
     },
-    ticketPreload:{
+    ticketPreload: {
         alignItems: 'flex-start',
         width: '100%',
         height: '60%',
@@ -52,9 +52,10 @@ export const styles = StyleSheet.create({
     },
     logo:{
         flex: 1,
-        maxHeight: 200,
-        minHeight: 80,
-        height: '30%',
+        maxHeight: 150,
+        minHeight: 40,
+        paddingHorizontal: Dimensions.get('window').width * 0.15,
+        height: Dimensions.get('window').height * 0.3,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -62,31 +63,33 @@ export const styles = StyleSheet.create({
         width: '100%',
         borderRadius: 15,
         padding: 15,
+        minHeight: 60,
         borderWidth: 1,
         color: colors.light,
         borderColor: colors.light,
         ...texts.textBoldLight,
-        marginVertical: 5,
+        marginVertical: Dimensions.get('window').height * 0.01,
     },
-    signIn:{
+    signIn: {
         alignItems: 'center',
-        justifyContent: 'space-between',
         padding: 30,
         flex: 1,
-        height: '30%',
-
     },
     button:{
         width: '100%',
         alignItems: 'center',
         backgroundColor: colors.secondary,
         padding: 15,
-        marginTop: 15,
+        marginTop: Dimensions.get('window').height * 0.02,
         borderRadius: 30,
 
     },
     textButton:{
-        marginTop: 10,
+        backgroundColor: '#000000',
+        width: '100%',
+        alignItems: 'center',
+        marginVertical: Dimensions.get('window').height * 0.02,
+        flex: 1,
     },
     ...texts
 

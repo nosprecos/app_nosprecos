@@ -19,8 +19,8 @@ function Signin(){
     const [password, setPassword] = useState('')
     return (
 
-        <ScrollView
-        contentContainerStyle={styles.container}
+        <View style={styles.container}>
+            <ScrollView
         >   
             <View style={styles.top}>
                 <Tickets
@@ -33,7 +33,7 @@ function Signin(){
                 style={styles.logo}
             >
                 <Logo
-                    width={'80%'}
+                    width={'100%'}
                     height={'100%'}
                 />
             </View>
@@ -61,34 +61,36 @@ function Signin(){
                         Entrar
                     </Text>
                 </TouchableOpacity>
+                
+                                
+            </View>
+            <View style={styles.signIn}>
+                
                 <TouchableOpacity
                     style={styles.textButton}
-                    onPress={()=> console.log('Esqueceu sua senha?')}
+                    onPress={() => console.log('Esqueceu sua senha?')}
                 >
                     <Text style={styles.textBoldLight}>
                         Esqueceu sua senha?
-                    </Text>
-                </TouchableOpacity>
-                
-                                
-            </View> 
-            <TouchableOpacity
-                    style={styles.textButton}
-                    onPress={()=> console.log('CADASTRAR!')}
-                >
-                    <View style={{width: '100%', marginTop: 30}}>
-                        <Text style={styles.textBoldLight}>
-                            Não tem uma conta? <Text style={[styles.textBoldLight, {fontWeight: 'bold'}]}>
-                            Crie agora!
-                        </Text>                         
                         </Text>
-                        
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.textButton}
+                    onPress={() => console.log('CADASTRAR!')}
+                >
 
-                    </View>   
-                    
-                </TouchableOpacity>         
-            
+                    <Text style={[styles.textBoldLight, { alignItems: 'center' }]}>
+                        Não tem uma conta?
+                        </Text>
+                    <Text style={[styles.textBoldLight, { fontWeight: 'bold' }]}>
+                        Crie agora!
+                        </Text>
+
+
+                </TouchableOpacity>
+            </View>
         </ScrollView>
+        </View>
         
 
     );
