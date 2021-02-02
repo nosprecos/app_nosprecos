@@ -31,7 +31,6 @@ export const styles = StyleSheet.create({
     },
     ticket:{
         flex: 1,
-        minHeight: 120,
         marginTop: -(Dimensions.get('window').height * 0.03),
         marginLeft: Dimensions.get('window').width * 0.4,
         transform: [
@@ -39,10 +38,9 @@ export const styles = StyleSheet.create({
         ]
     },
     top:{
-        flex:1,
-        height: '40%',
-        minHeight: 30,
-        maxHeight: 100,
+        height: Dimensions.get('window').height * 0.15,
+        minHeight: 60,        
+
     },
     logoPreload:{
         width: '100%',
@@ -52,10 +50,10 @@ export const styles = StyleSheet.create({
     },
     logo:{
         flex: 1,
+        minHeight: 50,
         maxHeight: 150,
-        minHeight: 40,
         paddingHorizontal: Dimensions.get('window').width * 0.15,
-        height: Dimensions.get('window').height * 0.3,
+        height: Dimensions.get('window').height * 0.25,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -72,8 +70,13 @@ export const styles = StyleSheet.create({
     },
     signIn: {
         alignItems: 'center',
+        height: Dimensions.get('window').height * 0.4,
         padding: 30,
         flex: 1,
+    },
+    bottom:{
+        width: '100%',
+        paddingTop: 30,
     },
     button:{
         width: '100%',
@@ -85,12 +88,11 @@ export const styles = StyleSheet.create({
 
     },
     textButton:{
-        backgroundColor: '#000000',
         width: '100%',
         alignItems: 'center',
-        marginVertical: Dimensions.get('window').height * 0.02,
-        flex: 1,
+        padding: 15,
     },
+
     ...texts
 
 });

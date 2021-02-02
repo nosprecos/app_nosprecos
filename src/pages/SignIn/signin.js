@@ -61,19 +61,19 @@ function Signin(){
                         Entrar
                     </Text>
                 </TouchableOpacity>
-                
+                    <TouchableOpacity
+                        style={styles.textButton}
+                        onPress={() => console.log('Esqueceu sua senha?')}
+                    >
+                        <Text style={styles.textBoldLight}>
+                            Esqueceu sua senha?
+                        </Text>
+                    </TouchableOpacity>
                                 
             </View>
-            <View style={styles.signIn}>
+            <View style={styles.bottom}>
                 
-                <TouchableOpacity
-                    style={styles.textButton}
-                    onPress={() => console.log('Esqueceu sua senha?')}
-                >
-                    <Text style={styles.textBoldLight}>
-                        Esqueceu sua senha?
-                        </Text>
-                </TouchableOpacity>
+                
                 <TouchableOpacity
                     style={styles.textButton}
                     onPress={() => console.log('CADASTRAR!')}
@@ -88,6 +88,7 @@ function Signin(){
 
 
                 </TouchableOpacity>
+                    
             </View>
         </ScrollView>
         </View>
