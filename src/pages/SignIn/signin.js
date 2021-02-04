@@ -4,14 +4,11 @@ import {colors} from '../../styles/colors'
 import Logo from "../../../assets/Logo/logoNosPrecos.svg";
 import Tickets from '../../../assets/Logo/tickets.svg'
 import {
-    StyleSheet,
     Text,
     View,
     TextInput,
     TouchableOpacity,
     ScrollView,
-    Dimensions,
-    useWindowDimensions,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import Signup from '../SignUp/signup';
@@ -23,7 +20,6 @@ function Signin(){
 
 
     function goToSignup(){
-        
         navigation.navigate('Signup');
     } 
 
