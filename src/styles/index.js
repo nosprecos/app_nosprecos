@@ -77,8 +77,7 @@ export const styles = StyleSheet.create({
     },
     signIn: {
         alignItems: 'center',
-        height: Dimensions.get('window').height * 0.4,
-        padding: 30,
+        paddingHorizontal: 30,
         flex: 1,
     },
     bottom:{

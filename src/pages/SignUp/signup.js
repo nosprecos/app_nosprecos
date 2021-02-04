@@ -14,28 +14,32 @@ import {
     useWindowDimensions,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import Signup from '../SignUp/signup';
 
-function Signin(){
+function Signup(){
     const [username, setUsername] = useState('')
+    const [name, setName] = useState('')
     const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
     const navigation = useNavigation();
 
-
-    function goToSignup(){
+    function signin(){
         
-        navigation.navigate('Signup');
-    } 
-
-    function verifyUser(username, password){
-        const user = {
-            username,
-            password
-        }
-        console.log(`${username} Logado!`)
-        console.log(user)
+        navigation.navigate('Signin');
     }
 
+    function createUser(name, email, username, password, confirmPassword){
+        const user = {
+            name,
+            email,
+            username,
+            password,
+            confirmPassword
+        }
+        console.log(`${username} cadastrado!`)
+        console.log(user)
+        
+    }
     return (
 
         <View style={styles.container}>
@@ -57,11 +61,25 @@ function Signin(){
                 />
             </View>
             <View style={styles.signIn}>
+             <TextInput
+                    style={styles.input}
+                    onChangeText={text => setName(text)}
+                    value={name}
+                    placeholder={'Nome Completo'}
+                    placeholderTextColor={colors.secondary}
+                />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={text => setEmail(text)}
+                    value={email}
+                    placeholder={'Email'}
+                    placeholderTextColor={colors.secondary}
+                />
                 <TextInput
                     style={styles.input}
                     onChangeText={text => setUsername(text)}
                     value={username}
-                    placeholder={'Nome de Usuário'}
+                    placeholder={'Usuário'}
                     placeholderTextColor={colors.secondary}
                 />
                 <TextInput
@@ -72,43 +90,25 @@ function Signin(){
                     secureTextEntry={true}
                     placeholderTextColor={colors.secondary}
                 />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={text => setConfirmPassword(text)}
+                    value={confirmPassword}
+                    placeholder={'Confirmar senha'}
+                    secureTextEntry={true}
+                    placeholderTextColor={colors.secondary}
+                />
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => verifyUser(username, password)}
-                >
-                    <Text style={styles.subtitleLight}>
-                        Entrar
+                        onPress={() => createUser(name, email, username, password, confirmPassword)}
+                    >
+                        <Text style={styles.subtitleLight}>
+                        Cadastrar
                     </Text>
                 </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.textButton}
-                        onPress={() => console.log('Esqueceu sua senha?')}
-                    >
-                        <Text style={styles.textBoldLight}>
-                            Esqueceu sua senha?
-                        </Text>
-                    </TouchableOpacity>
                                 
             </View>
-            <View style={styles.bottom}>
-                
-                
-                <TouchableOpacity
-                    style={styles.textButton}
-                    onPress={() => goToSignup()}
-                >
-
-                    <Text style={[styles.textBoldLight, { alignItems: 'center' }]}>
-                        Não tem uma conta?
-                        </Text>
-                    <Text style={[styles.textBoldLight, { fontWeight: 'bold' }]}>
-                        Crie agora!
-                        </Text>
-
-
-                </TouchableOpacity>
-                    
-            </View>
+            
         </ScrollView>
         </View>
         
@@ -116,4 +116,4 @@ function Signin(){
     );
 }
 
-export default Signin;
+export default Signup;

@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native'
 
 import Preload from './pages/Preload/preload.js'
 import Signin from './pages/SignIn/signin.js'
-
+import Signup from './pages/SignUp/signup.js'
 
 const Stack = createStackNavigator()
 
@@ -19,6 +19,7 @@ const Stack = createStackNavigator()
       >
         <Stack.Screen name="Preload" component={Preload} />
         <Stack.Screen name="Signin" component={Signin} />
+        <Stack.Screen name="Signup" component={Signup} />
 
       </Stack.Navigator>
     </NavigationContainer>    
