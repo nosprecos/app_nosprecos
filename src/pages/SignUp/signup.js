@@ -1,7 +1,7 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef} from 'react'
 import {styles} from '../../styles'
 import {colors} from '../../styles/colors'
-import Logo from "../../../assets/Logo/logoNosPrecos.svg";
+import Logo from "../../../assets/Logo/logoNosPrecos.svg"
 import Tickets from '../../../assets/Logo/tickets.svg'
 import {
     StyleSheet,
@@ -22,16 +22,36 @@ function Signup(){
     const [email, setEmail] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const navigation = useNavigation();
+    // const [ref, setRef] = useState([1,2,3,4,5])
     
-    // const Ref = useRef([]);
+    const inputRef=useRef(0)
+    const inputRef1=useRef(1)
+    const inputRef2=useRef(2)
+    const inputRef3=useRef(3)
+    const inputRef4=useRef(4)
+    
+    
     function signin(){
         
-        navigation.navigate('Signin');
+        navigation.navigate('Signin')
     }
 
-    /* function onTabClick(ref){
-        ref.focus()
-    }; */
+    function onTabClick(){
+        inputRef.current.focus()
+    }
+
+    function onTabClick1(){
+        inputRef1.current.focus()
+    }
+
+    function onTabClick2(){
+        inputRef2.current.focus()
+    }
+
+    function onTabClick3(){
+        inputRef3.current.focus()
+    }
+
 
     function createUser(name, email, username, password, confirmPassword){
         const user = {
@@ -68,39 +88,40 @@ function Signup(){
             </View>
             <View style={styles.signIn}>
              <TextInput
-                    // ref={1}
                     style={styles.input}
                     textContentType={"name"}
                     onChangeText={text => setName(text)}
                     value={name}
                     placeholder={'Nome Completo'}
                     placeholderTextColor={colors.secondary}
-                    /* onSubmitEditing={() =>{onTabClick(2)}} */
+                    onSubmitEditing={()=>{onTabClick()}}
                     inlineImageLeft='search-icon'
                 />
                 <TextInput
-                    // ref={2}
+                    ref={inputRef}
                     style={styles.input}
                     onChangeText={text => setEmail(text)}
                     value={email}
                     placeholder={'Email'}
                     keyboardType={'email-address'}
                     autoCapitalize={'none'}
+                    onSubmitEditing={() => onTabClick1()}
                     placeholderTextColor={colors.secondary}
                     textContentType={"emailAddress"}
                 />
                 <TextInput
-                    // ref={3}
+                    ref={inputRef1}
                     style={styles.input}
                     onChangeText={text => setUsername(text)}
                     textContentType={"username"}
                     autoCapitalize={'none'}
                     value={username}
+                    onSubmitEditing={() => onTabClick2()}
                     placeholder={'Usuário'}
                     placeholderTextColor={colors.secondary}
                     />
                 <TextInput
-                    // ref={4}
+                    ref={inputRef2}
                     style={styles.input}
                     onChangeText={text => setPassword(text)}
                     value={password}
@@ -109,11 +130,12 @@ function Signup(){
                     //autoFocus={true}
                     selectTextOnFocus={true}
                     placeholder={'Senha'}
+                    onSubmitEditing={() => onTabClick3()}
                     secureTextEntry={true}
                     placeholderTextColor={colors.secondary}
                 />
                 <TextInput
-                    // ref={5}
+                    ref={inputRef3}
                     style={styles.input}
                     onChangeText={text => setConfirmPassword(text)}
                     value={confirmPassword}
@@ -139,7 +161,7 @@ function Signup(){
         </View>
         
 
-    );
+    )
 }
 
-export default Signup;
+export default Signup
