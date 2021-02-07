@@ -10,6 +10,7 @@ import {
     TextInput,
     TouchableOpacity,
     ScrollView,
+    Image,
     Dimensions,
     useWindowDimensions,
 } from 'react-native'
@@ -69,8 +70,8 @@ function Signup(){
     return (
 
         <View style={styles.container}>
-            <ScrollView
-        >   
+            <ScrollView>   
+
             <View style={styles.top}>
                 <Tickets
                     width={'100%'}
@@ -78,28 +79,35 @@ function Signup(){
                     style={styles.ticket}
                 />
             </View> 
-            <View 
-                style={styles.logo}
-            >
+
+            <View style={styles.logo}>
                 <Logo
                     width={'100%'}
                     height={'100%'}
                 />
             </View>
+
             <View style={styles.signIn}>
-             <TextInput
-                    style={styles.input}
+                
+            <View style={styles.input}>
+                <Image style={styles.imageInput}
+                source={require("../../../assets/Icons/name.png")}/>
+                <TextInput
+                    style={styles.textInput}
                     textContentType={"name"}
                     onChangeText={text => setName(text)}
                     value={name}
                     placeholder={'Nome Completo'}
                     placeholderTextColor={colors.secondary}
                     onSubmitEditing={()=>{onTabClick()}}
-                    inlineImageLeft='search-icon'
                 />
+            </View>
+            <View style={styles.input}>
+                <Image style={styles.imageInput}
+                source={require("../../../assets/Icons/email.png")}/>
                 <TextInput
                     ref={inputRef}
-                    style={styles.input}
+                    style={styles.textInput}
                     onChangeText={text => setEmail(text)}
                     value={email}
                     placeholder={'Email'}
@@ -109,9 +117,13 @@ function Signup(){
                     placeholderTextColor={colors.secondary}
                     textContentType={"emailAddress"}
                 />
+            </View>    
+            <View style={styles.input}>
+                <Image style={styles.imageInput}
+                source={require("../../../assets/Icons/user.png")}/>
                 <TextInput
                     ref={inputRef1}
-                    style={styles.input}
+                    style={styles.textInput}
                     onChangeText={text => setUsername(text)}
                     textContentType={"username"}
                     autoCapitalize={'none'}
@@ -120,9 +132,13 @@ function Signup(){
                     placeholder={'Usuário'}
                     placeholderTextColor={colors.secondary}
                     />
+            </View>    
+            <View style={styles.input}>
+                <Image style={styles.imageInput}
+                source={require("../../../assets/Icons/password.png")}/>
                 <TextInput
                     ref={inputRef2}
-                    style={styles.input}
+                    style={styles.textInput}
                     onChangeText={text => setPassword(text)}
                     value={password}
                     textContentType={"password"}
@@ -134,9 +150,13 @@ function Signup(){
                     secureTextEntry={true}
                     placeholderTextColor={colors.secondary}
                 />
+            </View>    
+            <View style={styles.input}>
+                <Image style={styles.imageInput}
+                source={require("../../../assets/Icons/confirmPassword.png")}/>
                 <TextInput
                     ref={inputRef3}
-                    style={styles.input}
+                    style={styles.textInput}
                     onChangeText={text => setConfirmPassword(text)}
                     value={confirmPassword}
                     textContentType={"password"}
@@ -146,6 +166,11 @@ function Signup(){
                     secureTextEntry={true}
                     placeholderTextColor={colors.secondary}
                 />
+            </View>    
+                
+                
+                
+                
                 <TouchableOpacity
                     style={styles.button}
                         onPress={() => createUser(name, email, username, password, confirmPassword)}

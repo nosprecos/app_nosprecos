@@ -67,13 +67,24 @@ export const styles = StyleSheet.create({
     input:{
         width: '100%',
         borderRadius: 15,
-        padding: 15,
+        flexDirection: 'row',
+        alignItems: 'center',
         minHeight: 60,
+        maxHeight: 60,        
         borderWidth: 1,
         color: colors.light,
         borderColor: colors.light,
         ...texts.textBoldLight,
         marginVertical: Dimensions.get('window').height * 0.01,
+    },
+    textInput:{
+        color: colors.light,
+        ...texts.textBoldLight,
+    },
+    imageInput:{
+        marginHorizontal: 10,
+        height: 25,
+        width: 25,  
     },
     signIn: {
         alignItems: 'center',

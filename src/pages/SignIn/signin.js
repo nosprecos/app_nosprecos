@@ -9,6 +9,7 @@ import {
     TextInput,
     TouchableOpacity,
     ScrollView,
+    Image,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import Signup from '../SignUp/signup';
@@ -53,21 +54,33 @@ function Signin(){
                 />
             </View>
             <View style={styles.signIn}>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={text => setUsername(text)}
-                    value={username}
-                    placeholder={'Nome de Usuário'}
-                    placeholderTextColor={colors.secondary}
+                <View style={styles.input}>
+                    <Image style={styles.imageInput}
+                        source={require("../../../assets/Icons/user.png")}/>
+                    <TextInput
+                        style={styles.textInput}
+                        onChangeText={text => setUsername(text)}
+                        value={username}
+                        placeholder={'Nome de Usuário'}
+                        placeholderTextColor={colors.secondary}
                 />
-                <TextInput
-                    style={styles.input}
-                    onChangeText={text => setPassword(text)}
-                    value={password}
-                    placeholder={'Senha'}
-                    secureTextEntry={true}
-                    placeholderTextColor={colors.secondary}
+                </View>
+                <View style={styles.input}>
+                    <Image style={styles.imageInput}
+                            source={require("../../../assets/Icons/password.png")}/>
+                    <TextInput
+                        style={styles.textInput}
+                        onChangeText={text => setPassword(text)}
+                        value={password}
+                        placeholder={'Senha'}
+                        secureTextEntry={true}
+                        placeholderTextColor={colors.secondary}
                 />
+                </View>
+                
+
+                
+                
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => verifyUser(username, password)}
