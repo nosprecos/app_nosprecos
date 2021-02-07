@@ -13,10 +13,10 @@ import {
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import Signup from '../SignUp/signup';
-
+import api from '../../api'
 function Signin(){
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const [username, setUsername] = useState('gesin')
+    const [password, setPassword] = useState('euMeAmo1@')
     const navigation = useNavigation();
 
 
@@ -24,13 +24,22 @@ function Signin(){
         navigation.navigate('Signup');
     } 
 
-    function verifyUser(username, password){
-        const user = {
-            username,
-            password
-        }
-        console.log(`${username} Logado!`)
-        console.log(user)
+    async function verifyUser(userLogin, userPassword){
+
+        console.log(userLogin)
+        const response = await api.post('/signin',{
+            params:{
+                userLogin,
+                userPassword
+            }            
+        })
+
+        
+
+        // if(response){
+        //     console.log(response)
+        // }
+        return response
     }
 
     return (
@@ -83,7 +92,10 @@ function Signin(){
                 
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => verifyUser(username, password)}
+                    onPress={() => {
+                        console.log(username, password)
+                        verifyUser(username, password)
+                    }}
                 >
                     <Text style={styles.subtitleLight}>
                         Entrar
