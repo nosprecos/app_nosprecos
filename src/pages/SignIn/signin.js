@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {styles} from '../../styles'
-import {colors} from '../../styles/colors'
-import Logo from "../../../assets/Logo/logoNosPrecos.svg";
+import React, { useState } from 'react'
+import { styles } from '../../styles'
+import { colors } from '../../styles/colors'
+import Logo from "../../../assets/Logo/logoNosPrecos.svg"
 import Tickets from '../../../assets/Logo/tickets.svg'
 import {
     Text,
@@ -12,95 +12,96 @@ import {
     Image,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import Signup from '../SignUp/signup';
+import Signup from '../SignUp/signup'
 import api from '../../api'
-function Signin(){
+function Signin() {
     const [username, setUsername] = useState('gesin')
     const [password, setPassword] = useState('euMeAmo1@')
-    const navigation = useNavigation();
+    const navigation = useNavigation()
 
 
-    function goToSignup(){
-        navigation.navigate('Signup');
-    } 
+    function goToSignup() {
+        navigation.navigate('Signup')
+    }
 
-    async function verifyUser(userLogin, userPassword){
+    async function verifyUser(userLogin, userPassword) {
 
-        console.log(userLogin)
-        const response = await api.post('/signin',{
-            params:{
-                userLogin,
-                userPassword
-            }            
+        const userValid = await api.post('/signin', {
+            userLogin,
+            userPassword
         })
+            .then(response => {
+                console.log(response.data)
+                return response.data
+            })
+            .catch(error => {
+                console.log(error.response.data)
 
-        
+                //validation of error on front-end
+                return error
+            })
 
-        // if(response){
-        //     console.log(response)
-        // }
-        return response
+        return userValid
     }
 
     return (
 
         <View style={styles.container}>
             <ScrollView
-        >   
-            <View style={styles.top}>
-                <Tickets
-                    width={'100%'}
-                    height={'100%'}
-                    style={styles.ticket}
-                />
-            </View> 
-            <View 
-                style={styles.logo}
             >
-                <Logo
-                    width={'100%'}
-                    height={'100%'}
-                />
-            </View>
-            <View style={styles.signIn}>
-                <View style={styles.input}>
-                    <Image style={styles.imageInput}
-                        source={require("../../../assets/Icons/user.png")}/>
-                    <TextInput
-                        style={styles.textInput}
-                        onChangeText={text => setUsername(text)}
-                        value={username}
-                        placeholder={'Nome de Usuário'}
-                        placeholderTextColor={colors.secondary}
-                />
+                <View style={styles.top}>
+                    <Tickets
+                        width={'100%'}
+                        height={'100%'}
+                        style={styles.ticket}
+                    />
                 </View>
-                <View style={styles.input}>
-                    <Image style={styles.imageInput}
-                            source={require("../../../assets/Icons/password.png")}/>
-                    <TextInput
-                        style={styles.textInput}
-                        onChangeText={text => setPassword(text)}
-                        value={password}
-                        placeholder={'Senha'}
-                        secureTextEntry={true}
-                        placeholderTextColor={colors.secondary}
-                />
-                </View>
-                
-
-                
-                
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => {
-                        console.log(username, password)
-                        verifyUser(username, password)
-                    }}
+                <View
+                    style={styles.logo}
                 >
-                    <Text style={styles.subtitleLight}>
-                        Entrar
+                    <Logo
+                        width={'100%'}
+                        height={'100%'}
+                    />
+                </View>
+                <View style={styles.signIn}>
+                    <View style={styles.input}>
+                        <Image style={styles.imageInput}
+                            source={require("../../../assets/Icons/user.png")} />
+                        <TextInput
+                            style={styles.textInput}
+                            onChangeText={text => setUsername(text)}
+                            value={username}
+                            placeholder={'Nome de Usuário'}
+                            placeholderTextColor={colors.secondary}
+                        />
+                    </View>
+                    <View style={styles.input}>
+                        <Image style={styles.imageInput}
+                            source={require("../../../assets/Icons/password.png")} />
+                        <TextInput
+                            style={styles.textInput}
+                            onChangeText={text => setPassword(text)}
+                            value={password}
+                            placeholder={'Senha'}
+                            secureTextEntry={true}
+                            placeholderTextColor={colors.secondary}
+                        />
+                    </View>
+
+
+
+
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => {
+                            verifyUser(username, password)
+                        }}
+                    >
+                        <Text style={styles.subtitleLight}>
+                            Entrar
                     </Text>
-                </TouchableOpacity>
+                    </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.textButton}
                         onPress={() => console.log('Esqueceu sua senha?')}
@@ -109,30 +110,30 @@ function Signin(){
                             Esqueceu sua senha?
                         </Text>
                     </TouchableOpacity>
-                                
-            </View>
-            <View style={styles.bottom}>
-                
-                
-                <TouchableOpacity
-                    style={styles.textButton}
-                    onPress={() => goToSignup()}
-                >
 
-                    <Text style={[styles.textBoldLight, { alignItems: 'center' }]}>
-                        Não tem uma conta?
+                </View>
+                <View style={styles.bottom}>
+
+
+                    <TouchableOpacity
+                        style={styles.textButton}
+                        onPress={() => goToSignup()}
+                    >
+
+                        <Text style={[styles.textBoldLight, { alignItems: 'center' }]}>
+                            Não tem uma conta?
                         </Text>
-                    <Text style={[styles.textBoldLight, { fontWeight: 'bold' }]}>
-                        Crie agora!
+                        <Text style={[styles.textBoldLight, { fontWeight: 'bold' }]}>
+                            Crie agora!
                         </Text>
 
 
-                </TouchableOpacity>
-                    
-            </View>
-        </ScrollView>
+                    </TouchableOpacity>
+
+                </View>
+            </ScrollView>
         </View>
-        
+
 
     );
 }
