@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react'
 import {styles} from '../../styles'
 import {colors} from '../../styles/colors'
 import Logo from "../../../assets/Logo/logoNosPrecos.svg";
@@ -15,10 +15,21 @@ import { useNavigation } from '@react-navigation/native'
 import Signup from '../SignUp/signup';
 import api from '../../api'
 function Signin(){
-    const [username, setUsername] = useState('gesin')
-    const [password, setPassword] = useState('euMeAmo1@')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [errorUsername, setErrorUsername] = useState(true)
+    const [errorPassword, setErrorPassword] = useState(true)
     const navigation = useNavigation();
+    const inputRef=useRef(0)
 
+    function onTabVerification(){
+        
+
+    }
+
+    function onTabClick(){
+        inputRef.current.focus()
+    }
 
     function goToSignup(){
         navigation.navigate('Signup');
@@ -72,12 +83,22 @@ function Signin(){
                         value={username}
                         placeholder={'Nome de Usuário'}
                         placeholderTextColor={colors.secondary}
+                        onSubmitEditing={()=>{onTabClick()}}
                 />
                 </View>
+                {errorUsername &&  
+                    <View>
+                        <Text style={styles.textError}>
+                            [Error] Você digitou errado!
+                        </Text>
+                    </View>
+                }
+                
                 <View style={styles.input}>
                     <Image style={styles.imageInput}
                             source={require("../../../assets/Icons/password.png")}/>
                     <TextInput
+                        ref={inputRef}
                         style={styles.textInput}
                         onChangeText={text => setPassword(text)}
                         value={password}
@@ -86,6 +107,14 @@ function Signin(){
                         placeholderTextColor={colors.secondary}
                 />
                 </View>
+                {errorPassword &&
+                <View>
+                    <Text style={styles.textError}>
+                        [Error] Você digitou errado!
+                    </Text>
+                </View>
+                }
+                
                 
 
                 

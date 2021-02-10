@@ -80,6 +80,12 @@ export const styles = StyleSheet.create({
     textInput:{
         color: colors.light,
         ...texts.textBoldLight,
+        flex: 1,
+
+    },
+    textError:{
+        color: colors.light,
+
     },
     imageInput:{
         marginHorizontal: 10,
