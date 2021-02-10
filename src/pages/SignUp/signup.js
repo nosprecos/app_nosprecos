@@ -23,6 +23,11 @@ function Signup(){
     const [email, setEmail] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const navigation = useNavigation();
+    const [errorName, setErrorName] = useState(false)
+    const [errorEmail, setErrorEmail] = useState(false)
+    const [errorUsername, setErrorUsername] = useState(false)
+    const [errorPassword, setErrorPassword] = useState(false)
+    const [errorConfirmPassword, setErrorConfirmPassword] = useState(false)
     // const [ref, setRef] = useState([1,2,3,4,5])
     
     const inputRef=useRef(0)
@@ -36,21 +41,36 @@ function Signup(){
         
         navigation.navigate('Signin')
     }
+    //lembrar de mudar para 60
+    function onTabClick(name){
+        if (name.length > 6){
+            setErrorName(true)
+        } else {
+            setErrorName(false)
+        }
 
-    function onTabClick(){
         inputRef.current.focus()
     }
 
-    function onTabClick1(){
+    function onTabClick1(email){
+        if(email.indexOf('@')==-1 || email.indexOf('@')>-1  || email.length==1){
+            setErrorEmail(true)
+        }else {
+            setErrorEmail(false)
+        }
+
         inputRef1.current.focus()
     }
 
-    function onTabClick2(){
+    function onTabClick2(username){
         inputRef2.current.focus()
     }
 
-    function onTabClick3(){
+    function onTabClick3(password){
         inputRef3.current.focus()
+    }
+    function onTabClick4(confirmPassword){
+
     }
 
 
@@ -99,11 +119,17 @@ function Signup(){
                     value={name}
                     placeholder={'Nome Completo'}
                     placeholderTextColor={colors.secondary}
-                    onSubmitEditing={()=>{onTabClick()}}
+                    onSubmitEditing={()=>{onTabClick(name)}}
                 />
+                {errorName && 
+                <Image style={styles.imageInput}
+                source={require("../../../assets/Icons/error.png")}/>
+                }
+                
             </View>
             <View style={styles.input}>
                 <Image style={styles.imageInput}
+
                 source={require("../../../assets/Icons/email.png")}/>
                 <TextInput
                     ref={inputRef}
@@ -113,10 +139,14 @@ function Signup(){
                     placeholder={'Email'}
                     keyboardType={'email-address'}
                     autoCapitalize={'none'}
-                    onSubmitEditing={() => onTabClick1()}
+                    onSubmitEditing={() => onTabClick1(email)}
                     placeholderTextColor={colors.secondary}
                     textContentType={"emailAddress"}
                 />
+                {errorEmail && 
+                <Image style={styles.imageInput}
+                source={require("../../../assets/Icons/error.png")}/>
+                }
             </View>    
             <View style={styles.input}>
                 <Image style={styles.imageInput}
@@ -128,11 +158,16 @@ function Signup(){
                     textContentType={"username"}
                     autoCapitalize={'none'}
                     value={username}
-                    onSubmitEditing={() => onTabClick2()}
+                    onSubmitEditing={() => onTabClick2(username)}
                     placeholder={'Usuário'}
                     placeholderTextColor={colors.secondary}
                     />
-            </View>    
+            </View> 
+            {errorUsername && 
+                <Image style={styles.imageInput}
+                source={require("../../../assets/Icons/error.png")}/>
+            }   
+
             <View style={styles.input}>
                 <Image style={styles.imageInput}
                 source={require("../../../assets/Icons/password.png")}/>
@@ -146,11 +181,15 @@ function Signup(){
                     //autoFocus={true}
                     selectTextOnFocus={true}
                     placeholder={'Senha'}
-                    onSubmitEditing={() => onTabClick3()}
+                    onSubmitEditing={() => onTabClick3(password)}
                     secureTextEntry={true}
                     placeholderTextColor={colors.secondary}
                 />
-            </View>    
+            </View>
+            {errorPassword && 
+                <Image style={styles.imageInput}
+                source={require("../../../assets/Icons/error.png")}/>
+                }    
             <View style={styles.input}>
                 <Image style={styles.imageInput}
                 source={require("../../../assets/Icons/confirmPassword.png")}/>
@@ -163,10 +202,15 @@ function Signup(){
                     autoCapitalize={'none'}
                     placeholder={'Confirmar senha'}
                     selectTextOnFocus={true}
+                    onSubmitEditing={() => onTabClick4(confirmPassword)}
                     secureTextEntry={true}
                     placeholderTextColor={colors.secondary}
                 />
-            </View>    
+            </View>
+            {errorConfirmPassword && 
+                <Image style={styles.imageInput}
+                source={require("../../../assets/Icons/error.png")}/>
+                }    
                 
                 
                 

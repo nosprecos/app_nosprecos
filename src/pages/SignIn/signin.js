@@ -17,12 +17,11 @@ import api from '../../api'
 function Signin(){
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [errorUsername, setErrorUsername] = useState(true)
-    const [errorPassword, setErrorPassword] = useState(true)
+    const [error, setError] = useState(true)
     const navigation = useNavigation();
     const inputRef=useRef(0)
 
-    function onTabVerification(){
+    function onTabVerification(text){
         
 
     }
@@ -83,16 +82,10 @@ function Signin(){
                         value={username}
                         placeholder={'Nome de Usuário'}
                         placeholderTextColor={colors.secondary}
-                        onSubmitEditing={()=>{onTabClick()}}
+                        onSubmitEditing={()=>{onTabVerification(username)}}
                 />
                 </View>
-                {errorUsername &&  
-                    <View>
-                        <Text style={styles.textError}>
-                            [Error] Você digitou errado!
-                        </Text>
-                    </View>
-                }
+                
                 
                 <View style={styles.input}>
                     <Image style={styles.imageInput}
@@ -107,7 +100,7 @@ function Signin(){
                         placeholderTextColor={colors.secondary}
                 />
                 </View>
-                {errorPassword &&
+                {error &&
                 <View>
                     <Text style={styles.textError}>
                         [Error] Você digitou errado!
