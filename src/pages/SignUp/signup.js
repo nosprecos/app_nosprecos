@@ -15,6 +15,7 @@ import {
     useWindowDimensions,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { set } from 'react-native-reanimated'
 
 function Signup(){
     const [username, setUsername] = useState('')
@@ -36,6 +37,13 @@ function Signup(){
     const inputRef3=useRef(3)
     const inputRef4=useRef(4)
     
+    function isNotSpecialCharacter(password){
+        if(password.indexOf('!') ==-1 && password.indexOf('@') == -1 && password.indexOf('#') == -1 && password.indexOf('$') == -1 && password.indexOf('%') == -1 && password.indexOf('&') == -1 && password.indexOf('*') == -1 ){
+            return true
+        } else{
+            return false
+        }
+    }
     
     function signin(){
         
@@ -53,7 +61,7 @@ function Signup(){
     }
 
     function onTabClick1(email){
-        if(email.indexOf('@')==-1 || email.indexOf('@')>-1  || email.length==1){
+        if(email.indexOf('@')==-1 || email.length==1){
             setErrorEmail(true)
         }else {
             setErrorEmail(false)
@@ -63,10 +71,37 @@ function Signup(){
     }
 
     function onTabClick2(username){
+        //Lembrar de mudar para 30
+        if(username.length < 5 || username.length> 60){
+            setErrorUsername(true)
+        }else{
+            setErrorUsername(false)
+        }
+
         inputRef2.current.focus()
     }
 
     function onTabClick3(password){
+
+        const regex = /[0-9]/;
+
+        if(password.length<8 || password.length>60 ){
+            setErrorPassword(true)
+        } else if(password.toLowerCase() == password){
+            setErrorPassword(true)
+        } else if(password.toUpperCase()== password){
+            setErrorPassword(true)
+        } else if(regex.test(password) == false){
+            setErrorPassword(true)
+        }else if(isNotSpecialCharacter(password)){
+            setErrorPassword(true)
+        } else {
+            setErrorPassword(false)
+        }
+
+        
+        
+
         inputRef3.current.focus()
     }
     function onTabClick4(confirmPassword){
@@ -162,11 +197,12 @@ function Signup(){
                     placeholder={'Usuário'}
                     placeholderTextColor={colors.secondary}
                     />
+                    {errorUsername && 
+                    <Image style={styles.imageInput}
+                    source={require("../../../assets/Icons/error.png")}/>
+                    }
             </View> 
-            {errorUsername && 
-                <Image style={styles.imageInput}
-                source={require("../../../assets/Icons/error.png")}/>
-            }   
+           
 
             <View style={styles.input}>
                 <Image style={styles.imageInput}
@@ -182,14 +218,15 @@ function Signup(){
                     selectTextOnFocus={true}
                     placeholder={'Senha'}
                     onSubmitEditing={() => onTabClick3(password)}
-                    secureTextEntry={true}
+                    //secureTextEntry={true}
                     placeholderTextColor={colors.secondary}
                 />
-            </View>
-            {errorPassword && 
+                {errorPassword && 
                 <Image style={styles.imageInput}
                 source={require("../../../assets/Icons/error.png")}/>
-                }    
+                }
+            </View>
+                
             <View style={styles.input}>
                 <Image style={styles.imageInput}
                 source={require("../../../assets/Icons/confirmPassword.png")}/>
@@ -206,12 +243,11 @@ function Signup(){
                     secureTextEntry={true}
                     placeholderTextColor={colors.secondary}
                 />
-            </View>
-            {errorConfirmPassword && 
+                {errorConfirmPassword && 
                 <Image style={styles.imageInput}
                 source={require("../../../assets/Icons/error.png")}/>
-                }    
-                
+                }
+            </View>                          
                 
                 
                 
