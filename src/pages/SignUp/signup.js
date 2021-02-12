@@ -63,6 +63,7 @@ function Signup() {
     function onTabClick(name) {
         if (name.length > 60) {
             setErrorName(true)
+            setWarningName(false)
         } else {
             setErrorName(false)
         }
@@ -92,17 +93,22 @@ function Signup() {
     }
 
     function onTabClick3(password) {
-        setWarningPassword(false)
+
         if (password.length < 8 || password.length > 60) {
             setErrorPassword(true)
+            setWarningPassword(false)
         } else if (password.toLowerCase() == password) {
             setErrorPassword(true)
+            setWarningPassword(false)
         } else if (password.toUpperCase() == password) {
             setErrorPassword(true)
+            setWarningPassword(false)
         } else if (regex.test(password) == false) {
             setErrorPassword(true)
+            setWarningPassword(false)
         } else if (isNotSpecialCharacter(password)) {
             setErrorPassword(true)
+            setWarningPassword(false)
         } else {
             setErrorPassword(false)
         }
@@ -112,6 +118,7 @@ function Signup() {
     function onTabClick4(confirmPassword) {
         if (confirmPassword != password) {
             setErrorConfirmPassword(true)
+            setWarningConfirmPassword(false)
         } else {
             setErrorConfirmPassword(false)
         }
@@ -163,12 +170,14 @@ function Signup() {
                                 setName(text)
                                 setErrorName(false)
                                 if (text.length > 60) {
+
                                     setWarningName(true)
                                 } else {
                                     setWarningName(false)
                                 }
                                 if (text.length == 0) {
                                     setWarningName(false)
+                                    setErrorName(false)
                                 }
                             }}
                             value={name}
@@ -282,7 +291,7 @@ function Signup() {
                             onChangeText={text => {
                                 setPassword(text)
                                 const regex = /[0-9]/;
-
+                                setErrorPassword(false)
                                 if (text.length < 8 || text.length > 60) {
                                     setWarningPassword(true)
                                 } else if (text.toLowerCase() == text) {
@@ -333,8 +342,10 @@ function Signup() {
                             style={styles.textInput}
                             onChangeText={text => {
                                 setConfirmPassword(text)
+                                setErrorConfirmPassword(false)
                                 if (text != password) {
                                     setWarningConfirmPassword(true)
+
                                 } else {
                                     setWarningConfirmPassword(false)
                                 }
