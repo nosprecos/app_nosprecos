@@ -93,6 +93,7 @@ function Signup() {
     }
 
     function onTabClick3(password) {
+        const regex = /[0-9]/
 
         if (password.length < 8 || password.length > 60) {
             setErrorPassword(true)
