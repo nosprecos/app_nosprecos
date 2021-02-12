@@ -5,5 +5,6 @@ export const colors = {
     secondaryDark: '#119383',
     tertiary: '#FFDA00',
     dark: '#000000',
-    light: '#ffffff'
+    light: '#ffffff',
+    error: '#e30000'
 }
