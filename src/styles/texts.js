@@ -1,17 +1,17 @@
 import { StyleSheet } from 'react-native';
-import {colors} from './colors'
+import { colors } from './colors'
 
-const FONT_FAMILY={
+const FONT_FAMILY = {
     regular: "Catamaran",
     black: "CatamaranBlack",
     extraBold: "CatamaranExtraBold",
     bold: "CatamaranBold",
-    semiBold:"CatamaranSemiBold",
+    semiBold: "CatamaranSemiBold",
     medium: "CatamaranMedium",
     light: "CatamaranLight",
     thin: "CatamaranThin",
 }
-    
+
 
 export const texts = {
     //TITLES
@@ -52,37 +52,37 @@ export const texts = {
     },
 
     //SUBTITLES
-    subtitlePrimary:{
+    subtitlePrimary: {
         fontFamily: FONT_FAMILY.black,
         fontSize: 24,
         color: colors.primary,
     },
-    subtitlePrimaryDark:{
+    subtitlePrimaryDark: {
         fontFamily: FONT_FAMILY.black,
         fontSize: 24,
         color: colors.primaryDark,
     },
-    subtitleSecondary:{
+    subtitleSecondary: {
         fontFamily: FONT_FAMILY.black,
         fontSize: 24,
         color: colors.secondary,
     },
-    subtitleSecondaryDark:{
+    subtitleSecondaryDark: {
         fontFamily: FONT_FAMILY.black,
         fontSize: 24,
         color: colors.secondaryDark,
     },
-    subtitleTertiary:{
+    subtitleTertiary: {
         fontFamily: FONT_FAMILY.black,
         fontSize: 24,
         color: colors.tertiary,
     },
-    subtitleDark:{
+    subtitleDark: {
         fontFamily: FONT_FAMILY.black,
         fontSize: 24,
         color: colors.dark,
     },
-    subtitleLight:{
+    subtitleLight: {
         fontFamily: FONT_FAMILY.black,
         fontSize: 24,
         fontWeight: 'bold',
@@ -90,25 +90,35 @@ export const texts = {
     },
 
     //TEXTS
-    textLight:{
+    textLight: {
         fontFamily: FONT_FAMILY.light,
         fontSize: 18,
         color: colors.light,
     },
-    textDark:{
+    textDark: {
         fontFamily: FONT_FAMILY.light,
         fontSize: 18,
         color: colors.dark,
     },
-    textBoldLight:{
+    textBoldLight: {
         fontFamily: FONT_FAMILY.black,
         fontSize: 18,
         color: colors.light,
     },
-    textBoldDark:{
+    textBoldDark: {
         fontFamily: FONT_FAMILY.black,
         fontSize: 18,
         color: colors.dark,
     },
+    textError: {
+        fontFamily: FONT_FAMILY.light,
+        fontSize: 18,
+        color: colors.error,
+    },
+    textWarning: {
+        fontFamily: FONT_FAMILY.light,
+        fontSize: 18,
+        color: colors.tertiary,
+    }
 
 }
