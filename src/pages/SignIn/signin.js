@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { styles } from '../../styles'
 import { colors } from '../../styles/colors'
-import Logo from "../../../assets/Logo/logoNosPrecos.svg";
+import Logo from "../../../assets/Logo/logoNosPrecos.svg"
 import Tickets from '../../../assets/Logo/tickets.svg'
 import {
     Text,
@@ -12,13 +12,14 @@ import {
     Image,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import Signup from '../SignUp/signup';
+import Signup from '../SignUp/signup'
 import api from '../../api'
 import { texts } from '../../styles/texts';
 function Signin() {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const [username, setUsername] = useState('gesin')
+    const [password, setPassword] = useState('euMeAmo1@')
     const [error, setError] = useState(false)
+    const [errorMsg, setErrorMsg] = useState('')
     const navigation = useNavigation();
     const inputRef = useRef(0)
 
@@ -42,20 +43,24 @@ function Signin() {
 
     async function verifyUser(userLogin, userPassword) {
 
-        console.log(userLogin)
-        const response = await api.post('/signin', {
-            params: {
-                userLogin,
-                userPassword
-            }
+        const userValid = await api.post('/signin', {
+            userLogin,
+            userPassword
         })
+            .then(response => {
+                console.log(response.data)
+                return response.data
+            })
+            .catch(error => {
+                console.log(error.response.data)
 
+                //validation of error on front-end
+                setErrorMsg(error.response.data)
+                setError(true)
+                return error
+            })
 
-
-        // if(response){
-        //     console.log(response)
-        // }
-        return response
+        return userValid
     }
 
     return (
@@ -112,8 +117,8 @@ function Signin() {
                     {error &&
                         <View>
                             <Text style={texts.textWarning}>
-                                Informações inválidas!
-                    </Text>
+                                {errorMsg}
+                            </Text>
                         </View>
                     }
 

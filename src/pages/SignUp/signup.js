@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { styles } from '../../styles'
 import { colors } from '../../styles/colors'
+import { texts } from '../../styles/texts';
 import Logo from "../../../assets/Logo/logoNosPrecos.svg"
 import Tickets from '../../../assets/Logo/tickets.svg'
 import Warning from '../../../assets/Icons/warning.svg'
@@ -19,6 +20,7 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import { set } from 'react-native-reanimated'
 
+import api from '../../api'
 function Signup() {
     const [username, setUsername] = useState('')
     const [name, setName] = useState('')
@@ -27,6 +29,8 @@ function Signup() {
     const [confirmPassword, setConfirmPassword] = useState('')
     const navigation = useNavigation();
     //errors
+    const [error, setError] = useState(false)
+    const [errorMsg, setErrorMsg] = useState('')
     const [errorName, setErrorName] = useState(false)
     const [errorEmail, setErrorEmail] = useState(false)
     const [errorUsername, setErrorUsername] = useState(false)
@@ -125,19 +129,32 @@ function Signup() {
         }
     }
 
+    async function createUser(userRealName, userEmailAddress, userLoginName, userPassword, userConfirmPassword) {
 
-    function createUser(name, email, username, password, confirmPassword) {
-        const user = {
-            name,
-            email,
-            username,
-            password,
-            confirmPassword
-        }
-        console.log(`${username} cadastrado!`)
-        console.log(user)
+        const newUser = await api.post('/signup', {
+            userRealName,
+            userEmailAddress,
+            userLoginName,
+            userPassword,
+            userConfirmPassword
+
+        })
+            .then(response => {
+                console.log(response.data)
+                navigation.navigate('Signin')
+                return response.data
+            })
+            .catch(error => {
+                console.log(error.response.data)
+
+                //validation of error on front-end
+                setErrorMsg(error.response.data)
+                setError(true)
+                return error
+            })
+
+        return newUser
     }
-
 
     return (
 
@@ -381,7 +398,13 @@ function Signup() {
                             />
                         }
                     </View>
-
+                    {error &&
+                        <View>
+                            <Text style={texts.textWarning}>
+                                {errorMsg}
+                            </Text>
+                        </View>
+                    }
 
 
                     <TouchableOpacity
