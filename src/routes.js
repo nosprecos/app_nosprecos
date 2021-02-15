@@ -6,10 +6,11 @@ import { StyleSheet, Text, View } from 'react-native'
 import Preload from './pages/Preload/preload.js'
 import Signin from './pages/SignIn/signin.js'
 import Signup from './pages/SignUp/signup.js'
+import Profile from './pages/Profile/profile.js'
 
 const Stack = createStackNavigator()
 
- function Routes() {
+function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Preload"
@@ -20,9 +21,10 @@ const Stack = createStackNavigator()
         <Stack.Screen name="Preload" component={Preload} />
         <Stack.Screen name="Signin" component={Signin} />
         <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="Profile" component={Profile} />
 
       </Stack.Navigator>
-    </NavigationContainer>    
+    </NavigationContainer>
   )
 }
 

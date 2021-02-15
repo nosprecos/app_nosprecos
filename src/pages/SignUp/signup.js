@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { styles } from '../../styles'
 import { colors } from '../../styles/colors'
-import { texts } from '../../styles/texts';
+import { texts } from '../../styles/texts'
 import Logo from "../../../assets/Logo/logoNosPrecos.svg"
 import Tickets from '../../../assets/Logo/tickets.svg'
 import Warning from '../../../assets/Icons/warning.svg'
