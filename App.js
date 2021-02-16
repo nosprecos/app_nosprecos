@@ -24,7 +24,7 @@ export default function App() {
   return (
     <>
     <StatusBar
-        backgroundColor={colors.primary}
+        backgroundColor={colors.primaryDark}
         barStyle={'light-content'}
       />    
     <Routes/>

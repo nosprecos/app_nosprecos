@@ -111,6 +111,24 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 15,
     },
+    header:{
+        backgroundColor: colors.primaryDark,
+    },
+    headerMenu:{
+        width: Dimensions.get('window').width * 0.1,
+        height: Dimensions.get('window').height * 0.1,
+        marginHorizontal: 5,
+    },
+    headerUser:{
+        width: Dimensions.get('window').width * 0.1,
+        height: Dimensions.get('window').height * 0.1,
+        marginHorizontal: 5,
+    },
+    headerLogo:{
+        width: Dimensions.get('window').width * 0.3,
+        height: Dimensions.get('window').height * 0.3,
+        padding: 5,
+    },
 
     ...texts
 

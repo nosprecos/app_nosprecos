@@ -10,7 +10,6 @@ import {
 import { styles } from '../../styles'
 import { colors } from '../../styles/colors'
 import { texts } from '../../styles/texts'
-import { UserHeader } from '../../components/UserHeader'
 
 const Profile = (user) => {
     const userProfile = user.route.params
