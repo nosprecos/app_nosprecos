@@ -2,13 +2,14 @@ import React from 'react'
 import {
     View,
     Text,
+    TouchableOpacity,
 } from 'react-native'
 import { colors } from '../styles/colors'
 import { styles } from '../styles'
+import { useNavigation } from '@react-navigation/native'
 import Logo from "../../assets/Logo/logoNosPrecos.svg"
 import Menu from "../../assets/Icons/menu.svg"
 import UserDefault from "../../assets/Icons/userDefault.svg"
-
 
 export const HeaderTitle = () => {
     return (
@@ -21,12 +22,12 @@ export const HeaderTitle = () => {
     )
 }
 export const HeaderLeft = () => {
-
+    const navigation = useNavigation();
     return (
         <TouchableOpacity
             style={styles.headerMenu}
             onPress={() => {
-                console.log('Abrindo/Fechando sidebar')
+                navigation.openDrawer();
             }}
         >
             <Menu

@@ -16,8 +16,13 @@ import {
   HeaderRight
 } from './components/Header'
 
+import {
+  TabMenu
+} from './components/TabMenu'
+
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
+
 function Routes() {
   return (
     <NavigationContainer>
@@ -28,6 +33,8 @@ function Routes() {
         <Stack.Screen name="Signin" component={Signin} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Profile" component={Profile} options={{
+          headerShown: true,
+          headerTitleAlign: true,
           headerStyle: styles.header,
           headerTitle: () => (<HeaderTitle />),
           headerLeft: () => (<HeaderLeft />),
@@ -35,6 +42,7 @@ function Routes() {
 
         }} />
       </Stack.Navigator>
+
 
 
 

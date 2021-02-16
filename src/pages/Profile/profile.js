@@ -7,26 +7,19 @@ import {
     ScrollView,
     Image,
 } from 'react-native'
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { styles } from '../../styles'
 import { colors } from '../../styles/colors'
 import { texts } from '../../styles/texts'
-
+import { TabMenu } from '../../components/TabMenu';
+const Drawer = createDrawerNavigator()
 const Profile = (user) => {
     const userProfile = user.route.params
     console.log(userProfile)
     return (
-        <View style={styles.container}>
-            <Text style={texts.subtitleLight}>
-                Nome: {userProfile.userRealName}
-            </Text>
-            <Text style={texts.subtitleLight}>
-                Username: {userProfile.userLoginName}
-            </Text>
-            <Text style={texts.subtitleLight}>
-                Email: {userProfile.userEmailAddress}
-            </Text>
-
-        </View>
+    <Drawer.Navigator initialRouteName="TabMenu">
+        <Drawer.Screen name="TabMenu" component={TabMenu} />
+    </Drawer.Navigator> 
     )
 }
 

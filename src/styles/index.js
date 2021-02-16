@@ -118,8 +118,6 @@ export const styles = StyleSheet.create({
         width: Dimensions.get('window').width * 0.1,
         height: Dimensions.get('window').height * 0.1,
         marginHorizontal: 5,
-        headerTitleAlign: 'center',
-        headerShown: true,
     },
     headerUser: {
         width: Dimensions.get('window').width * 0.1,
