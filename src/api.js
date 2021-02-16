@@ -1,10 +1,13 @@
 import axios from "axios"
 
 const api = axios.create({
-  //Jardim de Piranhas
-  /* baseURL: "http://10.0.0.117:8080", */
+  //LUAN
+  //baseURL:"http://192.168.1.64:3333",
 
-  //Natal
+  //ARIEL
+  //baseURL: "http://192.168.1.153:3333",
+
+  //GESIO
   baseURL: "http://192.168.100.102:3333",
 })
 
