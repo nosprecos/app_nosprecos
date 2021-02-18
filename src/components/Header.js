@@ -38,10 +38,11 @@ export const HeaderLeft = ({ navigation }) => {
     )
 }
 export const HeaderRight = () => {
+    const navigation = useNavigation()
     return (
         <TouchableOpacity
             style={styles.headerUser}
-            onPress={() => { console.log('Indo pra page de User') }}
+            onPress={() => { navigation.navigate('Profile') }}
         >
             <UserDefault
                 height={'100%'}

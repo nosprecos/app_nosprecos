@@ -14,21 +14,19 @@ import {
     HeaderRight
 } from './components/Header'
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import {Profile} from './pages/Profile/profile'
+import { Profile } from './pages/Profile/profile'
+import EditProfile from './pages/EditProfile/editProfile'
 
 const Drawer = createDrawerNavigator()
-const RoutesContent = (userValid) => {
-    const userProfile = userValid.route.params
-    // console.log(userValid)
+const RoutesContent = () => {
     return (
         <Drawer.Navigator
             initialRouteName="Profile"
             drawerPosition={'left'}
             drawerType={'slide'}
         >
-            <Drawer.Screen name="Profile" component={Profile}
-            
-            />
+            <Drawer.Screen name="Profile" component={Profile} />
+            <Drawer.Screen name="EditProfile" component={EditProfile} />
         </Drawer.Navigator>
     )
 }

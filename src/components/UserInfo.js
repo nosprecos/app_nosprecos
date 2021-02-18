@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 import {
     View,
     Text,
@@ -13,7 +14,9 @@ import Whatsapp from "../../assets/Icons/whatsapp.svg"
 import Facebook from "../../assets/Icons/facebook.svg"
 import { texts } from '../styles/texts'
 import { color } from 'react-native-reanimated'
-export const UserInfo = ({user}) => {
+
+export const UserInfo = ({ user }) => {
+    const navigation = useNavigation()
     return (
         <View>
             <View style={styles.userInfoBg}>
@@ -44,7 +47,7 @@ export const UserInfo = ({user}) => {
                                 backgroundColor: colors.light,
                             }]}
                             onPress={() => {
-                                console.log('Editar perfil!')
+                                navigation.navigate("EditProfile")
                             }}
                         >
                             <Text
