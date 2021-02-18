@@ -5,6 +5,7 @@ import {
     Text,
     TouchableOpacity,
     Button,
+    Dimensions,
 } from 'react-native'
 import { colors } from '../styles/colors'
 import { styles } from '../styles'
@@ -106,22 +107,24 @@ export const UserInfoSideBar = () => {
     const { user } = useUser()
     const navigation = useNavigation()
     return (
-        <View>
+        <View style={{
+            height: Dimensions.get('window').height*0.2, 
+        }}>
             <View style={styles.userInfoBg}>
 
             </View>
-            <View style={styles.userInfo}>
+            <View style={styles.userInfoSideBar}>
 
 
-                <View style={styles.userInfoImage}>
+                <View style={styles.userInfoImageSideBar}>
                     <UserDefault
                         width={'100%'}
                         height={'100%'}
                         fill={colors.secondary}
                     />
                 </View>
-                <View style={styles.userInfoContent}>
-                    <View style={styles.userInfoNames}>
+                <View style={styles.userInfoContentSideBar}>
+                    <View style={styles.userInfoNamesSideBar}>
                         <Text style={texts.subtitleLight}>
                             {user.userRealName}
                         </Text>
@@ -129,7 +132,7 @@ export const UserInfoSideBar = () => {
                             {user.userLoginName}
                         </Text>
                     </View>
-                    <View style={styles.userInfoActions}>
+                    <View style={styles.userInfoActionsSideBar}>
                         <TouchableOpacity
                             style={[styles.userInfoButtons, {
                                 backgroundColor: colors.light,

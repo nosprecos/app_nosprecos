@@ -16,6 +16,7 @@ import { useNavigation } from '@react-navigation/native'
 import Signup from '../SignUp/signup'
 import api from '../../api'
 import { texts } from '../../styles/texts';
+import {ButtonAction} from '../../components/ButtonAction';
 function Signin() {
     const [username, setUsername] = useState('gesin')
     const [password, setPassword] = useState('euMeAmo1@')
@@ -133,9 +134,14 @@ function Signin() {
 
 
 
-
-                    <TouchableOpacity
-                        style={styles.button}
+                    <ButtonAction
+                        title={'Entrar'}
+                        action={()=>verifyUser(username, password)}
+                        username={username}
+                        password={password}
+                    />
+                    {/* <TouchableOpacity
+                        style={styles.button}s
                         onPress={() => {
                             verifyUser(username, password)
                         }}
@@ -143,7 +149,7 @@ function Signin() {
                         <Text style={styles.subtitleLight}>
                             Entrar
                     </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity
                         style={styles.textButton}
                         onPress={() => console.log('Esqueceu sua senha?')}
@@ -155,7 +161,7 @@ function Signin() {
 
                 </View>
                 <View style={styles.bottom}>
-
+                        
 
                     <TouchableOpacity
                         style={styles.textButton}

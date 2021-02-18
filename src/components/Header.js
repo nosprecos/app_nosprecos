@@ -25,8 +25,8 @@ export const HeaderLeft = ({ navigation }) => {
     return (
         <TouchableOpacity
             style={styles.headerMenu}
-            onPress={() => {
-                navigation.toggleDrawer()
+            onPress={() => { 
+                    navigation.toggleDrawer()                
             }}
         >
             <Menu

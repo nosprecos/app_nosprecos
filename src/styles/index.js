@@ -101,7 +101,8 @@ export const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         backgroundColor: colors.secondary,
-        padding: 15,
+        padding: 10,
+        maxHeight: 60,
         marginTop: Dimensions.get('window').height * 0.02,
         borderRadius: 30,
 
@@ -135,6 +136,12 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         marginBottom: 60,
     },
+    userInfoSideBar: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        marginBottom: 60,
+        paddingHorizontal: 15,
+    },
     userInfoBg: {
         backgroundColor: colors.secondaryDark,
         height: Dimensions.get('window').height * 0.1,
@@ -146,17 +153,34 @@ export const styles = StyleSheet.create({
         marginTop: Dimensions.get('window').height * 0.025,
         backgroundColor: colors.secondaryDark,
         borderRadius: 100,
-
+    },
+    userInfoImageSideBar: {
+        height: Dimensions.get('window').width * 0.25,
+        width: Dimensions.get('window').width * 0.25,
+        marginTop: Dimensions.get('window').height * 0.025,
+        backgroundColor: colors.secondaryDark,
+        borderRadius: 100,
     },
     userInfoContent: {
         flexDirection: 'column',
         height: Dimensions.get('window').height * 0.18,
         justifyContent: 'space-evenly',
-
+    },
+    userInfoContentSideBar: {
+        flexDirection: 'column',
+        height: Dimensions.get('window').height * 0.18,
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        flex: 1,
     },
     userInfoNames: {
         flexDirection: 'column',
         paddingHorizontal: 5,
+    },
+    userInfoNamesSideBar: {
+        flexDirection: 'column',
+        width:'100%',
+        paddingHorizontal: 10,
     },
     userInfoActions: {
         width: Dimensions.get('window').width * 0.7,
@@ -164,6 +188,14 @@ export const styles = StyleSheet.create({
         maxWidth: 250,
         flexDirection: 'row',
         justifyContent: 'space-around',
+    },
+    userInfoActionsSideBar: {
+        width: Dimensions.get('window').width * 0.3,
+        minWidth: 120,
+        maxWidth: 200,
+        flexDirection: 'row',
+        alignContent: 'flex-start',
+
     },
     userInfoButtons: {
         backgroundColor: colors.secondaryDark,

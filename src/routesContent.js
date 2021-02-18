@@ -26,9 +26,8 @@ const RoutesContent = () => {
         <Drawer.Navigator
             initialRouteName="Profile"
             drawerPosition={'left'}
-            drawerType={'slide'}
             drawerContent={() => (
-                < SideBar />
+                < SideBar/>
             )}
         >
             <Drawer.Screen name="Profile" component={Profile} />
