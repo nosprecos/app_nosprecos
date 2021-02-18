@@ -4,6 +4,7 @@ import {
     Text,
     Button,
     TouchableOpacity,
+    Thumbnail,
 } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { colors } from '../styles/colors'
@@ -14,19 +15,23 @@ import Menu from "../../assets/Icons/menu.svg"
 import UserDefault from "../../assets/Icons/userDefault.svg"
 const Drawer = createDrawerNavigator()
 
-export const TabMenu = () => {
-    return (    
-    <View style={styles.container}>
-    <Text style={texts.subtitleLight}>
-        Nome: Luan Santos de Souza
-    </Text>
-    <Text style={texts.subtitleLight}>
-        Username: luansds
-    </Text>
-    <Text style={texts.subtitleLight}>
-        Email: luzinZika1997@gmail.com
-    </Text>
 
-</View>
+import {
+    HeaderTitle,
+    HeaderLeft,
+    HeaderRight,
+    Header,
+} from './Header'
+import {
+    UserInfo,
+} from './UserInfo'
+export const TabMenu = ({ navigation }) => {
+    return (
+        <View style={styles.container}>
+
+            <Header navigation={navigation} />
+            <UserInfo />
+
+        </View>
     )
 }

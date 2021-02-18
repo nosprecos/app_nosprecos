@@ -32,15 +32,7 @@ function Routes() {
         <Stack.Screen name="Preload" component={Preload} />
         <Stack.Screen name="Signin" component={Signin} />
         <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen name="Profile" component={Profile} options={{
-          headerShown: true,
-          headerTitleAlign: true,
-          headerStyle: styles.header,
-          headerTitle: () => (<HeaderTitle />),
-          headerLeft: () => (<HeaderLeft />),
-          headerRight: () => (<HeaderRight />),
-
-        }} />
+        <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
 
 

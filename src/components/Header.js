@@ -21,13 +21,12 @@ export const HeaderTitle = () => {
         </View>
     )
 }
-export const HeaderLeft = () => {
-    const navigation = useNavigation();
+export const HeaderLeft = ({ navigation }) => {
     return (
         <TouchableOpacity
             style={styles.headerMenu}
             onPress={() => {
-                navigation.openDrawer();
+                navigation.toggleDrawer()
             }}
         >
             <Menu
@@ -50,5 +49,14 @@ export const HeaderRight = () => {
                 fill={colors.light}
             />
         </TouchableOpacity>
+    )
+}
+export const Header = ({ navigation }) => {
+    return (
+        <View style={styles.header}>
+            <HeaderLeft navigation={navigation} />
+            <HeaderTitle />
+            <HeaderRight />
+        </View>
     )
 }

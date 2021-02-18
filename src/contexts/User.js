@@ -13,7 +13,7 @@ export default function UserProvider({ children }) {
         >
             {children}
         </UserContext.Provider>
-    );
+    )
 }
 export function useUser() {
     const context = useContext(UserContext)

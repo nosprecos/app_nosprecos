@@ -113,23 +113,60 @@ export const styles = StyleSheet.create({
     },
     header: {
         backgroundColor: colors.primaryDark,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 10,
+        height: Dimensions.get('window').height * 0.09,
     },
     headerMenu: {
         width: Dimensions.get('window').width * 0.1,
         height: Dimensions.get('window').height * 0.1,
-        marginHorizontal: 5,
     },
     headerUser: {
         width: Dimensions.get('window').width * 0.1,
         height: Dimensions.get('window').height * 0.1,
-        marginHorizontal: 5,
     },
     headerLogo: {
         width: Dimensions.get('window').width * 0.3,
-        height: Dimensions.get('window').height * 0.3,
-        padding: 5,
+        height: Dimensions.get('window').height * 0.1,
     },
+    userInfo: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        marginBottom: 60,
+    },
+    userInfoBg: {
+        backgroundColor: colors.secondaryDark,
+        height: Dimensions.get('window').height * 0.1,
+        marginBottom: -(Dimensions.get('window').height * 0.1),
+    },
+    userInfoImage: {
+        height: Dimensions.get('window').height * 0.15,
+        width: Dimensions.get('window').height * 0.15,
+        marginTop: 20,
+        backgroundColor: colors.secondaryDark,
+        borderRadius: 100,
 
+    },
+    userInfoContent: {
+        flexDirection: 'column',
+        height: Dimensions.get('window').height * 0.18,
+        justifyContent: 'space-evenly',
+
+    },
+    userInfoNames: {
+        flexDirection: 'column',
+    },
+    userInfoActions: {
+        width: Dimensions.get('window').width * 0.6,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+    userInfoButtons: {
+        backgroundColor: colors.secondaryDark,
+        padding: 8,
+        borderRadius: 10,
+    },
     ...texts
 
 });

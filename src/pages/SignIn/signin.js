@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { styles } from '../../styles'
 import { colors } from '../../styles/colors'
-// import { useUser } from '../../contexts/User'
+
 import Logo from "../../../assets/Logo/logoNosPrecos.svg"
 import Tickets from '../../../assets/Logo/tickets.svg'
 import {
@@ -23,7 +23,6 @@ function Signin() {
     const [errorMsg, setErrorMsg] = useState('')
     const navigation = useNavigation();
     const inputRef = useRef(0)
-    // const { user, setUser } = useUser();
     function onTabVerification(text) {
 
 
@@ -41,8 +40,8 @@ function Signin() {
     function goToSignup() {
         navigation.navigate('Signup');
     }
-    function goToProfile(user) {
-        navigation.navigate('Profile', { ...user })
+    function goToProfile(userValid) {
+        navigation.navigate('Profile', { ...userValid })
     }
 
     async function verifyUser(userLogin, userPassword) {
@@ -136,7 +135,6 @@ function Signin() {
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => {
-                            console.log(username, password)
                             verifyUser(username, password)
                         }}
                     >
