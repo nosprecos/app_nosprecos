@@ -3,6 +3,7 @@ import Routes from './src/routes'
 import { StatusBar } from 'react-native'
 import {colors} from './src/styles/colors'
 import { useFonts } from 'expo-font'
+import UserProvider from './src/contexts/User'
 
 export default function App() {
 
@@ -23,11 +24,13 @@ export default function App() {
 
   return (
     <>
-    <StatusBar
+    <UserProvider>
+        <StatusBar
         backgroundColor={colors.primaryDark}
         barStyle={'light-content'}
-      />    
-    <Routes/>
+        />
+      <Routes/>
+    </UserProvider>
     </>
   );
 }

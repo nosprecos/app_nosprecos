@@ -141,9 +141,9 @@ export const styles = StyleSheet.create({
         marginBottom: -(Dimensions.get('window').height * 0.1),
     },
     userInfoImage: {
-        height: Dimensions.get('window').height * 0.15,
-        width: Dimensions.get('window').height * 0.15,
-        marginTop: 20,
+        height: Dimensions.get('window').width * 0.3,
+        width: Dimensions.get('window').width * 0.3,
+        marginTop: Dimensions.get('window').height * 0.025,
         backgroundColor: colors.secondaryDark,
         borderRadius: 100,
 
@@ -156,9 +156,12 @@ export const styles = StyleSheet.create({
     },
     userInfoNames: {
         flexDirection: 'column',
+        paddingHorizontal: 5,
     },
     userInfoActions: {
-        width: Dimensions.get('window').width * 0.6,
+        width: Dimensions.get('window').width * 0.7,
+        minWidth: 220,
+        maxWidth: 250,
         flexDirection: 'row',
         justifyContent: 'space-around',
     },

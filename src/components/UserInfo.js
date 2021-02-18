@@ -13,7 +13,7 @@ import Whatsapp from "../../assets/Icons/whatsapp.svg"
 import Facebook from "../../assets/Icons/facebook.svg"
 import { texts } from '../styles/texts'
 import { color } from 'react-native-reanimated'
-export const UserInfo = () => {
+export const UserInfo = ({user}) => {
     return (
         <View>
             <View style={styles.userInfoBg}>
@@ -32,10 +32,10 @@ export const UserInfo = () => {
                 <View style={styles.userInfoContent}>
                     <View style={styles.userInfoNames}>
                         <Text style={texts.subtitleLight}>
-                            First Name
+                            {user.userRealName}
                         </Text>
                         <Text style={texts.textLight}>
-                            Username
+                            {user.userLoginName}
                         </Text>
                     </View>
                     <View style={styles.userInfoActions}>

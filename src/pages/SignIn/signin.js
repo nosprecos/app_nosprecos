@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { styles } from '../../styles'
 import { colors } from '../../styles/colors'
-
+import {useUser} from '../../contexts/User'
 import Logo from "../../../assets/Logo/logoNosPrecos.svg"
 import Tickets from '../../../assets/Logo/tickets.svg'
 import {
@@ -23,6 +23,7 @@ function Signin() {
     const [errorMsg, setErrorMsg] = useState('')
     const navigation = useNavigation();
     const inputRef = useRef(0)
+    const {user, setUser} = useUser()
     function onTabVerification(text) {
 
 
@@ -41,7 +42,8 @@ function Signin() {
         navigation.navigate('Signup');
     }
     function goToProfile(userValid) {
-        navigation.navigate('Profile', { ...userValid })
+        setUser(userValid)
+        navigation.navigate('RoutesContent')
     }
 
     async function verifyUser(userLogin, userPassword) {

@@ -17,9 +17,6 @@ const Drawer = createDrawerNavigator()
 
 
 import {
-    HeaderTitle,
-    HeaderLeft,
-    HeaderRight,
     Header,
 } from './Header'
 import {

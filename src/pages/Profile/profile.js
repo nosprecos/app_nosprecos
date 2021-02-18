@@ -1,33 +1,38 @@
-import React, { useState, useRef } from 'react'
+import React from 'react'
 import {
-    Text,
     View,
-    TextInput,
+    Text,
+    Button,
     TouchableOpacity,
-    ScrollView,
-    Image,
+    Thumbnail,
 } from 'react-native'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { colors } from '../../styles/colors'
+import { styles } from '../../styles'
+import { texts } from '../../styles/texts'
+import Logo from "../../../assets/Logo/logoNosPrecos.svg"
+import Menu from "../../../assets/Icons/menu.svg"
+import UserDefault from "../../../assets/Icons/userDefault.svg"
+import {useUser} from '../../contexts/User'
+
+
+
 
 import {
-    HeaderTitle,
-    HeaderLeft,
-    HeaderRight
+    Header,
 } from '../../components/Header'
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { styles } from '../../styles'
-import { colors } from '../../styles/colors'
-import { texts } from '../../styles/texts'
-import { TabMenu } from '../../components/TabMenu';
-const Drawer = createDrawerNavigator()
-const Profile = (userValid) => {
-    const userProfile = userValid.route.params
-    // console.log(userValid)
+import {
+    UserInfo,   
+} from '../../components/UserInfo'
+
+export const Profile = ({ navigation }) => {
+    const { user } = useUser()
     return (
-        <Drawer.Navigator initialRouteName="TabMenu">
-            <Drawer.Screen name="TabMenu" component={TabMenu}
-            />
-        </Drawer.Navigator>
+        <View style={styles.container}>
+
+            <Header navigation={navigation} />
+            <UserInfo user={user} />
+
+        </View>
     )
 }
-
-export default Profile;
