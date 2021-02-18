@@ -23,11 +23,13 @@ import { useNavigation } from '@react-navigation/native'
 
 import api from '../../api'
 export default function EditProfile() {
+    const { user, setUser } = useUser()
     const [username, setUsername] = useState('')
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
     const [newPassword, setNewPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
     const navigation = useNavigation()
 
     //errors
@@ -53,7 +55,7 @@ export default function EditProfile() {
     const inputRef3 = useRef(3)
     const inputRef4 = useRef(4)
 
-    const { user } = useUser()
+
 
     function isNotSpecialCharacter(password) {
         if (password.indexOf('!') == -1 && password.indexOf('@') == -1 && password.indexOf('#') == -1 && password.indexOf('$') == -1 && password.indexOf('%') == -1 && password.indexOf('&') == -1 && password.indexOf('*') == -1) {
@@ -62,12 +64,6 @@ export default function EditProfile() {
             return false
         }
     }
-
-    function signin() {
-
-        navigation.navigate('Signin')
-    }
-    //lembrar de mudar para 60
     function onTabClick(name) {
         if (name.length > 60) {
             setErrorName(true)
@@ -140,7 +136,6 @@ export default function EditProfile() {
             userEmailAddress,
             userLoginName,
             userPassword,
-            userNewPassword
         })
             .then(response => {
                 console.log(response.data)

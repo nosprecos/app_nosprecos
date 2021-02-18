@@ -13,6 +13,9 @@ import {
     HeaderLeft,
     HeaderRight
 } from './components/Header'
+import {
+    SideBar
+} from './components/SideBar'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { Profile } from './pages/Profile/profile'
 import EditProfile from './pages/EditProfile/editProfile'
@@ -24,6 +27,9 @@ const RoutesContent = () => {
             initialRouteName="Profile"
             drawerPosition={'left'}
             drawerType={'slide'}
+            drawerContent={() => (
+                < SideBar />
+            )}
         >
             <Drawer.Screen name="Profile" component={Profile} />
             <Drawer.Screen name="EditProfile" component={EditProfile} />
