@@ -151,8 +151,11 @@ export const styles = StyleSheet.create({
         height: Dimensions.get('window').width * 0.3,
         width: Dimensions.get('window').width * 0.3,
         marginTop: Dimensions.get('window').height * 0.025,
-        backgroundColor: colors.secondaryDark,
+        backgroundColor: colors.light,
         borderRadius: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingBottom: 10,
     },
     userInfoImageSideBar: {
         height: Dimensions.get('window').width * 0.25,

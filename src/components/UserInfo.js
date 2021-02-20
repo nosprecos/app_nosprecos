@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useNavigation } from '@react-navigation/native'
 import {
     View,
@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     Button,
     Dimensions,
+    Image,
 } from 'react-native'
 import { colors } from '../styles/colors'
 import { styles } from '../styles'
@@ -14,10 +15,12 @@ import Instagram from "../../assets/Icons/instagram.svg"
 import Whatsapp from "../../assets/Icons/whatsapp.svg"
 import Facebook from "../../assets/Icons/facebook.svg"
 import { texts } from '../styles/texts'
-import { color } from 'react-native-reanimated'
 import { useUser } from '../contexts/User'
-export const UserInfo = () => {
+import ImageInput from './ImageInput'
+
+export const UserInfo = ({edit}) => {
     const { user } = useUser()
+    const [userRealImage, setUserRealImage] = useState('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==')
     const navigation = useNavigation()
     return (
         <View>
@@ -28,13 +31,22 @@ export const UserInfo = () => {
 
 
                 <View style={styles.userInfoImage}>
-                    <UserDefault
+                    {!userRealImage && <UserDefault
                         width={'100%'}
                         height={'100%'}
                         fill={colors.secondary}
+                    />                        
+                    }
+                    
+                    <ImageInput
+                    image={userRealImage}
+                    setImage={setUserRealImage}
+                    edit={edit}
                     />
+
                 </View>
                 <View style={styles.userInfoContent}>
+                
                     <View style={styles.userInfoNames}>
                         <Text style={texts.subtitleLight}>
                             {user.userRealName}

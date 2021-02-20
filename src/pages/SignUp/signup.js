@@ -18,7 +18,6 @@ import {
     useWindowDimensions,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { set } from 'react-native-reanimated'
 
 import api from '../../api'
 function Signup() {
@@ -44,7 +43,6 @@ function Signup() {
     const [warningPassword, setWarningPassword] = useState(false)
     const [warningConfirmPassword, setWarningConfirmPassword] = useState(false)
     // const [ref, setRef] = useState([1,2,3,4,5])
-
     const inputRef = useRef(0)
     const inputRef1 = useRef(1)
     const inputRef2 = useRef(2)

@@ -2,12 +2,9 @@ import React, { useState, useRef } from 'react'
 import { styles } from '../../styles'
 import { colors } from '../../styles/colors'
 import { texts } from '../../styles/texts'
-import {
-    Header,
-} from '../../components/Header'
-import {
-    UserInfo,
-} from '../../components/UserInfo'
+import ImageInput from '../../components/ImageInput'
+import {Header} from '../../components/Header'
+import {UserInfo} from '../../components/UserInfo'
 import Warning from '../../../assets/Icons/warning.svg'
 import Error from '../../../assets/Icons/error.svg'
 import { useUser } from '../../contexts/User'
@@ -24,10 +21,10 @@ import { useNavigation } from '@react-navigation/native'
 import api from '../../api'
 export default function EditProfile() {
     const { user, setUser } = useUser()
-    const [username, setUsername] = useState('')
-    const [name, setName] = useState('')
+    const [username, setUsername] = useState(user.userLoginName)
+    const [name, setName] = useState(user.userRealName)
     const [password, setPassword] = useState('')
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState(user.userEmailAddress)
     const [newPassword, setNewPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const navigation = useNavigation()
@@ -159,14 +156,14 @@ export default function EditProfile() {
         <View style={styles.container}>
             <ScrollView>
                 <Header navigation={navigation} />
-                <UserInfo user={user} />
-
+                <UserInfo user={user}
+                edit={true}/>
                 <View style={styles.signIn}>
-
+                    
                     <View style={styles.input}>
                         <Image style={styles.imageInput}
                             source={require("../../../assets/Icons/name.png")} />
-                        <TextInput
+                            <TextInput
                             style={styles.textInput}
                             textContentType={"name"}
                             onChangeText={text => {
