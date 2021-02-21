@@ -3,8 +3,8 @@ import { Button, Image, Text, View, Platform, TouchableOpacity } from 'react-nat
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import { styles } from '../styles'
-export default function ImageInput({image, setImage, edit}) {
-    
+export default function ImageInput({ image, setImage, edit }) {
+
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
@@ -28,37 +28,37 @@ export default function ImageInput({image, setImage, edit}) {
 
         if (!result.cancelled) {
             setImage(result.uri);
-        }
-    };
 
+        }
+    }
     return (
         <TouchableOpacity
-                style={styles.userInfoImage}
-                onPress={() => { pickImage() }}>
+            style={styles.userInfoImage}
+            onPress={() => { pickImage() }}>
 
-                
+
             {image &&
-            <Image source={{ uri: image }} style={{
-                marginBottom: -30,
-                borderRadius:100,
-                marginTop: 5,
-                width: 110,
-                height: 110,     
+                <Image source={{ uri: image }} style={{
+                    marginBottom: -30,
+                    borderRadius: 100,
+                    marginTop: 5,
+                    width: 110,
+                    height: 110,
                 }}
-            />
+                />
             }
-                {edit && <Text
-                    style={{
-                        backgroundColor: 'rgba(0,0,0, 0.4)',
-                        color: '#ffffff',
-                        padding: 5,
-                        borderRadius: 40,
-                    }}
-                >
+            {edit && <Text
+                style={{
+                    backgroundColor: 'rgba(0,0,0, 0.4)',
+                    color: '#ffffff',
+                    padding: 5,
+                    borderRadius: 40,
+                }}
+            >
 
-                    Editar foto
+                Editar foto
                 </Text>}
         </TouchableOpacity>
-        
+
     )
 }

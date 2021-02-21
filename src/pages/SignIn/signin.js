@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { styles } from '../../styles'
 import { colors } from '../../styles/colors'
-import {useUser} from '../../contexts/User'
+import { useUser } from '../../contexts/User'
 import Logo from "../../../assets/Logo/logoNosPrecos.svg"
 import Tickets from '../../../assets/Logo/tickets.svg'
 import {
@@ -16,34 +16,24 @@ import { useNavigation } from '@react-navigation/native'
 import Signup from '../SignUp/signup'
 import api from '../../api'
 import { texts } from '../../styles/texts';
-import {ButtonAction} from '../../components/ButtonAction';
+import { ButtonAction } from '../../components/ButtonAction';
+import { inputValidation } from '../../utils/inputValidations'
 function Signin() {
     const [username, setUsername] = useState('gesin')
     const [password, setPassword] = useState('euMeAmo1@')
     const [error, setError] = useState(false)
     const [errorMsg, setErrorMsg] = useState('')
     const navigation = useNavigation();
-    const inputRef = useRef(0)
-    const {user, setUser} = useUser()
-    function onTabVerification(text) {
+    const refInputPassword = useRef(0)
+    const { user, setUser } = useUser()
 
-
-    }
-
-    function onTabClick(text) {
-        if (text == null) {
-            setError(true)
-        } else {
-            setError(false)
-        }
-        inputRef.current.focus()
-    }
 
     function goToSignup() {
         navigation.navigate('Signup');
     }
     function goToProfile(userValid) {
         setUser(userValid)
+        console.log(`${userValid.userLoginName} logando...`)
         navigation.navigate('RoutesContent')
     }
 
@@ -54,9 +44,9 @@ function Signin() {
             userPassword
         })
             .then(response => {
-                // console.log(response.data)
                 const userResponse = response.data
                 // setUser(userResponse)
+
                 goToProfile(userResponse)
                 return response.data
             })
@@ -68,8 +58,6 @@ function Signin() {
                 setError(true)
                 return error
             })
-
-        return userValid
     }
 
     return (
@@ -105,7 +93,7 @@ function Signin() {
                             value={username}
                             placeholder={'Nome de Usuário'}
                             placeholderTextColor={colors.secondary}
-                            onSubmitEditing={() => { onTabClick(username) }}
+                            onSubmitEditing={() => { inputValidation('login', username, setError, refInputPassword) }}
                         />
                     </View>
 
@@ -114,7 +102,7 @@ function Signin() {
                         <Image style={styles.imageInput}
                             source={require("../../../assets/Icons/password.png")} />
                         <TextInput
-                            ref={inputRef}
+                            ref={refInputPassword}
                             style={styles.textInput}
                             onChangeText={text => setPassword(text)}
                             value={password}
@@ -136,7 +124,7 @@ function Signin() {
 
                     <ButtonAction
                         title={'Entrar'}
-                        action={()=>verifyUser(username, password)}
+                        action={() => verifyUser(username, password)}
                         username={username}
                         password={password}
                     />
@@ -161,7 +149,7 @@ function Signin() {
 
                 </View>
                 <View style={styles.bottom}>
-                        
+
 
                     <TouchableOpacity
                         style={styles.textButton}

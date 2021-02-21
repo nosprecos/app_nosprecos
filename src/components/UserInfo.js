@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import {
     View,
@@ -18,7 +18,7 @@ import { texts } from '../styles/texts'
 import { useUser } from '../contexts/User'
 import ImageInput from './ImageInput'
 
-export const UserInfo = ({edit}) => {
+export const UserInfo = ({ edit }) => {
     const { user } = useUser()
     const [userRealImage, setUserRealImage] = useState('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==')
     const navigation = useNavigation()
@@ -35,18 +35,18 @@ export const UserInfo = ({edit}) => {
                         width={'100%'}
                         height={'100%'}
                         fill={colors.secondary}
-                    />                        
+                    />
                     }
-                    
+
                     <ImageInput
-                    image={userRealImage}
-                    setImage={setUserRealImage}
-                    edit={edit}
+                        image={userRealImage}
+                        setImage={setUserRealImage}
+                        edit={edit}
                     />
 
                 </View>
                 <View style={styles.userInfoContent}>
-                
+
                     <View style={styles.userInfoNames}>
                         <Text style={texts.subtitleLight}>
                             {user.userRealName}
@@ -120,7 +120,7 @@ export const UserInfoSideBar = () => {
     const navigation = useNavigation()
     return (
         <View style={{
-            height: Dimensions.get('window').height*0.2, 
+            height: Dimensions.get('window').height * 0.2,
         }}>
             <View style={styles.userInfoBg}>
 

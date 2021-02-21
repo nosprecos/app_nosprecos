@@ -18,6 +18,7 @@ import {
     useWindowDimensions,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { inputValidation, onChangeValidation } from '../../utils/inputValidations'
 
 import api from '../../api'
 function Signup() {
@@ -42,90 +43,13 @@ function Signup() {
     const [warningUsername, setWarningUsername] = useState(false)
     const [warningPassword, setWarningPassword] = useState(false)
     const [warningConfirmPassword, setWarningConfirmPassword] = useState(false)
-    // const [ref, setRef] = useState([1,2,3,4,5])
-    const inputRef = useRef(0)
-    const inputRef1 = useRef(1)
-    const inputRef2 = useRef(2)
-    const inputRef3 = useRef(3)
-    const inputRef4 = useRef(4)
 
-    function isNotSpecialCharacter(password) {
-        if (password.indexOf('!') == -1 && password.indexOf('@') == -1 && password.indexOf('#') == -1 && password.indexOf('$') == -1 && password.indexOf('%') == -1 && password.indexOf('&') == -1 && password.indexOf('*') == -1) {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    function signin() {
-
-        navigation.navigate('Signin')
-    }
-    //lembrar de mudar para 60
-    function onTabClick(name) {
-        if (name.length > 60) {
-            setErrorName(true)
-            setWarningName(false)
-        } else {
-            setErrorName(false)
-        }
-        inputRef.current.focus()
-    }
-
-    function onTabClick1(email) {
-        if (email.indexOf('@') == -1 || email.length == 1) {
-            setErrorEmail(true)
-            setWarningEmail(false)
-        } else {
-            setErrorEmail(false)
-        }
-
-        inputRef1.current.focus()
-    }
-
-    function onTabClick2(username) {
-
-        if (username.length < 5 || username.length > 30) {
-            setErrorUsername(true)
-            setWarningUsername(false)
-        } else {
-            setErrorUsername(false)
-        }
-        inputRef2.current.focus()
-    }
-
-    function onTabClick3(password) {
-        const regex = /[0-9]/
-
-        if (password.length < 8 || password.length > 60) {
-            setErrorPassword(true)
-            setWarningPassword(false)
-        } else if (password.toLowerCase() == password) {
-            setErrorPassword(true)
-            setWarningPassword(false)
-        } else if (password.toUpperCase() == password) {
-            setErrorPassword(true)
-            setWarningPassword(false)
-        } else if (regex.test(password) == false) {
-            setErrorPassword(true)
-            setWarningPassword(false)
-        } else if (isNotSpecialCharacter(password)) {
-            setErrorPassword(true)
-            setWarningPassword(false)
-        } else {
-            setErrorPassword(false)
-        }
-
-        inputRef3.current.focus()
-    }
-    function onTabClick4(confirmPassword) {
-        if (confirmPassword != password) {
-            setErrorConfirmPassword(true)
-            setWarningConfirmPassword(false)
-        } else {
-            setErrorConfirmPassword(false)
-        }
-    }
+    //Refs to inputs
+    const refInputName = useRef(0)
+    const refInputEmail = useRef(1)
+    const refInputUsername = useRef(2)
+    const refInputPassword = useRef(3)
+    const refInputConfirmPassword = useRef(4)
 
     async function createUser(userRealName, userEmailAddress, userLoginName, userPassword, userConfirmPassword) {
 
@@ -138,7 +62,7 @@ function Signup() {
 
         })
             .then(response => {
-                console.log(response.data)
+                console.log('Usuário criado com sucesso!')
                 navigation.navigate('Signin')
                 return response.data
             })
@@ -183,23 +107,15 @@ function Signup() {
                             style={styles.textInput}
                             textContentType={"name"}
                             onChangeText={text => {
-                                setName(text)
-                                setErrorName(false)
-                                if (text.length > 60) {
-
-                                    setWarningName(true)
-                                } else {
-                                    setWarningName(false)
-                                }
-                                if (text.length == 0) {
-                                    setWarningName(false)
-                                    setErrorName(false)
-                                }
+                                onChangeValidation('name', text, setName, setErrorName, setWarningName)
                             }}
+                            ref={refInputName}
                             value={name}
                             placeholder={'Nome Completo'}
                             placeholderTextColor={colors.secondary}
-                            onSubmitEditing={() => { onTabClick(name) }}
+                            onSubmitEditing={() => {
+                                inputValidation('name', name, setErrorName, setWarningName, refInputEmail)
+                            }}
                         />
                         {errorName &&
                             <Error
@@ -220,26 +136,18 @@ function Signup() {
 
                             source={require("../../../assets/Icons/email.png")} />
                         <TextInput
-                            ref={inputRef}
+                            ref={refInputEmail}
                             style={styles.textInput}
                             onChangeText={text => {
-                                setEmail(text)
-                                setErrorEmail(false)
-                                if (text.indexOf('@') == -1) {
-                                    setWarningEmail(true)
-                                } else {
-                                    setWarningEmail(false)
-                                }
-                                if (text.length == 0) {
-                                    setWarningEmail(false)
-                                    setErrorEmail(false)
-                                }
+                                onChangeValidation('email', text, setEmail, setErrorEmail, setWarningEmail)
                             }}
                             value={email}
                             placeholder={'Email'}
                             keyboardType={'email-address'}
                             autoCapitalize={'none'}
-                            onSubmitEditing={() => onTabClick1(email)}
+                            onSubmitEditing={() => {
+                                inputValidation('email', email, setErrorEmail, setWarningEmail, refInputUsername)
+                            }}
                             placeholderTextColor={colors.secondary}
                             textContentType={"emailAddress"}
                         />
@@ -260,26 +168,17 @@ function Signup() {
                         <Image style={styles.imageInput}
                             source={require("../../../assets/Icons/user.png")} />
                         <TextInput
-                            ref={inputRef1}
+                            ref={refInputUsername}
                             style={styles.textInput}
                             onChangeText={text => {
-                                setUsername(text)
-                                setErrorUsername(false)
-                                if (text.length < 5 || text.length > 30) {
-                                    setWarningUsername(true)
-                                } else {
-                                    setWarningUsername(false)
-                                }
-
-                                if (text.length == 0) {
-                                    setWarningUsername(false)
-                                    setErrorUsername(false)
-                                }
+                                onChangeValidation('username', text, setUsername, setErrorUsername, setWarningUsername)
                             }}
                             textContentType={"username"}
                             autoCapitalize={'none'}
                             value={username}
-                            onSubmitEditing={() => onTabClick2(username)}
+                            onSubmitEditing={() => {
+                                inputValidation('username', username, setErrorUsername, setWarningUsername, refInputPassword)
+                            }}
                             placeholder={'Usuário'}
                             placeholderTextColor={colors.secondary}
                         />
@@ -302,38 +201,20 @@ function Signup() {
                         <Image style={styles.imageInput}
                             source={require("../../../assets/Icons/password.png")} />
                         <TextInput
-                            ref={inputRef2}
+                            ref={refInputPassword}
                             style={styles.textInput}
                             onChangeText={text => {
-                                setPassword(text)
-                                const regex = /[0-9]/;
-                                setErrorPassword(false)
-                                if (text.length < 8 || text.length > 60) {
-                                    setWarningPassword(true)
-                                } else if (text.toLowerCase() == text) {
-                                    setWarningPassword(true)
-                                } else if (text.toUpperCase() == text) {
-                                    setWarningPassword(true)
-                                } else if (regex.test(text) == false) {
-                                    setWarningPassword(true)
-                                } else if (isNotSpecialCharacter(text)) {
-                                    setWarningPassword(true)
-                                } else {
-                                    setWarningPassword(false)
-                                }
-                                if (text.length == 0) {
-                                    setWarningPassword(false)
-                                    setErrorPassword(false)
-                                }
+                                onChangeValidation('password', text, setPassword, setErrorPassword, setWarningPassword)
                             }}
                             value={password}
                             textContentType={"password"}
                             autoCapitalize={'none'}
-                            //autoFocus={true}
                             selectTextOnFocus={true}
                             placeholder={'Senha'}
-                            onSubmitEditing={() => onTabClick3(password)}
-                            //secureTextEntry={true}
+                            onSubmitEditing={() => {
+                                inputValidation('password', password, setErrorPassword, setWarningPassword, refInputConfirmPassword)
+                            }}
+                            secureTextEntry={true}
                             placeholderTextColor={colors.secondary}
                         />
                         {errorPassword &&
@@ -354,22 +235,10 @@ function Signup() {
                         <Image style={styles.imageInput}
                             source={require("../../../assets/Icons/confirmPassword.png")} />
                         <TextInput
-                            ref={inputRef3}
+                            ref={refInputConfirmPassword}
                             style={styles.textInput}
                             onChangeText={text => {
-                                setConfirmPassword(text)
-                                setErrorConfirmPassword(false)
-                                if (text != password) {
-                                    setWarningConfirmPassword(true)
-
-                                } else {
-                                    setWarningConfirmPassword(false)
-                                }
-
-                                if (text.length == 0) {
-                                    setWarningConfirmPassword(false)
-                                    setErrorConfirmPassword(false)
-                                }
+                                onChangeValidation('confirmPassword', text, setConfirmPassword, setErrorConfirmPassword, setWarningConfirmPassword)
                             }}
                             value={confirmPassword}
                             textContentType={"password"}
@@ -377,8 +246,7 @@ function Signup() {
                             placeholder={'Confirmar senha'}
                             selectTextOnFocus={true}
                             onSubmitEditing={() => {
-                                onTabClick4(confirmPassword)
-
+                                inputValidation('confirmPassword', confirmPassword, setErrorConfirmPassword, setWarningConfirmPassword, refInputConfirmPassword, password)
                             }}
                             secureTextEntry={true}
                             placeholderTextColor={colors.secondary}
