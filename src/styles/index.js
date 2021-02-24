@@ -155,7 +155,6 @@ export const styles = StyleSheet.create({
         borderRadius: 100,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingBottom: 10,
     },
     userInfoImageSideBar: {
         height: Dimensions.get('window').width * 0.25,
@@ -182,7 +181,7 @@ export const styles = StyleSheet.create({
     },
     userInfoNamesSideBar: {
         flexDirection: 'column',
-        width:'100%',
+        width: '100%',
         paddingHorizontal: 10,
     },
     userInfoActions: {

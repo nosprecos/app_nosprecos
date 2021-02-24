@@ -32,7 +32,9 @@ export const Profile = ({ navigation }) => {
         <View style={styles.container}>
 
             <Header navigation={navigation} />
-            <UserInfo user={user}/>
+            <UserInfo user={user}
+                edit={false}
+            />
 
         </View>
     )

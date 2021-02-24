@@ -25,7 +25,6 @@ export default function ImageInput({ image, setImage, edit }) {
             quality: 1,
         });
 
-
         if (!result.cancelled) {
             setImage(result.uri);
 
@@ -33,15 +32,17 @@ export default function ImageInput({ image, setImage, edit }) {
     }
     return (
         <TouchableOpacity
-            style={styles.userInfoImage}
-            onPress={() => { pickImage() }}>
+            onPress={() => { pickImage() }}
+            style={{
+                alignItems: 'center',
+            }}
+        >
 
 
             {image &&
                 <Image source={{ uri: image }} style={{
                     marginBottom: -30,
                     borderRadius: 100,
-                    marginTop: 5,
                     width: 110,
                     height: 110,
                 }}
@@ -53,6 +54,7 @@ export default function ImageInput({ image, setImage, edit }) {
                     color: '#ffffff',
                     padding: 5,
                     borderRadius: 40,
+                    width: 80,
                 }}
             >
 

@@ -3,11 +3,12 @@ import { styles } from '../../styles'
 import { colors } from '../../styles/colors'
 import { texts } from '../../styles/texts'
 import ImageInput from '../../components/ImageInput'
-import {Header} from '../../components/Header'
-import {UserInfo} from '../../components/UserInfo'
+import { Header } from '../../components/Header'
+import { UserInfo } from '../../components/UserInfo'
 import Warning from '../../../assets/Icons/warning.svg'
 import Error from '../../../assets/Icons/error.svg'
 import { useUser } from '../../contexts/User'
+import { inputValidation, onChangeValidation } from '../../utils/inputValidations'
 import {
     Text,
     View,
@@ -19,7 +20,9 @@ import {
 import { useNavigation } from '@react-navigation/native'
 
 import api from '../../api'
-export default function EditProfile() {
+export default function EditProfile(params) {
+    const setEdit = params.route.params.setEditMode
+    const navigation = useNavigation()
     const { user, setUser } = useUser()
     const [username, setUsername] = useState(user.userLoginName)
     const [name, setName] = useState(user.userRealName)
@@ -27,7 +30,7 @@ export default function EditProfile() {
     const [email, setEmail] = useState(user.userEmailAddress)
     const [newPassword, setNewPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const navigation = useNavigation()
+    const [userImage, setUserImage] = useState()
 
     //errors
     const [error, setError] = useState(false)
@@ -44,87 +47,15 @@ export default function EditProfile() {
     const [warningUsername, setWarningUsername] = useState(false)
     const [warningPassword, setWarningPassword] = useState(false)
     const [warningConfirmPassword, setWarningConfirmPassword] = useState(false)
-    // const [ref, setRef] = useState([1,2,3,4,5])
-
-    const inputRef = useRef(0)
-    const inputRef1 = useRef(1)
-    const inputRef2 = useRef(2)
-    const inputRef3 = useRef(3)
-    const inputRef4 = useRef(4)
 
 
+    //Refs to inputs
+    const refInputName = useRef(0)
+    const refInputEmail = useRef(1)
+    const refInputUsername = useRef(2)
+    const refInputPassword = useRef(3)
+    const refInputConfirmPassword = useRef(4)
 
-    function isNotSpecialCharacter(password) {
-        if (password.indexOf('!') == -1 && password.indexOf('@') == -1 && password.indexOf('#') == -1 && password.indexOf('$') == -1 && password.indexOf('%') == -1 && password.indexOf('&') == -1 && password.indexOf('*') == -1) {
-            return true
-        } else {
-            return false
-        }
-    }
-    function onTabClick(name) {
-        if (name.length > 60) {
-            setErrorName(true)
-            setWarningName(false)
-        } else {
-            setErrorName(false)
-        }
-        inputRef.current.focus()
-    }
-
-    function onTabClick1(email) {
-        if (email.indexOf('@') == -1 || email.length == 1) {
-            setErrorEmail(true)
-            setWarningEmail(false)
-        } else {
-            setErrorEmail(false)
-        }
-
-        inputRef1.current.focus()
-    }
-
-    function onTabClick2(username) {
-
-        if (username.length < 5 || username.length > 30) {
-            setErrorUsername(true)
-            setWarningUsername(false)
-        } else {
-            setErrorUsername(false)
-        }
-        inputRef2.current.focus()
-    }
-
-    function onTabClick3(password) {
-        const regex = /[0-9]/
-
-        if (password.length < 8 || password.length > 60) {
-            setErrorPassword(true)
-            setWarningPassword(false)
-        } else if (password.toLowerCase() == password) {
-            setErrorPassword(true)
-            setWarningPassword(false)
-        } else if (password.toUpperCase() == password) {
-            setErrorPassword(true)
-            setWarningPassword(false)
-        } else if (regex.test(password) == false) {
-            setErrorPassword(true)
-            setWarningPassword(false)
-        } else if (isNotSpecialCharacter(password)) {
-            setErrorPassword(true)
-            setWarningPassword(false)
-        } else {
-            setErrorPassword(false)
-        }
-
-        inputRef3.current.focus()
-    }
-    function onTabClick4(confirmPassword) {
-        if (confirmPassword != password) {
-            setErrorConfirmPassword(true)
-            setWarningConfirmPassword(false)
-        } else {
-            setErrorConfirmPassword(false)
-        }
-    }
 
     async function updateUser(userRealName, userEmailAddress, userLoginName, userPassword, userNewPassword) {
 
@@ -137,6 +68,7 @@ export default function EditProfile() {
             .then(response => {
                 console.log(response.data)
                 navigation.navigate('Profile')
+                setUser(response.data)
                 return response.data
             })
             .catch(error => {
@@ -155,35 +87,32 @@ export default function EditProfile() {
 
         <View style={styles.container}>
             <ScrollView>
-                <Header navigation={navigation} />
+                <Header navigation={navigation}
+                    setEdit={setEdit}
+                />
                 <UserInfo user={user}
-                edit={true}/>
+                    edit={true}
+                    userImage={userImage}
+                    setUserImage={setUserImage}
+                />
                 <View style={styles.signIn}>
-                    
+
                     <View style={styles.input}>
                         <Image style={styles.imageInput}
                             source={require("../../../assets/Icons/name.png")} />
-                            <TextInput
+                        <TextInput
                             style={styles.textInput}
                             textContentType={"name"}
                             onChangeText={text => {
-                                setName(text)
-                                setErrorName(false)
-                                if (text.length > 60) {
-
-                                    setWarningName(true)
-                                } else {
-                                    setWarningName(false)
-                                }
-                                if (text.length == 0) {
-                                    setWarningName(false)
-                                    setErrorName(false)
-                                }
+                                onChangeValidation('name', text, setName, setErrorName, setWarningName)
                             }}
+                            ref={refInputName}
                             value={name}
                             placeholder={'Nome Completo'}
                             placeholderTextColor={colors.secondary}
-                            onSubmitEditing={() => { onTabClick(name) }}
+                            onSubmitEditing={() => {
+                                inputValidation('name', name, setErrorName, setWarningName, refInputEmail)
+                            }}
                         />
                         {errorName &&
                             <Error
@@ -204,26 +133,18 @@ export default function EditProfile() {
 
                             source={require("../../../assets/Icons/email.png")} />
                         <TextInput
-                            ref={inputRef}
+                            ref={refInputEmail}
                             style={styles.textInput}
                             onChangeText={text => {
-                                setEmail(text)
-                                setErrorEmail(false)
-                                if (text.indexOf('@') == -1) {
-                                    setWarningEmail(true)
-                                } else {
-                                    setWarningEmail(false)
-                                }
-                                if (text.length == 0) {
-                                    setWarningEmail(false)
-                                    setErrorEmail(false)
-                                }
+                                onChangeValidation('email', text, setEmail, setErrorEmail, setWarningEmail)
                             }}
                             value={email}
                             placeholder={'Email'}
                             keyboardType={'email-address'}
                             autoCapitalize={'none'}
-                            onSubmitEditing={() => onTabClick1(email)}
+                            onSubmitEditing={() => {
+                                inputValidation('email', email, setErrorEmail, setWarningEmail, refInputUsername)
+                            }}
                             placeholderTextColor={colors.secondary}
                             textContentType={"emailAddress"}
                         />
@@ -244,26 +165,17 @@ export default function EditProfile() {
                         <Image style={styles.imageInput}
                             source={require("../../../assets/Icons/user.png")} />
                         <TextInput
-                            ref={inputRef1}
+                            ref={refInputUsername}
                             style={styles.textInput}
                             onChangeText={text => {
-                                setUsername(text)
-                                setErrorUsername(false)
-                                if (text.length < 5 || text.length > 30) {
-                                    setWarningUsername(true)
-                                } else {
-                                    setWarningUsername(false)
-                                }
-
-                                if (text.length == 0) {
-                                    setWarningUsername(false)
-                                    setErrorUsername(false)
-                                }
+                                onChangeValidation('username', text, setUsername, setErrorUsername, setWarningUsername)
                             }}
                             textContentType={"username"}
                             autoCapitalize={'none'}
                             value={username}
-                            onSubmitEditing={() => onTabClick2(username)}
+                            onSubmitEditing={() => {
+                                inputValidation('username', username, setErrorUsername, setWarningUsername, refInputPassword)
+                            }}
                             placeholder={'Usuário'}
                             placeholderTextColor={colors.secondary}
                         />
@@ -286,38 +198,20 @@ export default function EditProfile() {
                         <Image style={styles.imageInput}
                             source={require("../../../assets/Icons/password.png")} />
                         <TextInput
-                            ref={inputRef2}
+                            ref={refInputPassword}
                             style={styles.textInput}
                             onChangeText={text => {
-                                setPassword(text)
-                                const regex = /[0-9]/;
-                                setErrorPassword(false)
-                                if (text.length < 8 || text.length > 60) {
-                                    setWarningPassword(true)
-                                } else if (text.toLowerCase() == text) {
-                                    setWarningPassword(true)
-                                } else if (text.toUpperCase() == text) {
-                                    setWarningPassword(true)
-                                } else if (regex.test(text) == false) {
-                                    setWarningPassword(true)
-                                } else if (isNotSpecialCharacter(text)) {
-                                    setWarningPassword(true)
-                                } else {
-                                    setWarningPassword(false)
-                                }
-                                if (text.length == 0) {
-                                    setWarningPassword(false)
-                                    setErrorPassword(false)
-                                }
+                                onChangeValidation('password', text, setPassword, setErrorPassword, setWarningPassword)
                             }}
                             value={password}
                             textContentType={"password"}
                             autoCapitalize={'none'}
-                            //autoFocus={true}
                             selectTextOnFocus={true}
                             placeholder={'Senha'}
-                            onSubmitEditing={() => onTabClick3(password)}
-                            //secureTextEntry={true}
+                            onSubmitEditing={() => {
+                                inputValidation('password', password, setErrorPassword, setWarningPassword, refInputConfirmPassword)
+                            }}
+                            secureTextEntry={true}
                             placeholderTextColor={colors.secondary}
                         />
                         {errorPassword &&
@@ -338,31 +232,18 @@ export default function EditProfile() {
                         <Image style={styles.imageInput}
                             source={require("../../../assets/Icons/confirmPassword.png")} />
                         <TextInput
-                            ref={inputRef3}
+                            ref={refInputConfirmPassword}
                             style={styles.textInput}
                             onChangeText={text => {
-                                setNewPassword(text)
-                                setErrorConfirmPassword(false)
-                                if (text != password) {
-                                    setWarningConfirmPassword(true)
-
-                                } else {
-                                    setWarningConfirmPassword(false)
-                                }
-
-                                if (text.length == 0) {
-                                    setWarningConfirmPassword(false)
-                                    setErrorConfirmPassword(false)
-                                }
+                                onChangeValidation('confirmPassword', text, setConfirmPassword, setErrorConfirmPassword, setWarningConfirmPassword)
                             }}
-                            value={newPassword}
+                            value={confirmPassword}
                             textContentType={"password"}
                             autoCapitalize={'none'}
-                            placeholder={'Nova senha'}
+                            placeholder={'Confirmar senha'}
                             selectTextOnFocus={true}
                             onSubmitEditing={() => {
-                                onTabClick4(newPassword)
-
+                                inputValidation('confirmPassword', confirmPassword, setErrorConfirmPassword, setWarningConfirmPassword, refInputConfirmPassword, password)
                             }}
                             secureTextEntry={true}
                             placeholderTextColor={colors.secondary}

@@ -17,10 +17,12 @@ import Facebook from "../../assets/Icons/facebook.svg"
 import { texts } from '../styles/texts'
 import { useUser } from '../contexts/User'
 import ImageInput from './ImageInput'
+import { UserImage } from './UserImage'
 
-export const UserInfo = ({ edit }) => {
+export const UserInfo = ({ edit, userImage, setUserImage }) => {
     const { user } = useUser()
-    const [userRealImage, setUserRealImage] = useState('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==')
+    const [userRealImage, setUserRealImage] = useState()
+    const [editMode, setEditMode] = useState(edit)
     const navigation = useNavigation()
     return (
         <View>
@@ -28,22 +30,16 @@ export const UserInfo = ({ edit }) => {
 
             </View>
             <View style={styles.userInfo}>
-
-
                 <View style={styles.userInfoImage}>
-                    {!userRealImage && <UserDefault
-                        width={'100%'}
-                        height={'100%'}
-                        fill={colors.secondary}
-                    />
-                    }
-
-                    <ImageInput
-                        image={userRealImage}
-                        setImage={setUserRealImage}
+                    {!editMode && <UserImage
+                        image={userImage}
                         edit={edit}
-                    />
-
+                    />}
+                    {editMode && <ImageInput
+                        image={userImage}
+                        setImage={setUserImage}
+                        edit={edit}
+                    />}
                 </View>
                 <View style={styles.userInfoContent}>
 
@@ -56,12 +52,14 @@ export const UserInfo = ({ edit }) => {
                         </Text>
                     </View>
                     <View style={styles.userInfoActions}>
-                        <TouchableOpacity
+                        {!editMode && <TouchableOpacity
                             style={[styles.userInfoButtons, {
                                 backgroundColor: colors.light,
                             }]}
                             onPress={() => {
-                                navigation.navigate("EditProfile")
+                                navigation.navigate("EditProfile", {
+                                    setEditMode
+                                })
                             }}
                         >
                             <Text
@@ -69,7 +67,7 @@ export const UserInfo = ({ edit }) => {
                             >
                                 Editar Perfil
                             </Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity>}
                         <TouchableOpacity
                             style={styles.userInfoButtons}
                             onPress={() => {
@@ -138,7 +136,7 @@ export const UserInfoSideBar = () => {
                 <View style={styles.userInfoContentSideBar}>
                     <View style={styles.userInfoNamesSideBar}>
                         <Text style={texts.subtitleLight}>
-                            {user.userRealName}
+                            {user.userRealName.split(' ')[0]}
                         </Text>
                         <Text style={texts.textLight}>
                             {user.userLoginName}

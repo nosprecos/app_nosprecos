@@ -13,7 +13,7 @@ import {
 import {
     UserInfoSideBar,
 } from './UserInfo'
-import {ButtonAction} from './ButtonAction'
+import { ButtonAction } from './ButtonAction'
 import { colors } from '../styles/colors'
 import { styles } from '../styles'
 import { useNavigation } from '@react-navigation/native'
@@ -22,8 +22,7 @@ import Menu from "../../assets/Icons/menu.svg"
 import UserDefault from "../../assets/Icons/userDefault.svg"
 import { texts } from '../styles/texts'
 
-export const SideBar = ({navigation}) => {
-   
+export const SideBar = () => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -31,10 +30,10 @@ export const SideBar = ({navigation}) => {
             </View>
             <UserInfoSideBar />
             <View style={{
-                padding:20,
-                height: Dimensions.get('window').height*0.7 ,
+                padding: 20,
+                height: Dimensions.get('window').height * 0.7,
                 flexDirection: 'column',
-                
+
             }}>
                 <View>
                     <ButtonAction
@@ -42,9 +41,9 @@ export const SideBar = ({navigation}) => {
                         action={() => console.log('teu cú')}
                     />
                 </View>
-                
+
                 <View style={{
-                    marginTop: Dimensions.get('window').height*0.02 ,
+                    marginTop: Dimensions.get('window').height * 0.02,
                 }}>
                     <ButtonAction
                         title={'Notificações'}
@@ -53,12 +52,12 @@ export const SideBar = ({navigation}) => {
                 </View>
                 <View style={{
                     justifyContent: 'flex-end',
-                    flex:1,
-                    paddingBottom: Dimensions.get('window').height*0.02 ,
+                    flex: 1,
+                    paddingBottom: Dimensions.get('window').height * 0.02,
                 }}>
                     <ButtonAction
                         title={'Sair'}
-                        action={() => console.log('teu cú')}
+                        action={() => { console.log('teu cú') }}
                     />
                 </View>
 
