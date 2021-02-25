@@ -17,7 +17,9 @@ import Signup from '../SignUp/signup'
 import api from '../../api'
 import { texts } from '../../styles/texts';
 import { ButtonAction } from '../../components/ButtonAction';
-import { inputValidation } from '../../utils/inputValidations'
+import { inputValidation, onChangeValidation } from '../../utils/inputValidations'
+import Warning from '../../../assets/Icons/warning.svg'
+import Error from '../../../assets/Icons/error.svg'
 function Signin() {
     const [username, setUsername] = useState('gesin')
     const [password, setPassword] = useState('euMeAmo1@')
@@ -27,6 +29,11 @@ function Signin() {
     const refInputPassword = useRef(0)
     const { user, setUser } = useUser()
 
+    const [errorUsername, setErrorUsername] = useState(false)
+    const [errorPassword, setErrorPassword] = useState(false)
+
+    const [warningUsername, setWarningUsername] = useState(false)
+    const [warningPassword, setWarningPassword] = useState(false)
 
     function goToSignup() {
         navigation.navigate('Signup');
@@ -87,14 +94,29 @@ function Signin() {
                         <TextInput
                             style={styles.textInput}
                             onChangeText={text => {
-                                setUsername(text)
-
+                                onChangeValidation('username', text, setUsername, setErrorUsername, setWarningUsername)
                             }}
+                            textContentType={"username"}
+                            autoCapitalize={'none'}
                             value={username}
-                            placeholder={'Nome de Usuário'}
+                            onSubmitEditing={() => {
+                                inputValidation('username', username, setErrorUsername, setWarningUsername, refInputPassword)
+                            }}
+                            placeholder={'Usuário'}
                             placeholderTextColor={colors.secondary}
-                            onSubmitEditing={() => { inputValidation('login', username, setError, refInputPassword) }}
                         />
+                        {errorUsername &&
+                            <Error
+                                style={styles.imageInput}
+                                fill={colors.error}
+                            />
+                        }
+                        {warningUsername &&
+                            <Warning
+                                style={styles.imageInput}
+                                fill={colors.tertiary}
+                            />
+                        }
                     </View>
 
 
@@ -104,20 +126,33 @@ function Signin() {
                         <TextInput
                             ref={refInputPassword}
                             style={styles.textInput}
-                            onChangeText={text => setPassword(text)}
+                            onChangeText={text => {
+                                onChangeValidation('password', text, setPassword, setErrorPassword, setWarningPassword)
+                            }}
                             value={password}
+                            textContentType={"password"}
+                            autoCapitalize={'none'}
+                            selectTextOnFocus={true}
                             placeholder={'Senha'}
+                            onSubmitEditing={() => {
+                                inputValidation('password', password, setErrorPassword, setWarningPassword, refInputConfirmPassword)
+                            }}
                             secureTextEntry={true}
                             placeholderTextColor={colors.secondary}
                         />
+                        {errorPassword &&
+                            <Error
+                                style={styles.imageInput}
+                                fill={colors.error}
+                            />
+                        }
+                        {warningPassword &&
+                            <Warning
+                                style={styles.imageInput}
+                                fill={colors.tertiary}
+                            />
+                        }
                     </View>
-                    {error &&
-                        <View>
-                            <Text style={texts.textWarning}>
-                                {errorMsg}
-                            </Text>
-                        </View>
-                    }
 
 
 
