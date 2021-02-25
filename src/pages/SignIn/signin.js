@@ -135,7 +135,7 @@ function Signin() {
                             selectTextOnFocus={true}
                             placeholder={'Senha'}
                             onSubmitEditing={() => {
-                                inputValidation('password', password, setErrorPassword, setWarningPassword, refInputConfirmPassword)
+                                inputValidation('password', password, setErrorPassword, setWarningPassword)
                             }}
                             secureTextEntry={true}
                             placeholderTextColor={colors.secondary}

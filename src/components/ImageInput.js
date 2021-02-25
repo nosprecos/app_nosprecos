@@ -3,6 +3,7 @@ import { Button, Image, Text, View, Platform, TouchableOpacity } from 'react-nat
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import { styles } from '../styles'
+import FormData from 'form-data'
 export default function ImageInput({ image, setImage, edit }) {
 
     useEffect(() => {
@@ -21,13 +22,11 @@ export default function ImageInput({ image, setImage, edit }) {
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             base64: true,
-            aspect: [4, 3],
+            aspect: [4, 4],
             quality: 1,
         });
-
         if (!result.cancelled) {
-            setImage(result.uri);
-
+            setImage(`data:image/jpeg;base64,${result.base64}`);
         }
     }
     return (

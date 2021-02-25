@@ -19,6 +19,7 @@ import {
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
+
 import api from '../../api'
 export default function EditProfile(params) {
     const setEdit = params.route.params.setEditMode
