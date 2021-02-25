@@ -31,11 +31,11 @@ export const UserInfo = ({ edit, userImage, setUserImage }) => {
             </View>
             <View style={styles.userInfo}>
                 <View style={styles.userInfoImage}>
-                    {!editMode && <UserImage
+                    {!edit && <UserImage
                         image={userImage}
                         edit={edit}
                     />}
-                    {editMode && <ImageInput
+                    {edit && <ImageInput
                         image={userImage}
                         setImage={setUserImage}
                         edit={edit}
@@ -113,7 +113,7 @@ export const UserInfo = ({ edit, userImage, setUserImage }) => {
 }
 
 
-export const UserInfoSideBar = () => {
+export const UserInfoSideBar = ({ userImage, setUserImage }) => {
     const { user } = useUser()
     const navigation = useNavigation()
     return (
@@ -127,16 +127,14 @@ export const UserInfoSideBar = () => {
 
 
                 <View style={styles.userInfoImageSideBar}>
-                    <UserDefault
-                        width={'100%'}
-                        height={'100%'}
-                        fill={colors.secondary}
+                    <UserImage
+                        image={userImage}
                     />
                 </View>
                 <View style={styles.userInfoContentSideBar}>
                     <View style={styles.userInfoNamesSideBar}>
                         <Text style={texts.subtitleLight}>
-                            {user.userRealName.split(' ')[0]}
+                            Olá, {user.userRealName.split(' ')[0]}
                         </Text>
                         <Text style={texts.textLight}>
                             {user.userLoginName}

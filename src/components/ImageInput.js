@@ -3,7 +3,8 @@ import { Button, Image, Text, View, Platform, TouchableOpacity } from 'react-nat
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import { styles } from '../styles'
-import FormData from 'form-data'
+import { UserImage } from './UserImage'
+
 export default function ImageInput({ image, setImage, edit }) {
 
     useEffect(() => {
@@ -34,9 +35,20 @@ export default function ImageInput({ image, setImage, edit }) {
             onPress={() => { pickImage() }}
             style={{
                 alignItems: 'center',
-            }}
-        >
+                justifyContent: 'center',
+                width: '100%',
+                height: '100%',
 
+            }}
+        >   
+            {!image &&
+                <UserImage
+                style
+                    image={image}
+                    edit={edit}
+                />
+
+            }
 
             {image &&
                 <Image source={{ uri: image }} style={{
@@ -47,7 +59,7 @@ export default function ImageInput({ image, setImage, edit }) {
                 }}
                 />
             }
-            {edit && <Text
+            <Text
                 style={{
                     backgroundColor: 'rgba(0,0,0, 0.4)',
                     color: '#ffffff',
@@ -58,7 +70,7 @@ export default function ImageInput({ image, setImage, edit }) {
             >
 
                 Editar foto
-                </Text>}
+                </Text>
         </TouchableOpacity>
 
     )

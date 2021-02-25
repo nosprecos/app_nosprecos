@@ -21,16 +21,15 @@ import { useNavigation } from '@react-navigation/native'
 
 
 import api from '../../api'
-export default function EditProfile(params) {
-    const setEdit = params.route.params.setEditMode
+export default function EditProfile() {
     const navigation = useNavigation()
     const { user, setUser } = useUser()
-    const [username, setUsername] = useState(user.userLoginName)
-    const [name, setName] = useState(user.userRealName)
-    const [password, setPassword] = useState('')
-    const [email, setEmail] = useState(user.userEmailAddress)
-    const [newPassword, setNewPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
+    const [username, setUsername] = useState()
+    const [name, setName] = useState()
+    const [password, setPassword] = useState()
+    const [email, setEmail] = useState()
+    const [newPassword, setNewPassword] = useState()
+    const [confirmPassword, setConfirmPassword] = useState()
     const [userImage, setUserImage] = useState()
 
     //errors
@@ -89,7 +88,6 @@ export default function EditProfile(params) {
         <View style={styles.container}>
             <ScrollView>
                 <Header navigation={navigation}
-                    setEdit={setEdit}
                 />
                 <UserInfo user={user}
                     edit={true}

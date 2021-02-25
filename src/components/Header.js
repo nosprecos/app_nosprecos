@@ -39,13 +39,12 @@ export const HeaderLeft = ({ navigation }) => {
         </TouchableOpacity>
     )
 }
-export const HeaderRight = ({ setEdit }) => {
+export const HeaderRight = () => {
     const navigation = useNavigation()
     return (
         <TouchableOpacity
             style={styles.headerUser}
             onPress={() => {
-                setEdit(false)
                 navigation.navigate('Profile')
             }}
         >
@@ -55,14 +54,12 @@ export const HeaderRight = ({ setEdit }) => {
         </TouchableOpacity>
     )
 }
-export const Header = ({ navigation, setEdit }) => {
+export const Header = ({ navigation }) => {
     return (
         <View style={styles.header}>
             <HeaderLeft navigation={navigation} />
             <HeaderTitle />
-            <HeaderRight
-                setEdit={setEdit}
-            />
+            <HeaderRight />
         </View>
     )
 }

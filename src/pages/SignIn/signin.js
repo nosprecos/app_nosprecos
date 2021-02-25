@@ -21,7 +21,7 @@ import { inputValidation, onChangeValidation } from '../../utils/inputValidation
 import Warning from '../../../assets/Icons/warning.svg'
 import Error from '../../../assets/Icons/error.svg'
 function Signin() {
-    const [username, setUsername] = useState('gesin')
+    const [username, setUsername] = useState('srgesio')
     const [password, setPassword] = useState('euMeAmo1@')
     const [error, setError] = useState(false)
     const [errorMsg, setErrorMsg] = useState('')

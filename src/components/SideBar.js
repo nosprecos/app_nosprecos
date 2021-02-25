@@ -23,6 +23,7 @@ import UserDefault from "../../assets/Icons/userDefault.svg"
 import { texts } from '../styles/texts'
 
 export const SideBar = () => {
+    const navigation = useNavigation()
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -57,7 +58,10 @@ export const SideBar = () => {
                 }}>
                     <ButtonAction
                         title={'Sair'}
-                        action={() => { console.log('teu cú') }}
+                        action={() => {
+                            console.log('teu cú')
+                            navigation.navigate('Signin')
+                        }}
                     />
                 </View>
 
