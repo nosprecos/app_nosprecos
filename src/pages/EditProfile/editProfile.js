@@ -7,6 +7,7 @@ import { Header } from '../../components/Header'
 import { UserInfo } from '../../components/UserInfo'
 import Warning from '../../../assets/Icons/warning.svg'
 import Error from '../../../assets/Icons/error.svg'
+import FormData from 'form-data'
 import { useUser } from '../../contexts/User'
 import { inputValidation, onChangeValidation } from '../../utils/inputValidations'
 import {
@@ -57,7 +58,8 @@ export default function EditProfile() {
     const refInputConfirmPassword = useRef(4)
 
 
-    async function updateUser(userRealName, userEmailAddress, userLoginName, userPassword, userNewPassword) {
+    async function updateUser(userRealName, userEmailAddress, userLoginName, userPassword, userImage) {
+
 
         const newUser = await api.put(`/customer/update/${user._id}`, {
             userRealName,
@@ -80,6 +82,29 @@ export default function EditProfile() {
                 return error
             })
 
+        const formData = new FormData()
+        formData.append('picture', userImage)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        const newImage = await api.post(`/customer/update/photo/${user._id}`,
+            formData,
+            config).then(response => {
+                console.log(response.data)
+                //setUserImage(response.data)
+            })
+            .catch(error => {
+                console.log(error.response.data)
+
+                //validation of error on front-end
+                //setErrorMsg(error.response.data)
+                setError(true)
+                return error
+            })
+
+        console.log(newImage)
         return newUser
     }
 
@@ -271,7 +296,7 @@ export default function EditProfile() {
 
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={() => updateUser(name, email, username, password, newPassword)}
+                        onPress={() => updateUser(name, email, username, password, newPassword, userImage)}
                     >
                         <Text style={styles.subtitleLight}>
                             Atualizar

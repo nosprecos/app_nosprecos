@@ -27,7 +27,7 @@ export default function ImageInput({ image, setImage, edit }) {
             quality: 1,
         });
         if (!result.cancelled) {
-            setImage(`data:image/jpeg;base64,${result.base64}`);
+            setImage(result.uri);
         }
     }
     return (
@@ -40,10 +40,10 @@ export default function ImageInput({ image, setImage, edit }) {
                 height: '100%',
 
             }}
-        >   
+        >
             {!image &&
                 <UserImage
-                style
+                    style
                     image={image}
                     edit={edit}
                 />

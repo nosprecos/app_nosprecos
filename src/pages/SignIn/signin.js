@@ -58,12 +58,10 @@ function Signin() {
                 return response.data
             })
             .catch(error => {
-                console.log(error.response.data)
 
                 //validation of error on front-end
                 setErrorMsg(error.response.data)
                 setError(true)
-                return error
             })
     }
 
