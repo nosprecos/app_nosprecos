@@ -22,16 +22,16 @@ import {
 import {
     UserInfo,
 } from './UserInfo'
-export const ButtonAction = ({title, action, color}) => {
+export const ButtonAction = ({ title, action, color }) => {
     if (!color) color = colors.secondary
     return (
         <TouchableOpacity
-            style={[styles.button,{backgroundColor: color}]}
+            style={[styles.button, { backgroundColor: color }]}
             onPress={action}
         >
             <Text style={styles.subtitleLight}>
                 {title}
-                        </Text>
+            </Text>
         </TouchableOpacity>
     )
 }

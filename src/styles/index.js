@@ -134,7 +134,7 @@ export const styles = StyleSheet.create({
     userInfo: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        marginBottom: 60,
+        marginBottom: 30,
     },
     userInfoSideBar: {
         flexDirection: 'row',
@@ -154,7 +154,7 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.light,
         borderRadius: 100,
         justifyContent: 'center',
-        alignItems: 'center',     
+        alignItems: 'center',
     },
     userInfoImageSideBar: {
         height: Dimensions.get('window').width * 0.25,

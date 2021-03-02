@@ -6,6 +6,7 @@ import ImageInput from '../../components/ImageInput'
 import { Header } from '../../components/Header'
 import { UserInfo } from '../../components/UserInfo'
 import { ButtonAction } from '../../components/ButtonAction'
+import { ModalCustom, ModalInput } from '../../components/ModalCustom'
 import Warning from '../../../assets/Icons/warning.svg'
 import Error from '../../../assets/Icons/error.svg'
 import FormData from 'form-data'
@@ -18,6 +19,8 @@ import {
     TouchableOpacity,
     ScrollView,
     Image,
+    Alert,
+    Modal,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
@@ -50,6 +53,9 @@ export default function EditProfile() {
     const [warningPassword, setWarningPassword] = useState(false)
     const [warningConfirmPassword, setWarningConfirmPassword] = useState(false)
 
+    //modals
+    const [modalState, setModalState] = useState(false)
+    const [modalInputState, setModalInputState] = useState(false)
 
     //Refs to inputs
     const refInputName = useRef(0)
@@ -58,23 +64,25 @@ export default function EditProfile() {
     const refInputPassword = useRef(3)
     const refInputConfirmPassword = useRef(4)
 
-    async function removeUser(userId, userPassword){
+    async function removeUser(userId, userPassword) {
         console.log(userPassword)
-        await api.delete(`/customer/remove/${userId}`,{
+        await api.post(`/customer/remove/${userId}`, {
             userPassword: userPassword,
         })
-            .then(response =>{
+            .then(response => {
                 console.log('Conta exluida com Sucesso')
-                navigation.navigate('SignIn')
+                setModalState(!modalState)
             })
-            .catch(error =>{
+            .catch(error => {
                 console.log(error.response.data)
+                setError(true)
+                setErrorMsg(error.response.data)
             })
 
 
     }
 
-    async function updateUser(userRealName, userEmailAddress, userLoginName, userPassword, userImage) {
+    async function updateUser(userRealName, userEmailAddress, userLoginName, userPassword) {
         const newUser = await api.put(`/customer/update/${user._id}`, {
             userRealName,
             userEmailAddress,
@@ -96,6 +104,9 @@ export default function EditProfile() {
                 return error
             })
 
+
+    }
+    async function updateImage(userImage) {
         const formData = new FormData()
         formData.append('picture', userImage)
         console.log(formData)
@@ -114,15 +125,14 @@ export default function EditProfile() {
                 console.log(error.response.data)
 
                 //validation of error on front-end
-                //setErrorMsg(error.response.data)
+                setErrorMsg(error.response.data)
                 setError(true)
                 return error
             })
     }
-
     return (
 
-        <View style={[styles.container,{paddingBottom: 10}]}>
+        <View style={[styles.container, { paddingBottom: 10 }]}>
             <ScrollView>
                 <Header navigation={navigation}
                 />
@@ -131,8 +141,37 @@ export default function EditProfile() {
                     userImage={userImage}
                     setUserImage={setUserImage}
                 />
+
                 <View style={styles.signIn}>
 
+                    <ModalCustom
+                        title={'Conta Excluída. :('}
+                        subtitle={'Já queremos você de volta!'}
+                        action={() => {
+                            setModalState(!modalState)
+                            removeUser(user._id)
+                            navigation.navigate('Signin')
+                        }}
+                        textAction={'Ok'}
+                        state={modalState}
+                    />
+                    <ModalInput
+                        title={'Deseja realmente alterar?'}
+                        subtitle={'Confirme com a senha!'}
+                        actionConfirm={() => {
+                            setModalInputState(!modalInputState)
+                            removeUser(user._id, password)
+                        }}
+                        textActionConfirm={'Atualizar'}
+                        actionDismiss={() => {
+                            setModalInputState(!modalInputState)
+                        }}
+                        value={password}
+                        setValue={setPassword}
+                        textActionDismiss={'Cancelar'}
+                        state={modalInputState}
+                        icon={require("../../../assets/Icons/password.png")}
+                    />
                     <View style={styles.input}>
                         <Image style={styles.imageInput}
                             source={require("../../../assets/Icons/name.png")} />
@@ -308,7 +347,7 @@ export default function EditProfile() {
 
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={() => updateUser(name, email, username, password, userImage)}
+                        onPress={() => { setModalInputState(!modalInputState) }}
                     >
                         <Text style={styles.subtitleLight}>
                             Atualizar
@@ -317,7 +356,9 @@ export default function EditProfile() {
 
                     <ButtonAction
                         title={"Excluir Conta"}
-                        action={() => removeUser(user._id, password)}
+                        action={() => {
+                            setModalInputState(!modalInputState)
+                        }}
                         color={colors.error}
                     />
 

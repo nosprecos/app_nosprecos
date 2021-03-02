@@ -103,6 +103,7 @@ export const texts = {
     textBoldLight: {
         fontFamily: FONT_FAMILY.black,
         fontSize: 18,
+        fontWeight: 'bold',
         color: colors.light,
     },
     textBoldDark: {

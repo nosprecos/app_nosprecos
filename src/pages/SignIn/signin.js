@@ -61,6 +61,7 @@ function Signin() {
 
                 //validation of error on front-end
                 setErrorMsg(error.response.data)
+                console.log(error.response.data)
                 setError(true)
             })
     }
@@ -152,12 +153,18 @@ function Signin() {
                         }
                     </View>
 
-
+                    {error &&
+                        <View>
+                            <Text style={texts.textWarning}>
+                                {errorMsg}
+                            </Text>
+                        </View>
+                    }
 
 
                     <ButtonAction
                         title={'Entrar'}
-                        action={() => verifyUser(username, password)}
+                        action={() => { verifyUser(username, password) }}
                         username={username}
                         password={password}
                     />
@@ -171,6 +178,7 @@ function Signin() {
                             Entrar
                     </Text>
                     </TouchableOpacity> */}
+
                     <TouchableOpacity
                         style={styles.textButton}
                         onPress={() => console.log('Esqueceu sua senha?')}
