@@ -7,7 +7,8 @@ import {
 import { colors } from '../styles/colors'
 import { styles } from '../styles'
 import { useNavigation } from '@react-navigation/native'
-import Logo from "../../assets/Logo/logoNosPrecos.svg"
+//import Logo from "../../assets/Logo/logoNosPrecos.svg"
+import Logo from "../../assets/Logo/logoNosPrecosSecondary.svg"
 import Menu from "../../assets/Icons/menu.svg"
 import UserDefault from "../../assets/Icons/userDefault.svg"
 import { UserImage } from './UserImage'

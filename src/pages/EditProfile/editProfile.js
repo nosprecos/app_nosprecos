@@ -5,6 +5,7 @@ import { texts } from '../../styles/texts'
 import ImageInput from '../../components/ImageInput'
 import { Header } from '../../components/Header'
 import { UserInfo } from '../../components/UserInfo'
+import { ButtonAction } from '../../components/ButtonAction'
 import Warning from '../../../assets/Icons/warning.svg'
 import Error from '../../../assets/Icons/error.svg'
 import FormData from 'form-data'
@@ -57,10 +58,23 @@ export default function EditProfile() {
     const refInputPassword = useRef(3)
     const refInputConfirmPassword = useRef(4)
 
+    async function removeUser(userId, userPassword){
+        console.log(userPassword)
+        await api.delete(`/customer/remove/${userId}`,{
+            userPassword: userPassword,
+        })
+            .then(response =>{
+                console.log('Conta exluida com Sucesso')
+                navigation.navigate('SignIn')
+            })
+            .catch(error =>{
+                console.log(error.response.data)
+            })
+
+
+    }
 
     async function updateUser(userRealName, userEmailAddress, userLoginName, userPassword, userImage) {
-
-
         const newUser = await api.put(`/customer/update/${user._id}`, {
             userRealName,
             userEmailAddress,
@@ -68,7 +82,7 @@ export default function EditProfile() {
             userPassword,
         })
             .then(response => {
-                console.log(response.data)
+                //console.log(response.data)
                 navigation.navigate('Profile')
                 setUser(response.data)
                 return response.data
@@ -84,6 +98,7 @@ export default function EditProfile() {
 
         const formData = new FormData()
         formData.append('picture', userImage)
+        console.log(formData)
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
@@ -93,7 +108,7 @@ export default function EditProfile() {
             formData,
             config).then(response => {
                 console.log(response.data)
-                //setUserImage(response.data)
+                setUserImage(response.data)
             })
             .catch(error => {
                 console.log(error.response.data)
@@ -103,14 +118,11 @@ export default function EditProfile() {
                 setError(true)
                 return error
             })
-
-        console.log(newImage)
-        return newUser
     }
 
     return (
 
-        <View style={styles.container}>
+        <View style={[styles.container,{paddingBottom: 10}]}>
             <ScrollView>
                 <Header navigation={navigation}
                 />
@@ -296,12 +308,18 @@ export default function EditProfile() {
 
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={() => updateUser(name, email, username, password, newPassword, userImage)}
+                        onPress={() => updateUser(name, email, username, password, userImage)}
                     >
                         <Text style={styles.subtitleLight}>
                             Atualizar
                         </Text>
                     </TouchableOpacity>
+
+                    <ButtonAction
+                        title={"Excluir Conta"}
+                        action={() => removeUser(user._id, password)}
+                        color={colors.error}
+                    />
 
                 </View>
 

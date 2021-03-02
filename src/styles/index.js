@@ -129,7 +129,7 @@ export const styles = StyleSheet.create({
     },
     headerLogo: {
         width: Dimensions.get('window').width * 0.3,
-        height: Dimensions.get('window').height * 0.1,
+        height: Dimensions.get('window').height * 0.09,
     },
     userInfo: {
         flexDirection: 'row',

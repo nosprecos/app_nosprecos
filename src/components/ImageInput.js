@@ -22,12 +22,12 @@ export default function ImageInput({ image, setImage, edit }) {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-            base64: true,
             aspect: [4, 4],
             quality: 1,
         });
         if (!result.cancelled) {
             setImage(result.uri);
+            
         }
     }
     return (

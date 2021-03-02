@@ -21,8 +21,6 @@ import { UserImage } from './UserImage'
 
 export const UserInfo = ({ edit, userImage, setUserImage }) => {
     const { user } = useUser()
-    const [userRealImage, setUserRealImage] = useState()
-    const [editMode, setEditMode] = useState(edit)
     const navigation = useNavigation()
     return (
         <View>
@@ -52,14 +50,12 @@ export const UserInfo = ({ edit, userImage, setUserImage }) => {
                         </Text>
                     </View>
                     <View style={styles.userInfoActions}>
-                        {!editMode && <TouchableOpacity
+                        {!edit && <TouchableOpacity
                             style={[styles.userInfoButtons, {
                                 backgroundColor: colors.light,
                             }]}
                             onPress={() => {
-                                navigation.navigate("EditProfile", {
-                                    setEditMode
-                                })
+                                navigation.navigate("EditProfile")
                             }}
                         >
                             <Text
