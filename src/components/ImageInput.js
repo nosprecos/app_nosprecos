@@ -4,9 +4,12 @@ import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import { styles } from '../styles'
 import { UserImage } from './UserImage'
+import FormData from 'form-data'
+import { useUser } from '../contexts/User'
+import api from '../api'
 
 export default function ImageInput({ image, setImage, edit }) {
-
+    const { user } = useUser()
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
@@ -18,6 +21,31 @@ export default function ImageInput({ image, setImage, edit }) {
         })();
     }, []);
 
+    async function updateImage(userImage) {
+        const formData = new FormData()
+        formData.append('picture', {
+            uri: userImage.uri,
+            name: userImage.uri.split('/').pop(),
+            type: userImage.type
+        })
+        console.log(formData)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        api.post(`/customer/update/photo/${user._id}`,
+            formData).then(response => {
+                console.log(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+
+                return error
+            })
+
+    }
+
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -26,10 +54,14 @@ export default function ImageInput({ image, setImage, edit }) {
             quality: 1,
         });
         if (!result.cancelled) {
+            updateImage(result)
             setImage(result.uri);
-            
+
+
         }
     }
+
+
     return (
         <TouchableOpacity
             onPress={() => { pickImage() }}

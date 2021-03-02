@@ -106,7 +106,7 @@ export default function EditProfile() {
 
 
     }
-    async function updateImage(userImage) {
+    /* async function updateImage(userImage) {
         const formData = new FormData()
         formData.append('picture', userImage)
         console.log(formData)
@@ -118,7 +118,7 @@ export default function EditProfile() {
         const newImage = await api.post(`/customer/update/photo/${user._id}`,
             formData,
             config).then(response => {
-                console.log(response.data)
+            
                 setUserImage(response.data)
             })
             .catch(error => {
@@ -129,7 +129,7 @@ export default function EditProfile() {
                 setError(true)
                 return error
             })
-    }
+    } */
     return (
 
         <View style={[styles.container, { paddingBottom: 10 }]}>
@@ -156,13 +156,13 @@ export default function EditProfile() {
                         state={modalState}
                     />
                     <ModalInput
-                        title={'Deseja realmente alterar?'}
+                        title={'Deseja realmente excluir?'}
                         subtitle={'Confirme com a senha!'}
                         actionConfirm={() => {
                             setModalInputState(!modalInputState)
                             removeUser(user._id, password)
                         }}
-                        textActionConfirm={'Atualizar'}
+                        textActionConfirm={'Excluir'}
                         actionDismiss={() => {
                             setModalInputState(!modalInputState)
                         }}
