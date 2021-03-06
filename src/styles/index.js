@@ -204,6 +204,18 @@ export const styles = StyleSheet.create({
         padding: 8,
         borderRadius: 10,
     },
+    labels: {
+        marginTop: 10,
+        alignSelf: 'flex-start',
+        ...texts.textLight
+    },
+    editPassword: {
+        width: '100%',
+        padding: 10,
+        backgroundColor: colors.primaryDark,
+        borderRadius: 15,
+        marginTop: 10,
+    },
     ...texts
 
 });

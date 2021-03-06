@@ -103,6 +103,19 @@ export const inputValidation = (type, value, setError, setWarning, next = null, 
         }
         console.log('Type: ' + type)
     }
+    if (type === 'whatsapp') {
+        if (value.length <= 12) {
+            setError(true)
+            setWarning(false)
+        } else {
+            setError(false)
+        }
+
+        if (next) {
+            next.current.focus()
+        }
+        console.log('Type: ' + type)
+    }
 
 }
 
@@ -155,6 +168,13 @@ export const onChangeValidation = (type, value, setValue, setError, setWarning, 
     }
     if (type === 'confirmPassword') {
         if (value != compareValue) {
+            setWarning(true)
+        } else {
+            setWarning(false)
+        }
+    }
+    if (type === 'whatsapp') {
+        if (value.length <= 12) {
             setWarning(true)
         } else {
             setWarning(false)

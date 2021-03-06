@@ -8,6 +8,7 @@ import { UserInfo } from '../../components/UserInfo'
 import { ButtonAction } from '../../components/ButtonAction'
 import { ModalCustom, ModalInput } from '../../components/ModalCustom'
 import Warning from '../../../assets/Icons/warning.svg'
+import Whatsapp from '../../../assets/Icons/whatsapp.svg'
 import Error from '../../../assets/Icons/error.svg'
 import FormData from 'form-data'
 import { useUser } from '../../contexts/User'
@@ -29,10 +30,11 @@ import api from '../../api'
 export default function EditProfile() {
     const navigation = useNavigation()
     const { user, setUser } = useUser()
-    const [username, setUsername] = useState()
     const [name, setName] = useState()
-    const [password, setPassword] = useState()
     const [email, setEmail] = useState()
+    const [username, setUsername] = useState()
+    const [password, setPassword] = useState()
+    const [whatsapp, setWhatsapp] = useState()
     const [newPassword, setNewPassword] = useState()
     const [confirmPassword, setConfirmPassword] = useState()
     const [userImage, setUserImage] = useState()
@@ -44,6 +46,8 @@ export default function EditProfile() {
     const [errorEmail, setErrorEmail] = useState(false)
     const [errorUsername, setErrorUsername] = useState(false)
     const [errorPassword, setErrorPassword] = useState(false)
+    const [errorWhatsapp, setErrorWhatsapp] = useState(false)
+    const [errorNewPassword, setErrorNewPassword] = useState(false)
     const [errorConfirmPassword, setErrorConfirmPassword] = useState(false)
 
     //warnnings
@@ -51,11 +55,14 @@ export default function EditProfile() {
     const [warningEmail, setWarningEmail] = useState(false)
     const [warningUsername, setWarningUsername] = useState(false)
     const [warningPassword, setWarningPassword] = useState(false)
+    const [warningWhatsapp, setWarningWhatsapp] = useState(false)
+    const [warningNewPassword, setWarningNewPassword] = useState(false)
     const [warningConfirmPassword, setWarningConfirmPassword] = useState(false)
 
     //modals
     const [modalState, setModalState] = useState(false)
-    const [modalInputState, setModalInputState] = useState(false)
+    const [modalUpdateState, setModalUpdateState] = useState(false)
+    const [modalDeleteState, setModalDeleteState] = useState(false)
 
     //Refs to inputs
     const refInputName = useRef(0)
@@ -82,12 +89,15 @@ export default function EditProfile() {
 
     }
 
-    async function updateUser(userRealName, userEmailAddress, userLoginName, userPassword) {
+    async function updateUser(userRealName, userEmailAddress, userLoginName, userWhatsapp, userPassword, userNewPassword, userConfirmPassword) {
         const newUser = await api.put(`/customer/update/${user._id}`, {
             userRealName,
             userEmailAddress,
             userLoginName,
+            userWhatsapp,
             userPassword,
+            userNewPassword,
+            userConfirmPassword
         })
             .then(response => {
                 //console.log(response.data)
@@ -149,7 +159,6 @@ export default function EditProfile() {
                         subtitle={'Já queremos você de volta!'}
                         action={() => {
                             setModalState(!modalState)
-                            removeUser(user._id)
                             navigation.navigate('Signin')
                         }}
                         textAction={'Ok'}
@@ -159,19 +168,41 @@ export default function EditProfile() {
                         title={'Deseja realmente excluir?'}
                         subtitle={'Confirme com a senha!'}
                         actionConfirm={() => {
-                            setModalInputState(!modalInputState)
+                            setModalDeleteState(!modalDeleteState)
                             removeUser(user._id, password)
                         }}
                         textActionConfirm={'Excluir'}
                         actionDismiss={() => {
-                            setModalInputState(!modalInputState)
+                            setModalDeleteState(!modalDeleteState)
                         }}
                         value={password}
                         setValue={setPassword}
                         textActionDismiss={'Cancelar'}
-                        state={modalInputState}
+                        state={modalDeleteState}
                         icon={require("../../../assets/Icons/password.png")}
                     />
+                    <ModalInput
+                        title={'Deseja realmente alterar?'}
+                        subtitle={'Confirme com a senha!'}
+                        actionConfirm={() => {
+                            setModalUpdateState(!modalUpdateState)
+                            updateUser(name, email, username, whatsapp, password, newPassword, confirmPassword)
+                        }}
+                        textActionConfirm={'Alterar'}
+                        actionDismiss={() => {
+                            setModalUpdateState(!modalUpdateState)
+                        }}
+                        value={password}
+                        setValue={setPassword}
+                        textActionDismiss={'Cancelar'}
+                        state={modalUpdateState}
+                        icon={require("../../../assets/Icons/password.png")}
+                    />
+                    <Text style={texts.subtitleSecondary}>Editar perfil</Text>
+
+                    <Text style={styles.labels}>
+                        Nome:
+                    </Text>
                     <View style={styles.input}>
                         <Image style={styles.imageInput}
                             source={require("../../../assets/Icons/name.png")} />
@@ -183,7 +214,7 @@ export default function EditProfile() {
                             }}
                             ref={refInputName}
                             value={name}
-                            placeholder={'Nome Completo'}
+                            placeholder={user.userRealName}
                             placeholderTextColor={colors.secondary}
                             onSubmitEditing={() => {
                                 inputValidation('name', name, setErrorName, setWarningName, refInputEmail)
@@ -203,6 +234,9 @@ export default function EditProfile() {
                         }
 
                     </View>
+                    <Text style={styles.labels}>
+                        E-mail:
+                    </Text>
                     <View style={styles.input}>
                         <Image style={styles.imageInput}
 
@@ -214,7 +248,7 @@ export default function EditProfile() {
                                 onChangeValidation('email', text, setEmail, setErrorEmail, setWarningEmail)
                             }}
                             value={email}
-                            placeholder={'Email'}
+                            placeholder={user.userEmailAddress}
                             keyboardType={'email-address'}
                             autoCapitalize={'none'}
                             onSubmitEditing={() => {
@@ -236,6 +270,9 @@ export default function EditProfile() {
                             />
                         }
                     </View>
+                    <Text style={styles.labels}>
+                        Usuário:
+                    </Text>
                     <View style={styles.input}>
                         <Image style={styles.imageInput}
                             source={require("../../../assets/Icons/user.png")} />
@@ -251,7 +288,7 @@ export default function EditProfile() {
                             onSubmitEditing={() => {
                                 inputValidation('username', username, setErrorUsername, setWarningUsername, refInputPassword)
                             }}
-                            placeholder={'Usuário'}
+                            placeholder={user.userLoginName}
                             placeholderTextColor={colors.secondary}
                         />
                         {errorUsername &&
@@ -267,87 +304,127 @@ export default function EditProfile() {
                             />
                         }
                     </View>
-
-
+                    <Text style={styles.labels}>
+                        Whatsapp:
+                    </Text>
                     <View style={styles.input}>
-                        <Image style={styles.imageInput}
-                            source={require("../../../assets/Icons/password.png")} />
-                        <TextInput
-                            ref={refInputPassword}
-                            style={styles.textInput}
-                            onChangeText={text => {
-                                onChangeValidation('password', text, setPassword, setErrorPassword, setWarningPassword)
-                            }}
-                            value={password}
-                            textContentType={"password"}
-                            autoCapitalize={'none'}
-                            selectTextOnFocus={true}
-                            placeholder={'Senha'}
-                            onSubmitEditing={() => {
-                                inputValidation('password', password, setErrorPassword, setWarningPassword, refInputConfirmPassword)
-                            }}
-                            secureTextEntry={true}
-                            placeholderTextColor={colors.secondary}
-                        />
-                        {errorPassword &&
-                            <Error
-                                style={styles.imageInput}
-                                fill={colors.error}
+                        <View style={styles.imageInput}>
+                            <Whatsapp
+                                width={'100%'}
+                                height={'100%'}
+                                fill={colors.light}
                             />
-                        }
-                        {warningPassword &&
-                            <Warning
-                                style={styles.imageInput}
-                                fill={colors.tertiary}
-                            />
-                        }
-                    </View>
-
-                    <View style={styles.input}>
-                        <Image style={styles.imageInput}
-                            source={require("../../../assets/Icons/confirmPassword.png")} />
-                        <TextInput
-                            ref={refInputConfirmPassword}
-                            style={styles.textInput}
-                            onChangeText={text => {
-                                onChangeValidation('confirmPassword', text, setConfirmPassword, setErrorConfirmPassword, setWarningConfirmPassword)
-                            }}
-                            value={confirmPassword}
-                            textContentType={"password"}
-                            autoCapitalize={'none'}
-                            placeholder={'Confirmar senha'}
-                            selectTextOnFocus={true}
-                            onSubmitEditing={() => {
-                                inputValidation('confirmPassword', confirmPassword, setErrorConfirmPassword, setWarningConfirmPassword, refInputConfirmPassword, password)
-                            }}
-                            secureTextEntry={true}
-                            placeholderTextColor={colors.secondary}
-                        />
-                        {errorConfirmPassword &&
-                            <Error
-                                style={styles.imageInput}
-                                fill={colors.error}
-                            />
-                        }
-                        {warningConfirmPassword &&
-                            <Warning
-                                style={styles.imageInput}
-                                fill={colors.tertiary}
-                            />
-                        }
-                    </View>
-                    {error &&
-                        <View>
-                            <Text style={texts.textWarning}>
-                                {errorMsg}
-                            </Text>
                         </View>
-                    }
+                        <TextInput
+                            style={styles.textInput}
+                            onChangeText={text => {
+                                onChangeValidation('whatsapp', text, setWhatsapp, setErrorWhatsapp, setWarningWhatsapp)
+                            }}
+                            textContentType={"telephoneNumber"}
+                            autoCapitalize={'none'}
+                            value={whatsapp}
+                            onSubmitEditing={() => {
+                                inputValidation('whatsapp', whatsapp, setErrorWhatsapp, setWarningWhatsapp)
+                            }}
+                            placeholder={user.userWhatsapp}
+                            placeholderTextColor={colors.secondary}
+                        />
+                        {errorWhatsapp &&
+                            <Error
+                                style={styles.imageInput}
+                                fill={colors.error}
+                            />
+                        }
+                        {warningWhatsapp &&
+                            <Warning
+                                style={styles.imageInput}
+                                fill={colors.tertiary}
+                            />
+                        }
+                    </View>
+                    <View style={styles.editPassword}>
+                        <Text style={styles.textInput}>
+                            Trocar Senha
+                        </Text>
+                        <View style={styles.input}>
+                            <Image style={styles.imageInput}
+                                source={require("../../../assets/Icons/password.png")} />
+                            <TextInput
+                                ref={refInputPassword}
+                                style={styles.textInput}
+                                onChangeText={text => {
+                                    onChangeValidation('password', text, setNewPassword, setErrorNewPassword, setWarningNewPassword)
+                                }}
+                                value={newPassword}
+                                textContentType={"password"}
+                                autoCapitalize={'none'}
+                                selectTextOnFocus={true}
+                                placeholder={'Nova Senha'}
+                                onSubmitEditing={() => {
+                                    inputValidation('password', newPassword, setErrorNewPassword, setWarningNewPassword, refInputConfirmPassword)
+                                }}
+                                secureTextEntry={true}
+                                placeholderTextColor={colors.secondary}
+                            />
+                            {errorNewPassword &&
+                                <Error
+                                    style={styles.imageInput}
+                                    fill={colors.error}
+                                />
+                            }
+                            {warningNewPassword &&
+                                <Warning
+                                    style={styles.imageInput}
+                                    fill={colors.tertiary}
+                                />
+                            }
+                        </View>
 
+                        <View style={styles.input}>
+                            <Image style={styles.imageInput}
+                                source={require("../../../assets/Icons/confirmPassword.png")} />
+                            <TextInput
+                                ref={refInputConfirmPassword}
+                                style={styles.textInput}
+                                onChangeText={text => {
+                                    onChangeValidation('confirmPassword', text, setConfirmPassword, setErrorConfirmPassword, setWarningConfirmPassword)
+                                }}
+                                value={confirmPassword}
+                                textContentType={"password"}
+                                autoCapitalize={'none'}
+                                placeholder={'Confirmar senha'}
+                                selectTextOnFocus={true}
+                                onSubmitEditing={() => {
+                                    inputValidation('confirmPassword', confirmPassword, setErrorConfirmPassword, setWarningConfirmPassword, refInputConfirmPassword, password)
+                                }}
+                                secureTextEntry={true}
+                                placeholderTextColor={colors.secondary}
+                            />
+                            {errorConfirmPassword &&
+                                <Error
+                                    style={styles.imageInput}
+                                    fill={colors.error}
+                                />
+                            }
+                            {warningConfirmPassword &&
+                                <Warning
+                                    style={styles.imageInput}
+                                    fill={colors.tertiary}
+                                />
+                            }
+                        </View>
+                        {error &&
+                            <View>
+                                <Text style={texts.textWarning}>
+                                    {errorMsg}
+                                </Text>
+                            </View>
+                        }
 
+                    </View>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={() => { setModalInputState(!modalInputState) }}
+                        onPress={() => { setModalUpdateState(!modalUpdateState) }}
                     >
                         <Text style={styles.subtitleLight}>
                             Atualizar
@@ -357,7 +434,7 @@ export default function EditProfile() {
                     <ButtonAction
                         title={"Excluir Conta"}
                         action={() => {
-                            setModalInputState(!modalInputState)
+                            setModalDeleteState(!modalDeleteState)
                         }}
                         color={colors.error}
                     />
