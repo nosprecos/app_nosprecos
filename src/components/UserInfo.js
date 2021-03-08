@@ -7,6 +7,7 @@ import {
     Button,
     Dimensions,
     Image,
+    Linking
 } from 'react-native'
 import { colors } from '../styles/colors'
 import { styles } from '../styles'
@@ -67,7 +68,7 @@ export const UserInfo = ({ edit, userImage, setUserImage }) => {
                         <TouchableOpacity
                             style={styles.userInfoButtons}
                             onPress={() => {
-                                console.log('Wpp!')
+                                Linking.openURL(`https://api.whatsapp.com/send?phone=${user.userWhatsAppUrl}`)
                             }}
                         >
                             <Whatsapp
@@ -75,8 +76,11 @@ export const UserInfo = ({ edit, userImage, setUserImage }) => {
                                 width={20}
                                 fill={colors.light}
                             />
+                            <Text style={[styles.textLight, {
+                                paddingHorizontal: 5,
+                            }]}>WhatsApp</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                             style={styles.userInfoButtons}
                             onPress={() => {
                                 console.log('Face!')
@@ -99,7 +103,7 @@ export const UserInfo = ({ edit, userImage, setUserImage }) => {
                                 width={20}
                                 fill={colors.light}
                             />
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 </View>
 

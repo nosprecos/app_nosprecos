@@ -23,19 +23,14 @@ export default function ImageInput({ image, setImage, edit }) {
 
     async function updateImage(userImage) {
         const formData = new FormData()
-        formData.append('picture', {
-            uri: userImage.uri,
-            name: userImage.uri.split('/').pop(),
-            type: userImage.type
-        })
-        console.log(formData)
+        formData.append('picture', userImage)
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         }
         api.post(`/customer/update/photo/${user._id}`,
-            formData).then(response => {
+            formData, config).then(response => {
                 console.log(response.data)
             })
             .catch(error => {

@@ -189,7 +189,7 @@ export const styles = StyleSheet.create({
         minWidth: 220,
         maxWidth: 250,
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'flex-start'
     },
     userInfoActionsSideBar: {
         width: Dimensions.get('window').width * 0.3,
@@ -203,6 +203,10 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.secondaryDark,
         padding: 8,
         borderRadius: 10,
+        flexDirection: 'row',
+        marginHorizontal: 5,
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     labels: {
         marginTop: 10,

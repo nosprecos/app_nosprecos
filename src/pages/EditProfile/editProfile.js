@@ -89,20 +89,31 @@ export default function EditProfile() {
 
     }
 
-    async function updateUser(userRealName, userEmailAddress, userLoginName, userWhatsapp, userPassword, userNewPassword, userConfirmPassword) {
+    async function updateUser(userRealName, userEmailAddress, userLoginName, userWhatsAppUrl, userPassword, userNewPassword, userConfirmPassword) {
+
+        console.log({
+            userRealName,
+            userEmailAddress,
+            userLoginName,
+            userWhatsAppUrl,
+            userPassword,
+            userNewPassword,
+            userConfirmPassword
+        })
         const newUser = await api.put(`/customer/update/${user._id}`, {
             userRealName,
             userEmailAddress,
             userLoginName,
-            userWhatsapp,
+            userWhatsAppUrl,
             userPassword,
             userNewPassword,
             userConfirmPassword
         })
             .then(response => {
-                //console.log(response.data)
-                navigation.navigate('Profile')
+                console.log(response.data)
                 setUser(response.data)
+
+                navigation.navigate('Profile')
                 return response.data
             })
             .catch(error => {
@@ -326,7 +337,7 @@ export default function EditProfile() {
                             onSubmitEditing={() => {
                                 inputValidation('whatsapp', whatsapp, setErrorWhatsapp, setWarningWhatsapp)
                             }}
-                            placeholder={user.userWhatsapp}
+                            placeholder={user.userWhatsAppUrl}
                             placeholderTextColor={colors.secondary}
                         />
                         {errorWhatsapp &&
