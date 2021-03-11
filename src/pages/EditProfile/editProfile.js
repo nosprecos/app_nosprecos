@@ -30,14 +30,14 @@ import api from '../../api'
 export default function EditProfile() {
     const navigation = useNavigation()
     const { user, setUser } = useUser()
-    const [name, setName] = useState()
-    const [email, setEmail] = useState()
-    const [username, setUsername] = useState()
-    const [password, setPassword] = useState()
-    const [whatsapp, setWhatsapp] = useState()
-    const [newPassword, setNewPassword] = useState()
-    const [confirmPassword, setConfirmPassword] = useState()
-    const [userImage, setUserImage] = useState()
+    const [name, setName] = useState(null)
+    const [email, setEmail] = useState(null)
+    const [username, setUsername] = useState(null)
+    const [password, setPassword] = useState(null)
+    const [whatsapp, setWhatsapp] = useState(null)
+    const [newPassword, setNewPassword] = useState(null)
+    const [confirmPassword, setConfirmPassword] = useState(null)
+    const [userImage, setUserImage] = useState(null)
 
     //errors
     const [error, setError] = useState(false)
@@ -72,7 +72,6 @@ export default function EditProfile() {
     const refInputConfirmPassword = useRef(4)
 
     async function removeUser(userId, userPassword) {
-        console.log(userPassword)
         await api.post(`/customer/remove/${userId}`, {
             userPassword: userPassword,
         })
@@ -110,9 +109,6 @@ export default function EditProfile() {
             userConfirmPassword
         })
             .then(response => {
-                console.log(response.data)
-                setUser(response.data)
-
                 navigation.navigate('Profile')
                 return response.data
             })
@@ -125,39 +121,15 @@ export default function EditProfile() {
                 return error
             })
 
-
+        setUser(newUser)
     }
-    /* async function updateImage(userImage) {
-        const formData = new FormData()
-        formData.append('picture', userImage)
-        console.log(formData)
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        }
-        const newImage = await api.post(`/customer/update/photo/${user._id}`,
-            formData,
-            config).then(response => {
-            
-                setUserImage(response.data)
-            })
-            .catch(error => {
-                console.log(error.response.data)
-
-                //validation of error on front-end
-                setErrorMsg(error.response.data)
-                setError(true)
-                return error
-            })
-    } */
     return (
 
         <View style={[styles.container, { paddingBottom: 10 }]}>
             <ScrollView>
                 <Header navigation={navigation}
                 />
-                <UserInfo user={user}
+                <UserInfo
                     edit={true}
                     userImage={userImage}
                     setUserImage={setUserImage}
@@ -424,15 +396,16 @@ export default function EditProfile() {
                                 />
                             }
                         </View>
-                        {error &&
-                            <View>
-                                <Text style={texts.textWarning}>
-                                    {errorMsg}
-                                </Text>
-                            </View>
-                        }
+
 
                     </View>
+                    {error &&
+                        <View>
+                            <Text style={texts.textWarning}>
+                                {errorMsg}
+                            </Text>
+                        </View>
+                    }
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => { setModalUpdateState(!modalUpdateState) }}

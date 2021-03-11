@@ -39,7 +39,7 @@ export const SideBar = () => {
                 <View>
                     <ButtonAction
                         title={'Anúncios'}
-                        action={() => console.log('teu cú')}
+                        action={() => console.log('Anúncios')}
                     />
                 </View>
 
@@ -48,7 +48,7 @@ export const SideBar = () => {
                 }}>
                     <ButtonAction
                         title={'Notificações'}
-                        action={() => console.log('teu cú')}
+                        action={() => console.log('Notificações')}
                     />
                 </View>
                 <View style={{
@@ -59,7 +59,7 @@ export const SideBar = () => {
                     <ButtonAction
                         title={'Sair'}
                         action={() => {
-                            console.log('teu cú')
+                            console.log('Saiu!')
                             navigation.navigate('Signin')
                         }}
                     />

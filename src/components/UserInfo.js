@@ -20,7 +20,7 @@ import { useUser } from '../contexts/User'
 import ImageInput from './ImageInput'
 import { UserImage } from './UserImage'
 
-export const UserInfo = ({ edit, userImage, setUserImage }) => {
+export const UserInfo = ({ edit, setUserImage }) => {
     const { user } = useUser()
     const navigation = useNavigation()
     return (
@@ -134,7 +134,7 @@ export const UserInfoSideBar = ({ userImage, setUserImage }) => {
                 <View style={styles.userInfoContentSideBar}>
                     <View style={styles.userInfoNamesSideBar}>
                         <Text style={texts.subtitleLight}>
-                            Olá, {user.userRealName.split(' ')[0]}
+                            {user.userRealName.split(' ')[0]}
                         </Text>
                         <Text style={texts.textLight}>
                             {user.userLoginName}

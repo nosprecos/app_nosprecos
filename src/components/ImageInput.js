@@ -6,8 +6,7 @@ import { styles } from '../styles'
 import { UserImage } from './UserImage'
 import FormData from 'form-data'
 import { useUser } from '../contexts/User'
-import api, { config } from '../api'
-import axios from "axios"
+import api from '../api'
 
 export default function ImageInput({ image, setImage, edit }) {
     const { user, setUser } = useUser()
@@ -39,7 +38,6 @@ export default function ImageInput({ image, setImage, edit }) {
                 'Content-Type': 'multipart/form-data',
             },
         }).then(response => {
-            console.log(response.data)
             setImage(response.data.userProfilePicture)
             setUser({
                 ...user,

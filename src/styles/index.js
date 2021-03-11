@@ -115,21 +115,20 @@ export const styles = StyleSheet.create({
     header: {
         backgroundColor: colors.primaryDark,
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: 10,
-        height: Dimensions.get('window').height * 0.09,
+        justifyContent: 'space-around',
+        padding: 5,
     },
     headerMenu: {
-        width: Dimensions.get('window').width * 0.1,
-        height: Dimensions.get('window').height * 0.1,
+        width: Dimensions.get('window').width * 0.10,
+        height: Dimensions.get('window').width * 0.13,
     },
     headerUser: {
-        width: Dimensions.get('window').width * 0.1,
-        height: Dimensions.get('window').height * 0.1,
+        width: Dimensions.get('window').width * 0.13,
+        height: Dimensions.get('window').width * 0.13,
     },
     headerLogo: {
-        width: Dimensions.get('window').width * 0.3,
-        height: Dimensions.get('window').height * 0.09,
+        width: Dimensions.get('window').width * 0.5,
+        height: Dimensions.get('window').width * 0.13,
     },
     userInfo: {
         flexDirection: 'row',
@@ -150,7 +149,7 @@ export const styles = StyleSheet.create({
     userInfoImage: {
         height: Dimensions.get('window').width * 0.3,
         width: Dimensions.get('window').width * 0.3,
-        marginTop: Dimensions.get('window').height * 0.025,
+        marginTop: Dimensions.get('window').height * 0.02,
         backgroundColor: colors.light,
         borderRadius: 100,
         justifyContent: 'center',

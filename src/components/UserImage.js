@@ -13,7 +13,7 @@ import { styles } from '../styles'
 import UserDefault from "../../assets/Icons/userDefault.svg"
 export const UserImage = ({ image, edit, fill, style }) => {
     if (!fill) fill = colors.secondary
-    let margin = -10
+    let margin = 0
     if (edit) { margin = -30 }
     return (
         <View
