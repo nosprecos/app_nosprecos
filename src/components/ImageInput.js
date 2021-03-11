@@ -6,10 +6,11 @@ import { styles } from '../styles'
 import { UserImage } from './UserImage'
 import FormData from 'form-data'
 import { useUser } from '../contexts/User'
-import api from '../api'
+import api, { config } from '../api'
+import axios from "axios"
 
 export default function ImageInput({ image, setImage, edit }) {
-    const { user } = useUser()
+    const { user, setUser } = useUser()
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
@@ -23,16 +24,28 @@ export default function ImageInput({ image, setImage, edit }) {
 
     async function updateImage(userImage) {
         const formData = new FormData()
-        formData.append('picture', userImage)
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        }
+        formData.append("data", true);
+        formData.append('picture', {
+            name: 'image',
+            type: `image/${userImage.uri.split('.').pop()}`,
+            uri: userImage.uri
+        })
+        console.log(userImage)
+
         api.post(`/customer/update/photo/${user._id}`,
-            formData, config).then(response => {
-                console.log(response.data)
+            formData, {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'multipart/form-data',
+            },
+        }).then(response => {
+            console.log(response.data)
+            setImage(response.data.userProfilePicture)
+            setUser({
+                ...user,
+                userProfilePicture: response.data.userProfilePicture
             })
+        })
             .catch(error => {
                 console.log(error)
 
@@ -50,7 +63,7 @@ export default function ImageInput({ image, setImage, edit }) {
         });
         if (!result.cancelled) {
             updateImage(result)
-            setImage(result.uri);
+            // setImage(result.uri)
 
 
         }

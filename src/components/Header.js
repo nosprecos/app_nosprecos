@@ -13,6 +13,7 @@ import Menu from "../../assets/Icons/menu.svg"
 import UserDefault from "../../assets/Icons/userDefault.svg"
 import { UserImage } from './UserImage'
 import { color } from 'react-native-reanimated'
+import { useUser } from '../contexts/User'
 
 export const HeaderTitle = () => {
     return (
@@ -42,6 +43,7 @@ export const HeaderLeft = ({ navigation }) => {
 }
 export const HeaderRight = () => {
     const navigation = useNavigation()
+    const { user } = useUser()
     return (
         <TouchableOpacity
             style={styles.headerUser}
@@ -50,6 +52,7 @@ export const HeaderRight = () => {
             }}
         >
             <UserImage
+                image={user.userProfilePicture}
                 fill={colors.light}
             />
         </TouchableOpacity>

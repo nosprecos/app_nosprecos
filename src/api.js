@@ -10,5 +10,5 @@ const api = axios.create({
   //GESIO
   baseURL: "http://192.168.100.102:3333",
 })
-
+export const config = "http://192.168.100.102:3333"
 export default api

@@ -31,11 +31,11 @@ export const UserInfo = ({ edit, userImage, setUserImage }) => {
             <View style={styles.userInfo}>
                 <View style={styles.userInfoImage}>
                     {!edit && <UserImage
-                        image={userImage}
+                        image={user.userProfilePicture}
                         edit={edit}
                     />}
                     {edit && <ImageInput
-                        image={userImage}
+                        image={user.userProfilePicture}
                         setImage={setUserImage}
                         edit={edit}
                     />}
@@ -128,7 +128,7 @@ export const UserInfoSideBar = ({ userImage, setUserImage }) => {
 
                 <View style={styles.userInfoImageSideBar}>
                     <UserImage
-                        image={userImage}
+                        image={user.userProfilePicture}
                     />
                 </View>
                 <View style={styles.userInfoContentSideBar}>
