@@ -100,6 +100,11 @@ export const texts = {
         fontSize: 18,
         color: colors.dark,
     },
+    textSecondaryDark: {
+        fontFamily: FONT_FAMILY.light,
+        fontSize: 18,
+        color: colors.secondaryDark,
+    },
     textBoldLight: {
         fontFamily: FONT_FAMILY.black,
         fontSize: 18,
