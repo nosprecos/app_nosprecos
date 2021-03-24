@@ -24,6 +24,11 @@ import { texts } from '../styles/texts'
 
 export const SideBar = () => {
     const navigation = useNavigation()
+
+    function goToMyAds(){
+        navigation.navigate('CreateAd')
+
+    }    
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -39,7 +44,7 @@ export const SideBar = () => {
                 <View>
                     <ButtonAction
                         title={'Anúncios'}
-                        action={() => console.log('Anúncios')}
+                        action={() => goToMyAds()}
                     />
                 </View>
 

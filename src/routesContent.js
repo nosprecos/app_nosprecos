@@ -19,6 +19,7 @@ import {
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { Profile } from './pages/Profile/profile'
 import EditProfile from './pages/EditProfile/editProfile'
+import CreateAd from './pages/CreateAd/createAd'
 
 const Drawer = createDrawerNavigator()
 const RoutesContent = () => {
@@ -32,6 +33,7 @@ const RoutesContent = () => {
         >
             <Drawer.Screen name="Profile" component={Profile} />
             <Drawer.Screen name="EditProfile" component={EditProfile} />
+            <Drawer.Screen name="CreateAd" component={CreateAd} />
         </Drawer.Navigator>
     )
 }
