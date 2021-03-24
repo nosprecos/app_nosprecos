@@ -20,8 +20,11 @@ import {
 import {
     UserInfo,
 } from './UserInfo'
-export const CardAd = ({ ad, edit, key }) => {
-    console.log(key)
+export const CardAd = ({ ad, edit, ads, setAds, index }) => {
+    function removeAds(index, ads) {
+        ads.splice(index, 1)
+        setAds([...ads])
+    }
     return (
         <View style={{
 
@@ -82,7 +85,7 @@ export const CardAd = ({ ad, edit, key }) => {
                         <View>
                             <ButtonAction
                                 title={'Excluir'}
-                                action={() => console.log('excluir ad')}
+                                action={() => removeAds(index, ads)}
                                 color={colors.error}
                             />
                         </View>

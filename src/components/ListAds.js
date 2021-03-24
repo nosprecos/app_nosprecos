@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     View,
     Text,
@@ -17,43 +17,22 @@ import UserDefault from "../../assets/Icons/userDefault.svg"
 import {
     CardAd,
 } from './CardAd'
-export const ListAds = ({ edit }) => {
-    let ticketQuantity = 5
-    let ticketPrice = 2
-    const ads = [{
-        id: "aaaa",
-        customerId: 'aaaa',
-        adName: 'Show Profissional',
-        adDate: '12/12/12',
-        adDescription: `Descrição legal interessante de ler e tal, etc etc etc. Descrição legal interessante de ler e tal, etc etc etc. Descrição legal interessante de ler e tal, etc etc etc.`,
-        ticketQuantity: 5,
-        ticketPrice: 2,
-        totalPrice: `R$ ${(ticketPrice * ticketQuantity).toFixed(2)}`,
-        adWhatsappUrl: '5584999370302',
-        adInstagramUrl: '5584999370302',
-        adfacebookUrl: '5584999370302',
-    }, {
-        id: "aaaa",
-        customerId: 'aaaa',
-        adName: 'Show Profissional',
-        adDate: '12/12/12',
-        adDescription: `Descrição legal interessante de ler e tal, etc etc etc. Descrição legal interessante de ler e tal, etc etc etc. Descrição legal interessante de ler e tal, etc etc etc.`,
-        ticketQuantity: 5,
-        ticketPrice: 2,
-        totalPrice: `R$ ${(ticketPrice * ticketQuantity).toFixed(2)}`,
-        adWhatsappUrl: '5584999370302',
-        adInstagramUrl: '5584999370302',
-        adfacebookUrl: '5584999370302',
-    }]
+export const ListAds = ({ edit, ads, setAds }) => {
+
+
     return (
         <View>
-            {ads.map((ad, key) => (
+            {ads.map((ad, index) => (
                 <CardAd
                     ad={ad}
                     edit={edit}
-                    key={key}
+                    ads={ads}
+                    setAds={setAds}
+                    key={index}
+                    index={index}
                 />
             ))}
+
         </View>
     )
 }
