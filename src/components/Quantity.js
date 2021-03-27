@@ -13,18 +13,9 @@ import { colors } from '../styles/colors'
 import { texts } from '../styles/texts'
 
 export default function Quantity({ticket}){
-    const [numberTicket, setNumberTicket] = useState(ticket)
+    const [numberTicket, setNumberTicket] = useState(1)
 
-    function isZero(){
-        if(numberTicket === '0'){
-            return true
-        }
-        else {
-            return false
-        }
-    }
-
-    function numberOfTickets(operation){
+    function numberOfTickets(operation) {
         if(operation){
             setNumberTicket((numberTicket + 1))
         } else {
@@ -41,7 +32,26 @@ export default function Quantity({ticket}){
             marginTop: 10,
             justifyContent: 'center',
         }}>
-            <TouchableOpacity style={{
+            { numberTicket == 1 &&  <TouchableOpacity style={{
+                backgroundColor: colors.secondary,
+                alignItems: 'center',
+                justifyContent: 'center',
+                flex: 1,
+                opacity: 0.5,
+                width: 80,
+                borderTopLeftRadius: 20,
+                borderBottomLeftRadius: 20,
+            }} 
+            disabled={true}  
+        >
+                <Text style={{
+                    ...texts.subtitleLight,   
+                }}>
+                    -
+                </Text>
+            </TouchableOpacity> }
+
+            { numberTicket > 1 &&  <TouchableOpacity style={{
                 backgroundColor: colors.secondary,
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -50,15 +60,14 @@ export default function Quantity({ticket}){
                 borderTopLeftRadius: 20,
                 borderBottomLeftRadius: 20,
             }}                           
-            onPress={()=> numberOfTickets(false)}
-            //disabled={() =>isZero()}  
+            onPress={()=> numberOfTickets(false, numberTicket)}
         >
                 <Text style={{
                     ...texts.subtitleLight,   
                 }}>
                     -
                 </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> }
 
             <View style={{
                 backgroundColor: '#ffffff',

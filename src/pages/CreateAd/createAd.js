@@ -16,6 +16,7 @@ import {
 import 
     Quantity
  from '../../components/Quantity'
+import { set } from 'react-native-reanimated'
 
 export default function CreateAd({navigation}){
 
@@ -25,7 +26,19 @@ export default function CreateAd({navigation}){
     const [price, setprice] = useState('')
     const [ticket, setticket] = useState(1)
 
-
+    function formatData(data){
+        setData(data)
+        const array = data.split('')       
+        if(array.lenght == 2){
+            const newArray = array.splice(2, 0 , "/")
+            setData(newArray)    
+        }
+        if(array.lenght == 5){
+            const newArray = array.splice(5, 0 , "/")
+            setData(newArray)    
+        }
+              
+    }
 
 return (
         <ScrollView style={styles.container}>
@@ -74,7 +87,7 @@ return (
                             color: colors.light,
                             ...texts.textLight,
                             flex: 1,
-                            padding: 20,
+                            padding: 10,
                         } }
                         onChangeText={text =>  setTitle(text)}
                         placeholder={'Título do Anúncio'}
@@ -119,9 +132,17 @@ return (
                                 color: colors.light,
                                 ...texts.textLight,
                                 flex: 1,
-                                padding: 20,
+                                padding: 10,
                             } }
-                            onChangeText={text =>  setData(text)}
+                            onChangeText={text =>                                
+                                { if (text.length == 2 || text.length == 5){
+                                        text = text + '/'
+                                    }
+                                
+                                setData(text)
+
+                            } }
+                            value={data}
                             placeholder={'_ _/_ _/_ _'}
                             autoCapitalize={'none'}                            
                             placeholderTextColor={colors.secondary}
@@ -160,7 +181,7 @@ return (
                         style={{
                             color: colors.light,
                             ...texts.textLight,
-                            padding: 20,
+                            padding: 10,
                             justifyContent: 'flex-start',
                         } }
                         onChangeText={text =>  setDescription(text)}
@@ -202,7 +223,7 @@ return (
                         style={{
                             color: colors.light,
                             ...texts.textLight,
-                            padding: 20,
+                            padding: 10,
                             justifyContent: 'flex-start',
                         } }
                         onChangeText={text =>  setTitle(text)}
