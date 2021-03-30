@@ -62,21 +62,13 @@ export const Profile = ({ navigation }) => {
             <UserInfo user={user}
                 edit={false}
             />
-            <View style={{
-                marginBottom: 20,
-                paddingHorizontal: 15,
-                flexDirection: 'row',
-                justifyContent: 'space-between'
-            }}>
+            <View style={styles.titleActions}>
 
                 <Text style={texts.subtitleSecondary}>Anúncios</Text>
                 <View style={{
                     flexDirection: 'row'
                 }}>
-                    <TouchableOpacity style={{
-                        width: 40,
-                        height: 40,
-                    }}
+                    <TouchableOpacity style={styles.miniButton}
                         onPress={() => newAd(ads)}
                     >
                         <Add
@@ -85,10 +77,7 @@ export const Profile = ({ navigation }) => {
                             fill={colors.light}
                         />
                     </TouchableOpacity>
-                    <TouchableOpacity style={{
-                        width: 40,
-                        height: 40,
-                    }}
+                    <TouchableOpacity style={styles.miniButton}
                         onPress={() => setEdit(!edit)}
                     >
                         <Settings

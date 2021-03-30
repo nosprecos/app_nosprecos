@@ -219,6 +219,44 @@ export const styles = StyleSheet.create({
         borderRadius: 15,
         marginTop: 10,
     },
+    miniButton: {
+        width: 40,
+        height: 40,
+    },
+    titleActions: {
+        marginBottom: 20,
+        paddingHorizontal: 15,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    cardSpace: {
+        paddingHorizontal: 15,
+        marginVertical: 10,
+    },
+    cardHead: {
+        backgroundColor: colors.secondaryDark,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    cardBody: {
+        backgroundColor: colors.light,
+        padding: 15,
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
+    },
+    cardSubInfo: {
+        alignItems: 'flex-end',
+        paddingVertical: 5,
+    },
+    cardEditActions: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+    },
     ...texts
 
 });
