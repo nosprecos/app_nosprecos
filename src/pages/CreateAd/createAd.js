@@ -10,18 +10,18 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { styles } from '../../styles'
 import { colors } from '../../styles/colors'
 import { texts } from '../../styles/texts'
+import {DatePicker} from '../../components/DatePicker'
 import {
     Header,
 } from '../../components/Header'
 import 
     Quantity
  from '../../components/Quantity'
-import { set } from 'react-native-reanimated'
 
 export default function CreateAd({navigation}){
 
     const [title, setTitle] = useState('')
-    const [data, setData] = useState('')
+    const [data, setData] = useState(new Date(1598051730000))
     const [description, setDescription] = useState('')
     const [price, setprice] = useState('')
     const [ticket, setticket] = useState(1)
@@ -113,7 +113,7 @@ return (
                 <View style={{
                     alignItems: 'center',
                 }}>
-                        <View style={{
+                        {/* <View style={{
                         width: Dimensions.get('window').width * 0.8,
                         borderRadius: 15,
                         flexDirection: 'row',
@@ -126,8 +126,13 @@ return (
                         borderColor: colors.light,
                         ...texts.textBoldLight,
                         marginVertical: Dimensions.get('window').height * 0.01,
-                        }}>
-                            <TextInput
+                        }}> */}
+
+                            <DatePicker
+                            data={data}
+                            value={data}
+                            />
+                            {/* <TextInput
                             style={{
                                 color: colors.light,
                                 ...texts.textLight,
@@ -148,9 +153,9 @@ return (
                             placeholderTextColor={colors.secondary}
                             textContentType={"emailAddress"}
                             keyboardType={'number-pad'}
-                            />
-                        </View>
-                </View>
+                            /> */}
+                        {/* </View> */}
+                    </View>
 
                 <View>
                     <Text style={{
