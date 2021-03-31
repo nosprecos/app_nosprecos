@@ -16,17 +16,17 @@ import {
 export function DatePicker(){
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
-    const [dateString, setDateString] = useState(formatData(date.getDate(), date.getMonth, date.getFullYear));
+    const [dateString, setDateString] = useState(`${whatDay(date.getDate())} / ${whatMonth(date.getMonth())} / ${date.getFullYear()}`);
 
     const onChange = (event, selectedDate) => {
         if (selectedDate === undefined) {
             setShow(false)
             setDate(new Date())
-            setDateString(`${new Date().getDate()}/ ${new Date().getMonth() + 1}/ ${new Date().getFullYear()}`) 
+            setDateString(`${whatDay(new Date().getDate())} / ${whatMonth(new Date().getMonth())} / ${new Date().getFullYear()}`) 
         } else {
             setShow(false)
             setDate(selectedDate);
-            setDateString(`${selectedDate.toLocaleDateString()}`)
+            setDateString(`${whatDay(selectedDate.getDate())} / ${whatMonth(selectedDate.getMonth())} / ${selectedDate.getFullYear()}`)
         }
     }
      
@@ -34,68 +34,43 @@ export function DatePicker(){
        setShow(true);
     } 
     
+    function whatMonth(month){
+        if(month == 0){
+            return 'Jan'
+        } else if (month == 1){
+            m = 'Fev'
+        } else if (month == 2){
+            return 'Mar'
+        } else if (month == 3){
+            return 'Abr'
+        }else if (month == 4){
+            return 'Mai'
+        }else if (month == 5){
+            return 'Jun'
+        }else if (month == 6){
+            return 'Jul'
+        }else if (month == 7){
+            return 'Ago'
+        }else if (month == 8){
+            return 'Set'
+        }else if (month == 9){
+            return 'Out'
+        }else if (month == 10){
+            return 'Nov'
+        }else if (month == 11){
+            return 'Dez'
+        } else{
+            return 'Mês não identificado'
+        } 
+    }    
     
-    function formatData({day, month, year}){
-        const d = day
-        const m = month
-        const y = year
-        
+    
+    function whatDay(day){       
         if(day < 10){
-            d = '0'+ `${day}`
-            if(month == 0){
-                m = 'Jan'
-            } else if (month == 1){
-                m = 'Fev'
-            } else if (month == 2){
-                m = 'Mar'
-            } else if (month == 3){
-                m = 'Abr'
-            }else if (month == 4){
-                m = 'Mai'
-            }else if (month == 5){
-                m = 'Jun'
-            }else if (month == 6){
-                m = 'Jul'
-            }else if (month == 7){
-                m = 'Ago'
-            }else if (month == 8){
-                m = 'Set'
-            }else if (month == 9){
-                m = 'Out'
-            }else if (month == 10){
-                m = 'Nov'
-            }else if (month == 11){
-                m = 'Dez'
-            }        
+           return '0'+`${day}`  
         } else {
-            if(month == 0){
-                m = 'Jan'
-            } else if (month == 1){
-                m = 'Fev'
-            } else if (month == 2){
-                m = 'Mar'
-            } else if (month == 3){
-                m = 'Abr'
-            }else if (month == 4){
-                m = 'Mai'
-            }else if (month == 5){
-                m = 'Jun'
-            }else if (month == 6){
-                m = 'Jul'
-            }else if (month == 7){
-                m = 'Ago'
-            }else if (month == 8){
-                m = 'Set'
-            }else if (month == 9){
-                m = 'Out'
-            }else if (month == 10){
-                m = 'Nov'
-            }else if (month == 11){
-                m = 'Dez'
-            }
+            return `${day}`    
         }
-    
-        return (`${d}/${m}/${y}`)
     }
 
     return (
@@ -132,6 +107,7 @@ export function DatePicker(){
                 is24Hour={true}
                 display="calendar"
                 onChange={onChange}
+                maximumDate={new Date()}
             />
 
             )}
