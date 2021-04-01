@@ -10,6 +10,8 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { styles } from '../../styles'
 import { colors } from '../../styles/colors'
 import { texts } from '../../styles/texts'
+import { ModalCustom, ModalInput } from '../../components/ModalCustom'
+import { ButtonAction } from '../../components/ButtonAction'
 import {DatePicker} from '../../components/DatePicker'
 import {
     Header,
@@ -19,12 +21,12 @@ import
  from '../../components/Quantity'
 
 export default function CreateAd({navigation}){
-
+    const p = 0
     const [title, setTitle] = useState('')
     const [data, setData] = useState(new Date(1598051730000))
     const [description, setDescription] = useState('')
-    const [price, setprice] = useState('')
-    const [ticket, setticket] = useState(1)
+    const [price, setPrice] = useState(0)
+    const [ticket, setTicket] = useState(1)
 
     function formatData(data){
         setData(data)
@@ -113,49 +115,12 @@ return (
                 <View style={{
                     alignItems: 'center',
                 }}>
-                        {/* <View style={{
-                        width: Dimensions.get('window').width * 0.8,
-                        borderRadius: 15,
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        alignContent: 'center',
-                        minHeight: 60,
-                        maxHeight: 60,
-                        borderWidth: 1,
-                        color: colors.light,
-                        borderColor: colors.light,
-                        ...texts.textBoldLight,
-                        marginVertical: Dimensions.get('window').height * 0.01,
-                        }}> */}
 
-                            <DatePicker
-                            data={data}
-                            value={data}
-                            />
-                            {/* <TextInput
-                            style={{
-                                color: colors.light,
-                                ...texts.textLight,
-                                flex: 1,
-                                padding: 10,
-                            } }
-                            onChangeText={text =>                                
-                                { if (text.length == 2 || text.length == 5){
-                                        text = text + '/'
-                                    }
-                                
-                                setData(text)
-
-                            } }
-                            value={data}
-                            placeholder={'_ _/_ _/_ _'}
-                            autoCapitalize={'none'}                            
-                            placeholderTextColor={colors.secondary}
-                            textContentType={"emailAddress"}
-                            keyboardType={'number-pad'}
-                            /> */}
-                        {/* </View> */}
-                    </View>
+                        <DatePicker
+                        data={data}
+                        value={data}
+                        />
+                </View>
 
                 <View>
                     <Text style={{
@@ -228,10 +193,11 @@ return (
                         style={{
                             color: colors.light,
                             ...texts.textLight,
+                            width: '100%',
                             padding: 10,
                             justifyContent: 'flex-start',
                         } }
-                        onChangeText={text =>  setTitle(text)}
+                        onChangeText={text =>  setPrice(text)}
                         placeholder={'Preço do Anúncio'}
                         autoCapitalize={'none'}                            
                         placeholderTextColor={colors.secondary}
@@ -250,17 +216,37 @@ return (
                     </Text>  
             </View>
 
-            <View style={{
-                alignItems: 'center',
-            }}> 
+                
                 <Quantity
                 ticket={ticket}
+                setTicket={setTicket}
                 />
+                
+            <View style={{
+                width: '100%',
+                maxHeight: 50,
+                minHeight: 50,
+                height: 50,
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+                <Text style={styles.subtitleSecondary}>
+                    Total: R${(ticket*price).toFixed(2)}
+                </Text>
+            </View> 
+
+            <ButtonAction
+                        title={"Anunciar"}
+                        action={() => {
+                            setModalDeleteState(!modalDeleteState)
+                        }}
+                        color={colors.actionConfirm}
+
+                    />
 
             </View>
 
-
-            </View>            
+                       
         </ScrollView>
 
 

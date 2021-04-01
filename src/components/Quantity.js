@@ -12,14 +12,12 @@ import { set } from 'react-native-reanimated'
 import { colors } from '../styles/colors'
 import { texts } from '../styles/texts'
 
-export default function Quantity({ticket}){
-    const [numberTicket, setNumberTicket] = useState(1)
-
+export default function Quantity({ticket, setTicket}){
     function numberOfTickets(operation) {
         if(operation){
-            setNumberTicket((numberTicket + 1))
+            setTicket((ticket + 1))
         } else {
-            setNumberTicket((numberTicket - 1))
+            setTicket((ticket - 1))
         }
     }
 
@@ -32,7 +30,7 @@ export default function Quantity({ticket}){
             marginTop: 10,
             justifyContent: 'center',
         }}>
-            { numberTicket == 1 &&  <TouchableOpacity style={{
+            { ticket == 1 &&  <TouchableOpacity style={{
                 backgroundColor: colors.secondary,
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -51,7 +49,7 @@ export default function Quantity({ticket}){
                 </Text>
             </TouchableOpacity> }
 
-            { numberTicket > 1 &&  <TouchableOpacity style={{
+            { ticket > 1 &&  <TouchableOpacity style={{
                 backgroundColor: colors.secondary,
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -60,7 +58,7 @@ export default function Quantity({ticket}){
                 borderTopLeftRadius: 20,
                 borderBottomLeftRadius: 20,
             }}                           
-            onPress={()=> numberOfTickets(false, numberTicket)}
+            onPress={()=> numberOfTickets(false, ticket)}
         >
                 <Text style={{
                     ...texts.subtitleLight,   
@@ -80,7 +78,7 @@ export default function Quantity({ticket}){
                     alignItems: 'center',
                     ...texts.subtitleSecondaryDark,       
                 }}>
-                    {numberTicket}
+                    {ticket}
                 </Text>
             </View>
 
