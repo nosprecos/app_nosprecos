@@ -34,9 +34,8 @@ export default function Quantity({ticket, setTicket}){
                 backgroundColor: colors.secondary,
                 alignItems: 'center',
                 justifyContent: 'center',
-                flex: 1,
                 opacity: 0.5,
-                width: 80,
+                padding: 30,
                 borderTopLeftRadius: 20,
                 borderBottomLeftRadius: 20,
             }} 
@@ -69,7 +68,8 @@ export default function Quantity({ticket, setTicket}){
 
             <View style={{
                 backgroundColor: '#ffffff',
-                width: '50%',
+                paddingVertical: 10,
+                paddingHorizontal:60,
                 alignItems: 'center',
                 justifyContent: 'center',   
             }}            
@@ -84,8 +84,7 @@ export default function Quantity({ticket, setTicket}){
 
             <TouchableOpacity style= {{
                 backgroundColor: colors.secondary,
-                flex: 1,
-                width: 80,
+                padding: 30,
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderTopRightRadius: 20,

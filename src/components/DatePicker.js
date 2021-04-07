@@ -74,11 +74,11 @@ export function DatePicker(){
     }
 
     return (
-        <View>
+        <View style={{
+            width: '100%',
+        }}>
             <TouchableOpacity
-            style={{
-                    width: Dimensions.get('window').width * 0.8,
-                    borderRadius: 15,
+            style={{borderRadius: 15,
                     flexDirection: 'row',
                     alignItems: 'center',
                     alignContent: 'center',
@@ -107,7 +107,6 @@ export function DatePicker(){
                 is24Hour={true}
                 display="calendar"
                 onChange={onChange}
-                maximumDate={new Date()}
             />
 
             )}

@@ -71,7 +71,6 @@ return (
                 alignItems: 'center',
             }}>
                 <View style={{
-                width: Dimensions.get('window').width * 0.8,
                 borderRadius: 15,
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -112,10 +111,10 @@ return (
                         Data do Anúncio:
                     </Text>  
                 </View>
+
                 <View style={{
                     alignItems: 'center',
                 }}>
-
                         <DatePicker
                         data={data}
                         value={data}
@@ -135,7 +134,6 @@ return (
                 alignItems: 'center',
             }}>
                 <View style={{
-                width: Dimensions.get('window').width * 0.8,
                 borderRadius: 15,
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -177,7 +175,6 @@ return (
                 alignItems: 'center',
             }}>
                 <View style={{
-                width: Dimensions.get('window').width * 0.8,
                 borderRadius: 15,
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -238,7 +235,7 @@ return (
             <ButtonAction
                         title={"Anunciar"}
                         action={() => {
-                            setModalDeleteState(!modalDeleteState)
+                            console.log('Clicou')
                         }}
                         color={colors.actionConfirm}
 
