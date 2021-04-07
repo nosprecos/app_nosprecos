@@ -231,7 +231,6 @@ export const styles = StyleSheet.create({
         borderRadius: 15,
         marginTop: 10,
     },
-<<<<<<< HEAD
     setQuantity:{
         flexDirection: 'row',
         width: '100%',
@@ -273,8 +272,8 @@ export const styles = StyleSheet.create({
     headText:{
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 10,
-=======
+        padding: 10, 
+    },
     miniButton: {
         width: 40,
         height: 40,
@@ -312,7 +311,6 @@ export const styles = StyleSheet.create({
     cardEditActions: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
->>>>>>> origin/myads
     },
     ...texts
 

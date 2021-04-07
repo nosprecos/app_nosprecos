@@ -65,11 +65,6 @@ export const Profile = ({ navigation }) => {
             />
             <View style={styles.titleActions}>
 
-<<<<<<< HEAD
-            
-
-        </View>
-=======
                 <Text style={texts.subtitleSecondary}>Anúncios</Text>
                 <View style={{
                     flexDirection: 'row'
@@ -101,6 +96,5 @@ export const Profile = ({ navigation }) => {
                 setAds={setAds}
             />
         </ScrollView>
->>>>>>> origin/myads
     )
 }
