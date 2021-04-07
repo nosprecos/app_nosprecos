@@ -45,8 +45,7 @@ function Signin() {
     }
 
     async function verifyUser(userLogin, userPassword) {
-
-        const userValid = await api.post('/signin', {
+        await api.post('/signin', {
             userLogin,
             userPassword
         })
@@ -55,7 +54,6 @@ function Signin() {
                 // setUser(userResponse)
 
                 goToProfile(userResponse)
-                return response.data
             })
             .catch(error => {
 
