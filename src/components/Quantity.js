@@ -5,11 +5,10 @@ import {
     TextInput,
     Modal,
     Image,
-    TouchableOpa
+    TouchableOpacity
 } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import { set } from 'react-native-reanimated'
 import { colors } from '../styles/colors'
+import { styles } from '../styles'
 import { texts } from '../styles/texts'
 
 export default function Quantity({ticket, setTicket}){
@@ -23,78 +22,40 @@ export default function Quantity({ticket, setTicket}){
 
 
     return (
-        <View style={{
-            flexDirection: 'row',
-            width: '100%',
-            minHeight: 60,
-            marginTop: 10,
-            justifyContent: 'center',
-        }}>
-            { ticket == 1 &&  <TouchableOpacity style={{
-                backgroundColor: colors.secondary,
-                alignItems: 'center',
-                justifyContent: 'center',
-                opacity: 0.5,
-                padding: 30,
-                borderTopLeftRadius: 20,
-                borderBottomLeftRadius: 20,
-            }} 
+        <View style={styles.setQuantity}>
+            { ticket == 1 &&  <TouchableOpacity style={styles.quantityButtonDisabled} 
             disabled={true}  
         >
-                <Text style={{
-                    ...texts.subtitleLight,   
-                }}>
+                <Text style={texts.subtitleLight}>
                     -
                 </Text>
             </TouchableOpacity> }
 
-            { ticket > 1 &&  <TouchableOpacity style={{
-                backgroundColor: colors.secondary,
-                alignItems: 'center',
-                justifyContent: 'center',
-                flex: 1,
-                width: 80,
+            { ticket > 1 &&  <TouchableOpacity style={[styles.quantityButton,{
                 borderTopLeftRadius: 20,
-                borderBottomLeftRadius: 20,
-            }}                           
+                borderBottomLeftRadius: 20
+            }]}                           
             onPress={()=> numberOfTickets(false, ticket)}
         >
-                <Text style={{
-                    ...texts.subtitleLight,   
-                }}>
+                <Text style={texts.subtitleLight}>
                     -
                 </Text>
             </TouchableOpacity> }
 
-            <View style={{
-                backgroundColor: '#ffffff',
-                paddingVertical: 10,
-                paddingHorizontal:60,
-                alignItems: 'center',
-                justifyContent: 'center',   
-            }}            
+            <View style={styles.quantityValue}            
             >
-                <Text style={{
-                    alignItems: 'center',
-                    ...texts.subtitleSecondaryDark,       
-                }}>
+                <Text style={texts.subtitleSecondaryDark}>
                     {ticket}
                 </Text>
             </View>
 
-            <TouchableOpacity style= {{
-                backgroundColor: colors.secondary,
-                padding: 30,
-                alignItems: 'center',
-                justifyContent: 'center',
+            <TouchableOpacity style= {[styles.quantityButton,{
                 borderTopRightRadius: 20,
-                borderBottomRightRadius: 20,
-            }}
+                borderBottomRightRadius: 20
+            }]}
             onPress={()=> numberOfTickets(true)}
             >
-                <Text style={{
-                    ...texts.subtitleLight,   
-                }}>
+                <Text style={texts.subtitleLight}>
                     +
                 </Text>
             </TouchableOpacity>

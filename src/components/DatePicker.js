@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { colors } from '../styles/colors'
 import { styles } from '../styles'
 import { texts } from '../styles/texts'
+import Calendar from "../../assets/Icons/calendar.svg"
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
     View,
@@ -78,23 +79,17 @@ export function DatePicker(){
             width: '100%',
         }}>
             <TouchableOpacity
-            style={{borderRadius: 15,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    alignContent: 'center',
-                    minHeight: 60,
-                    maxHeight: 60,
-                    borderWidth: 1,
-                    color: colors.light,
-                    borderColor: colors.light,
-                    ...texts.textBoldLight,
-                    marginVertical: Dimensions.get('window').height * 0.01,
-            }}
+            style={styles.input}
                     
             onPress={()=> showDatepicker()}
             >
-            <Image style={styles.imageInput}
-                source={require("../../assets/Icons/calendar.png")} />
+            <View style={styles.imageInput}>
+                <Calendar
+                    width={'100%'}
+                    height={'100%'}
+                    fill={colors.secondary}
+                />
+            </View>
             <Text style={styles.textLight}>
                 {dateString}
             </Text>
@@ -107,6 +102,7 @@ export function DatePicker(){
                 is24Hour={true}
                 display="calendar"
                 onChange={onChange}
+                minimumDate={new Date()}
             />
 
             )}

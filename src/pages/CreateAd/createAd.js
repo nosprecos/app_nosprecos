@@ -46,50 +46,21 @@ return (
         <ScrollView style={styles.container}>
             <Header navigation={navigation} />
             <View style={{padding: 30}}>
-            <View style={{
-                height: Dimensions.get('window').height * 0.1,
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}>
-                <Text style={{
-                    ...texts.subtitleSecondary,
-                }}>
+            <View style={styles.headText}>
+                <Text style={texts.subtitleSecondary}>
                     Criar Anúncio
                 </Text>
             </View>
             <View>
-                <Text style={{
-                    color: colors.light,
-                    marginTop: 10,
-
-                }}>
+                <Text style={styles.labels}>
                     Título do Anúncio:
                 </Text>  
             </View>
 
-            <View style={{
-                alignItems: 'center',
-            }}>
-                <View style={{
-                borderRadius: 15,
-                flexDirection: 'row',
-                alignItems: 'center',
-                alignContent: 'center',
-                minHeight: 60,
-                maxHeight: 60,
-                borderWidth: 1,
-                color: colors.light,
-                borderColor: colors.light,
-                ...texts.textBoldLight,
-                marginVertical: Dimensions.get('window').height * 0.01,
-                }}>
+            <View>
+                <View style={styles.input}>
                         <TextInput
-                        style={{
-                            color: colors.light,
-                            ...texts.textLight,
-                            flex: 1,
-                            padding: 10,
-                        } }
+                        style={[styles.textInput,{padding: 10}]}
                         onChangeText={text =>  setTitle(text)}
                         placeholder={'Título do Anúncio'}
                         autoCapitalize={'none'}                            
@@ -103,18 +74,12 @@ return (
             </View>
 
                 <View>
-                    <Text style={{
-                        color: colors.light,
-                        marginTop: 10,
-
-                    }}>
+                    <Text style={styles.labels}>
                         Data do Anúncio:
                     </Text>  
                 </View>
 
-                <View style={{
-                    alignItems: 'center',
-                }}>
+                <View>
                         <DatePicker
                         data={data}
                         value={data}
@@ -122,38 +87,16 @@ return (
                 </View>
 
                 <View>
-                    <Text style={{
-                        color: colors.light,
-                        marginTop: 10,
-
-                    }}>
+                    <Text style={styles.labels}>
                         Descrição do Anúncio:
                     </Text>  
                 </View>
-            <View style={{
-                alignItems: 'center',
-            }}>
-                <View style={{
-                borderRadius: 15,
-                flexDirection: 'row',
-                alignItems: 'center',
-                alignContent: 'center',
-                minHeight: 60,
-                borderWidth: 1,
-                color: colors.light,
-                borderColor: colors.light,
-                ...texts.textBoldLight,
-                marginVertical: Dimensions.get('window').height * 0.01,
-                }}>
+            <View>
+                <View style={styles.inputMultiline}>
                         <TextInput
-                        style={{
-                            color: colors.light,
-                            ...texts.textLight,
-                            padding: 10,
-                            justifyContent: 'flex-start',
-                        } }
+                        style={[styles.textInput, {paddingHorizontal: 10}]}
                         onChangeText={text =>  setDescription(text)}
-                        placeholder={'Quais informações você gostaria de adicionar ao anúcio?'}
+                        placeholder={'Quais informações você gostaria de adicionar ao anúncio?'}
                         multiline={true}
                         autoCapitalize={'none'}                            
                         placeholderTextColor={colors.secondary}
@@ -163,37 +106,14 @@ return (
             </View>
 
             <View>
-                    <Text style={{
-                        color: colors.light,
-                        marginTop: 10,
-
-                    }}>
+                    <Text style={styles.labels}>
                         Preço do Anúncio:
                     </Text>  
                 </View>
-            <View style={{
-                alignItems: 'center',
-            }}>
-                <View style={{
-                borderRadius: 15,
-                flexDirection: 'row',
-                alignItems: 'center',
-                alignContent: 'center',
-                minHeight: 60,
-                borderWidth: 1,
-                color: colors.light,
-                borderColor: colors.light,
-                ...texts.textBoldLight,
-                marginVertical: Dimensions.get('window').height * 0.01,
-                }}>
+            <View>
+                <View style={styles.input}>
                         <TextInput
-                        style={{
-                            color: colors.light,
-                            ...texts.textLight,
-                            width: '100%',
-                            padding: 10,
-                            justifyContent: 'flex-start',
-                        } }
+                        style={[styles.textInput,{paddingHorizontal:10}]}
                         onChangeText={text =>  setPrice(text)}
                         placeholder={'Preço do Anúncio'}
                         autoCapitalize={'none'}                            
@@ -204,11 +124,7 @@ return (
             </View>
 
             <View>
-                    <Text style={{
-                        color: colors.light,
-                        marginTop: 10,
-
-                    }}>
+                    <Text style={styles.labels}>
                         Quantidade de Ingressos:
                     </Text>  
             </View>
@@ -219,14 +135,7 @@ return (
                 setTicket={setTicket}
                 />
                 
-            <View style={{
-                width: '100%',
-                maxHeight: 50,
-                minHeight: 50,
-                height: 50,
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}>
+            <View style={styles.totalPriceValue}>
                 <Text style={styles.subtitleSecondary}>
                     Total: R${(ticket*price).toFixed(2)}
                 </Text>
@@ -237,7 +146,6 @@ return (
                         action={() => {
                             console.log('Clicou')
                         }}
-                        color={colors.actionConfirm}
 
                     />
 

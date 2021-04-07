@@ -5,6 +5,7 @@ import {
     Button,
     TouchableOpacity,
     Thumbnail,
+    Dimensions,
 } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { colors } from '../../styles/colors'
@@ -35,6 +36,8 @@ export const Profile = ({ navigation }) => {
             <UserInfo user={user}
                 edit={false}
             />
+
+            
 
         </View>
     )
