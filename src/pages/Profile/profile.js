@@ -49,9 +49,9 @@ export const Profile = ({ navigation }) => {
         ticketQuantity: 5,
         ticketPrice: 2,
         totalPrice: `R$ ${(ticketPrice * ticketQuantity).toFixed(2)}`,
-        adWhatsappUrl: '5584999370302',
-        adInstagramUrl: '5584999370302',
-        adfacebookUrl: '5584999370302',
+        adWhatsappUrl: '55########',
+        adInstagramUrl: '55#########',
+        adfacebookUrl: '55##########',
     }])
     function newAd(ads) {
         setAds([...ads, ads[0]])
